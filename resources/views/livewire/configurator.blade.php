@@ -447,16 +447,33 @@
                 </div>
             @endif
 
-            <div class="flex justify-between pt-4 border-t border-gray-200">
-                <button wire:click="prevStep" class="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition flex items-center">
+            <form action="{{ route('configurator.pdf') }}" method="GET" target="_blank" class="flex justify-between pt-4 border-t border-gray-200">
+                <button type="button" wire:click="prevStep" class="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition flex items-center">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     Back
                 </button>
-                <button wire:click="restart" class="px-6 py-3 bg-unox-blue text-white rounded-lg font-semibold hover:bg-blue-700 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                    Start Over
-                </button>
-            </div>
+
+                @foreach($selectedProductIds as $id)
+                    <input type="hidden" name="products[]" value="{{ $id }}">
+                @endforeach
+                @foreach($columnAccessories as $id => $data)
+                    <input type="hidden" name="column[{{ $id }}]" value="{{ $data['quantity'] }}">
+                @endforeach
+                @foreach($otherAccessories as $id => $data)
+                    <input type="hidden" name="other[{{ $id }}]" value="{{ $data['quantity'] }}">
+                @endforeach
+
+                <div class="flex items-center space-x-3">
+                    <button type="submit" class="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Export to PDF
+                    </button>
+                    <button type="button" wire:click="restart" class="px-6 py-3 bg-unox-blue text-white rounded-lg font-semibold hover:bg-blue-700 transition flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Start Over
+                    </button>
+                </div>
+            </form>
         </div>
     @endif
 </div>

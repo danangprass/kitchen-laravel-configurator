@@ -161,8 +161,10 @@ class UnoxDataSeeder extends Seeder
                     "consumption_kwh" => null,
                     "co2_emission" => null,
                     "energy_star_certified" => $p["energy_star"] ?? false,
-                    "configurator_image" => $p["configurator_image"] ?? null,
-                    "list_image" => $p["list_image"] ?? null,
+                    "configurator_image" =>
+                        $p["configurator_image"] ?? ($p["image_src"] ?? null),
+                    "list_image" =>
+                        $p["list_image"] ?? ($p["image_src"] ?? null),
                     "features" => $p["features"] ?? null,
                     "card_info" => $p["card_info"] ?? null,
                     "price" => $this->parseNumber($p["price"] ?? null),

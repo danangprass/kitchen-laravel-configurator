@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Accessory;
 use App\Models\Category;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -43,7 +44,9 @@ class Configurator extends Component
     public function toggleProduct(int $id): void
     {
         if (in_array($id, $this->selectedProductIds, true)) {
-            $this->selectedProductIds = array_diff($this->selectedProductIds, [$id]);
+            $this->selectedProductIds = array_diff($this->selectedProductIds, [
+                $id,
+            ]);
         } else {
             $this->selectedProductIds[] = $id;
         }
@@ -51,7 +54,9 @@ class Configurator extends Component
 
     public function removeProduct(int $id): void
     {
-        $this->selectedProductIds = array_diff($this->selectedProductIds, [$id]);
+        $this->selectedProductIds = array_diff($this->selectedProductIds, [
+            $id,
+        ]);
         $this->resetAccessorySelections();
     }
 
@@ -88,21 +93,23 @@ class Configurator extends Component
             unset($this->columnAccessories[$accessoryId]);
         } else {
             $this->columnAccessories[$accessoryId] = [
-                'quantity' => 1,
-                'selected' => true,
+                "quantity" => 1,
+                "selected" => true,
             ];
         }
     }
 
-    public function updateColumnAccessoryQuantity(int $accessoryId, int $quantity): void
-    {
+    public function updateColumnAccessoryQuantity(
+        int $accessoryId,
+        int $quantity,
+    ): void {
         if ($quantity < 1) {
             unset($this->columnAccessories[$accessoryId]);
             return;
         }
 
         if (isset($this->columnAccessories[$accessoryId])) {
-            $this->columnAccessories[$accessoryId]['quantity'] = $quantity;
+            $this->columnAccessories[$accessoryId]["quantity"] = $quantity;
         }
     }
 
@@ -112,21 +119,23 @@ class Configurator extends Component
             unset($this->otherAccessories[$accessoryId]);
         } else {
             $this->otherAccessories[$accessoryId] = [
-                'quantity' => 1,
-                'selected' => true,
+                "quantity" => 1,
+                "selected" => true,
             ];
         }
     }
 
-    public function updateOtherAccessoryQuantity(int $accessoryId, int $quantity): void
-    {
+    public function updateOtherAccessoryQuantity(
+        int $accessoryId,
+        int $quantity,
+    ): void {
         if ($quantity < 1) {
             unset($this->otherAccessories[$accessoryId]);
             return;
         }
 
         if (isset($this->otherAccessories[$accessoryId])) {
-            $this->otherAccessories[$accessoryId]['quantity'] = $quantity;
+            $this->otherAccessories[$accessoryId]["quantity"] = $quantity;
         }
     }
 
@@ -142,10 +151,10 @@ class Configurator extends Component
 
     public function getCategoriesProperty(): Collection
     {
-        return Category::with('children')
-            ->whereNull('parent_id')
-            ->where('is_active', true)
-            ->orderBy('sort_order')
+        return Category::with("children")
+            ->whereNull("parent_id")
+            ->where("is_active", true)
+            ->orderBy("sort_order")
             ->get();
     }
 
@@ -155,7 +164,7 @@ class Configurator extends Component
             return null;
         }
 
-        return $this->categories->firstWhere('id', $this->selectedCategoryId);
+        return $this->categories->firstWhere("id", $this->selectedCategoryId);
     }
 
     public function getSubcategoriesProperty(): Collection
@@ -166,9 +175,10 @@ class Configurator extends Component
             return collect();
         }
 
-        return $category->children()
-            ->where('is_active', true)
-            ->orderBy('sort_order')
+        return $category
+            ->children()
+            ->where("is_active", true)
+            ->orderBy("sort_order")
             ->get();
     }
 
@@ -178,7 +188,10 @@ class Configurator extends Component
             return null;
         }
 
-        return $this->subcategories->firstWhere('id', $this->selectedSubcategoryId);
+        return $this->subcategories->firstWhere(
+            "id",
+            $this->selectedSubcategoryId,
+        );
     }
 
     public function getProductsProperty(): Collection
@@ -189,9 +202,9 @@ class Configurator extends Component
             return collect();
         }
 
-        return Product::where('category_id', $subcategory->id)
-            ->where('is_active', true)
-            ->orderBy('sort_order')
+        return Product::where("category_id", $subcategory->id)
+            ->where("is_active", true)
+            ->orderBy("sort_order")
             ->get();
     }
 
@@ -201,9 +214,9 @@ class Configurator extends Component
             return collect();
         }
 
-        return Product::whereIn('id', $this->selectedProductIds)
-            ->with('category.parent')
-            ->orderBy('sort_order')
+        return Product::whereIn("id", $this->selectedProductIds)
+            ->with("category.parent")
+            ->orderBy("sort_order")
             ->get();
     }
 
@@ -213,13 +226,13 @@ class Configurator extends Component
             return collect();
         }
 
-        return Accessory::whereHas('products', function ($query) {
-            $query->whereIn('products.id', $this->selectedProductIds);
+        return Accessory::whereHas("products", function ($query) {
+            $query->whereIn("products.id", $this->selectedProductIds);
         })
-            ->whereIn('configurator_position', ['upper', 'bottom'])
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('name')
+            ->whereIn("configurator_position", ["upper", "bottom"])
+            ->where("is_active", true)
+            ->orderBy("sort_order")
+            ->orderBy("name")
             ->get();
     }
 
@@ -229,16 +242,17 @@ class Configurator extends Component
             return collect();
         }
 
-        return Accessory::whereHas('products', function ($query) {
-            $query->whereIn('products.id', $this->selectedProductIds);
+        return Accessory::whereHas("products", function ($query) {
+            $query->whereIn("products.id", $this->selectedProductIds);
         })
             ->where(function ($query) {
-                $query->where('configurator_position', 'other')
-                    ->orWhereNull('configurator_position');
+                $query
+                    ->where("configurator_position", "other")
+                    ->orWhereNull("configurator_position");
             })
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('name')
+            ->where("is_active", true)
+            ->orderBy("sort_order")
+            ->orderBy("name")
             ->get();
     }
 
@@ -250,10 +264,11 @@ class Configurator extends Component
 
         $ids = array_keys($this->columnAccessories);
 
-        return Accessory::whereIn('id', $ids)
+        return Accessory::whereIn("id", $ids)
             ->get()
             ->map(function (Accessory $accessory) {
-                $accessory->selected_quantity = $this->columnAccessories[$accessory->id]['quantity'] ?? 1;
+                $accessory->selected_quantity =
+                    $this->columnAccessories[$accessory->id]["quantity"] ?? 1;
 
                 return $accessory;
             });
@@ -267,10 +282,11 @@ class Configurator extends Component
 
         $ids = array_keys($this->otherAccessories);
 
-        return Accessory::whereIn('id', $ids)
+        return Accessory::whereIn("id", $ids)
             ->get()
             ->map(function (Accessory $accessory) {
-                $accessory->selected_quantity = $this->otherAccessories[$accessory->id]['quantity'] ?? 1;
+                $accessory->selected_quantity =
+                    $this->otherAccessories[$accessory->id]["quantity"] ?? 1;
 
                 return $accessory;
             });
@@ -285,20 +301,44 @@ class Configurator extends Component
         }
 
         foreach ($this->selectedColumnAccessoriesList as $accessory) {
-            $total += (float) ($accessory->price ?? 0) * $accessory->selected_quantity;
+            $total +=
+                (float) ($accessory->price ?? 0) *
+                $accessory->selected_quantity;
         }
 
         foreach ($this->selectedOtherAccessoriesList as $accessory) {
-            $total += (float) ($accessory->price ?? 0) * $accessory->selected_quantity;
+            $total +=
+                (float) ($accessory->price ?? 0) *
+                $accessory->selected_quantity;
         }
 
         return $total > 0 ? $total : null;
     }
 
+    public function downloadPdf()
+    {
+        $data = [
+            "selectedProducts" => $this->selectedProducts,
+            "selectedColumnAccessoriesList" =>
+                $this->selectedColumnAccessoriesList,
+            "selectedOtherAccessoriesList" =>
+                $this->selectedOtherAccessoriesList,
+            "totalPrice" => $this->totalPrice,
+        ];
+
+        $pdf = Pdf::loadView("pdf.configuration", $data);
+        $pdf->setPaper("a4", "portrait");
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, "UNOX_Configuration_" . now()->format("Ymd_His") . ".pdf");
+    }
+
     public function render()
     {
-        return view('livewire.configurator')
-            ->layout('layouts.app', ['title' => 'UNOX Oven Configurator']);
+        return view("livewire.configurator")->layout("layouts.app", [
+            "title" => "UNOX Oven Configurator",
+        ]);
     }
 
     private function resetAccessorySelections(): void
@@ -309,8 +349,8 @@ class Configurator extends Component
 
     private function initializeAccessorySelections(): void
     {
-        $columnIds = $this->compatibleColumnAccessories->pluck('id')->toArray();
-        $otherIds = $this->compatibleOtherAccessories->pluck('id')->toArray();
+        $columnIds = $this->compatibleColumnAccessories->pluck("id")->toArray();
+        $otherIds = $this->compatibleOtherAccessories->pluck("id")->toArray();
 
         $this->columnAccessories = array_intersect_key(
             $this->columnAccessories,
