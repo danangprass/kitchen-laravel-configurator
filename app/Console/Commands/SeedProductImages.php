@@ -152,6 +152,11 @@ class SeedProductImages extends Command
     private function downloadImage(string $relativeUrl, string $type, string $sku): ?string
     {
         $filename = basename($relativeUrl);
+
+        if (str_contains($relativeUrl, '..')) {
+            return null;
+        }
+
         $directory = $type.'/'.preg_replace('/[^a-zA-Z0-9\-_]/', '_', $sku);
         $path = $directory.'/'.$filename;
 
