@@ -177,6 +177,7 @@ class Configurator extends Component
 
         return $category
             ->children()
+            ->withCount("products")
             ->where("is_active", true)
             ->orderBy("sort_order")
             ->get();
@@ -331,13 +332,13 @@ class Configurator extends Component
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, "UNOX_Configuration_" . now()->format("Ymd_His") . ".pdf");
+        }, "Kitchen_Configuration_" . now()->format("Ymd_His") . ".pdf");
     }
 
     public function render()
     {
         return view("livewire.configurator")->layout("layouts.app", [
-            "title" => "UNOX Oven Configurator",
+            "title" => "Kitchen Oven Configurator",
         ]);
     }
 

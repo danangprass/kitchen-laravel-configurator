@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $this->call([CategorySeeder::class, UnoxDataSeeder::class]);
+        $this->call([CategorySeeder::class, KitchenDataSeeder::class]);
     }
 }

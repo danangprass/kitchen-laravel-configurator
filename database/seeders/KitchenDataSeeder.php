@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class UnoxDataSeeder extends Seeder
+class KitchenDataSeeder extends Seeder
 {
     private array $categoryMap = [];
     private array $accessoryIdMap = [];
@@ -33,7 +33,7 @@ class UnoxDataSeeder extends Seeder
         $this->seedProducts($productsJson);
         $this->seedProductAccessoryRelations($productsJson);
 
-        $this->command->info("UNOX data imported successfully!");
+        $this->command->info("Kitchen data imported successfully!");
         $this->command->info(Category::count() . " categories");
         $this->command->info(Product::count() . " products");
         $this->command->info(Accessory::count() . " accessories");

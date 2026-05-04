@@ -20,6 +20,8 @@ class ProductImageResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Schema $schema): Schema
     {
         return ProductImageForm::configure($schema);
@@ -33,16 +35,16 @@ class ProductImageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListProductImages::route('/'),
-            'create' => CreateProductImage::route('/create'),
-            'edit' => EditProductImage::route('/{record}/edit'),
+            "index" => ListProductImages::route("/"),
+            "create" => CreateProductImage::route("/create"),
+            "edit" => EditProductImage::route("/{record}/edit"),
         ];
     }
 }

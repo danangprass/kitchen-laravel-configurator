@@ -66,6 +66,6 @@ Route::get("/configurator/pdf", function (Request $request) {
     $pdf->setPaper("a4", "portrait");
 
     return $pdf->download(
-        "UNOX_Configuration_" . now()->format("Ymd_His") . ".pdf",
+        "Kitchen_Configuration_" . now()->format("Ymd_His") . ".pdf",
     );
 })->name("configurator.pdf");
