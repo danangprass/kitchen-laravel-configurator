@@ -1,58 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Kitchen Configurator
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A multi-step product configurator built with Laravel 13, Livewire 4, and Filament 5. Guides users through selecting kitchen equipment, arranging configurations, choosing accessories, and exporting a professional PDF summary.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Technology | Version |
+|---|---|
+| PHP | 8.3+ |
+| Laravel | 13.x |
+| Filament | v5 |
+| Livewire | v4 |
+| Tailwind CSS | v4 (CDN) |
+| SQLite | — |
+| DOMPDF | barryvdh/laravel-dompdf |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Frontend Configurator (`/configurator`)
+- **5-step wizard**: Choose equipment → Arrangement → Column accessories → Other accessories → Summary
+- Category and subcategory browsing with product counts
+- Multi-select products with quantity controls
+- Real-time accessory filtering based on product compatibility
+- Price estimate calculation
+- PDF export with cover page, specs tables, and totals
 
-## Learning Laravel
+### Admin Panel (`/admin`)
+- Full CRUD for categories, products, accessories, and images
+- Hierarchical category management
+- Product-image relation managers
+- Authentication and access control
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Prerequisites
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.3 or higher
+- Composer
+- SQLite PHP extension enabled
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Installation
 
-## Agentic Development
+1. Clone the repository:
+   ````bash
+   git clone git@github.com:danangprass/kitchen-laravel-configurator.git
+   cd kitchen-laravel-configurator
+   ````
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+2. Install PHP dependencies:
+   ````bash
+   composer install
+   ````
 
-```bash
-composer require laravel/boost --dev
+3. Copy the environment file:
+   ````bash
+   cp .env.example .env
+   ````
 
-php artisan boost:install
-```
+4. Generate the application key:
+   ````bash
+   php artisan key:generate
+   ````
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+5. Run database migrations and seeders:
+   ````bash
+   php artisan migrate --seed
+   ````
 
-## Contributing
+6. Start the development server:
+   ````bash
+   php artisan serve
+   ````
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. Open your browser and navigate to:
+   - Configurator: `http://localhost/configurator`
+   - Admin Panel: `http://localhost/admin`
 
-## Code of Conduct
+## Default Admin Credentials
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Email**: `admin@unox.com`
+- **Password**: `password`
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+> Change these credentials before deploying to production.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the MIT license.
