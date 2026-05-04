@@ -18,39 +18,39 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        "category_id",
-        "name",
-        "line",
-        "slug",
-        "sku",
-        "description",
-        "short_description",
-        "type",
-        "panel",
-        "control_type",
-        "power_supply",
-        "opening_side",
-        "width",
-        "depth",
-        "height",
-        "weight",
-        "number_of_trays",
-        "tray_size",
-        "distance_between_trays",
-        "voltage",
-        "electric_power",
-        "max_gas_power",
-        "frequency",
-        "consumption_kwh",
-        "co2_emission",
-        "energy_star_certified",
-        "configurator_image",
-        "list_image",
-        "features",
-        "card_info",
-        "price",
-        "is_active",
-        "sort_order",
+        'category_id',
+        'name',
+        'line',
+        'slug',
+        'sku',
+        'description',
+        'short_description',
+        'type',
+        'panel',
+        'control_type',
+        'power_supply',
+        'opening_side',
+        'width',
+        'depth',
+        'height',
+        'weight',
+        'number_of_trays',
+        'tray_size',
+        'distance_between_trays',
+        'voltage',
+        'electric_power',
+        'max_gas_power',
+        'frequency',
+        'consumption_kwh',
+        'co2_emission',
+        'energy_star_certified',
+        'configurator_image',
+        'list_image',
+        'features',
+        'card_info',
+        'price',
+        'is_active',
+        'sort_order',
     ];
 
     /**
@@ -61,21 +61,21 @@ class Product extends Model
     protected function casts(): array
     {
         return [
-            "id" => "integer",
-            "category_id" => "integer",
-            "width" => "decimal:2",
-            "depth" => "decimal:2",
-            "height" => "decimal:2",
-            "weight" => "decimal:2",
-            "electric_power" => "decimal:2",
-            "max_gas_power" => "decimal:2",
-            "consumption_kwh" => "decimal:2",
-            "co2_emission" => "decimal:2",
-            "energy_star_certified" => "boolean",
-            "features" => "array",
-            "card_info" => "array",
-            "price" => "decimal:2",
-            "is_active" => "boolean",
+            'id' => 'integer',
+            'category_id' => 'integer',
+            'width' => 'decimal:2',
+            'depth' => 'decimal:2',
+            'height' => 'decimal:2',
+            'weight' => 'decimal:2',
+            'electric_power' => 'decimal:2',
+            'max_gas_power' => 'decimal:2',
+            'consumption_kwh' => 'decimal:2',
+            'co2_emission' => 'decimal:2',
+            'energy_star_certified' => 'boolean',
+            'features' => 'array',
+            'card_info' => 'array',
+            'price' => 'decimal:2',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -86,8 +86,8 @@ class Product extends Model
 
     public function accessories(): BelongsToMany
     {
-        return $this->belongsToMany(Accessory::class, "product_accessories")
-            ->withPivot("quantity", "is_default", "sort_order")
+        return $this->belongsToMany(Accessory::class, 'product_accessories')
+            ->withPivot('quantity', 'is_default', 'sort_order')
             ->withTimestamps();
     }
 

@@ -242,7 +242,7 @@
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
                                     <h4 class="font-bold text-slate-900 text-sm">{{ $accessory->commercial_name ?? $accessory->name }}</h4>
-                                    <p class="text-xs text-slate-500 mt-1">{{ $accessory->code }}</p>
+                                    <p class="text-xs text-slate-500 mt-1">{{ $accessory->sku }}</p>
                                     @if ($accessory->accessory_line)
                                         <p class="text-xs text-slate-600 mt-1">{{ $accessory->accessory_line }}</p>
                                     @endif
@@ -310,7 +310,7 @@
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
                                     <h4 class="font-bold text-slate-900 text-sm">{{ $accessory->commercial_name ?? $accessory->name }}</h4>
-                                    <p class="text-xs text-slate-500 mt-1">{{ $accessory->code }}</p>
+                                    <p class="text-xs text-slate-500 mt-1">{{ $accessory->sku }}</p>
                                     @if ($accessory->accessory_category)
                                         <p class="text-xs text-slate-400 mt-1">{{ $accessory->accessory_category }}</p>
                                     @endif
@@ -399,7 +399,7 @@
                             <div class="px-6 py-4 flex items-center justify-between">
                                 <div>
                                     <p class="font-medium text-slate-900">{{ $accessory->commercial_name ?? $accessory->name }}</p>
-                                    <p class="text-sm text-slate-500">{{ $accessory->code }} × {{ $accessory->selected_quantity }}</p>
+                                    <p class="text-sm text-slate-500">{{ $accessory->sku }} × {{ $accessory->selected_quantity }}</p>
                                 </div>
                                 @if ($accessory->price)
                                     <span class="font-semibold text-slate-900">${{ number_format($accessory->price * $accessory->selected_quantity, 2) }}</span>
@@ -423,7 +423,7 @@
                             <div class="px-6 py-4 flex items-center justify-between">
                                 <div>
                                     <p class="font-medium text-slate-900">{{ $accessory->commercial_name ?? $accessory->name }}</p>
-                                    <p class="text-sm text-slate-500">{{ $accessory->code }} × {{ $accessory->selected_quantity }}</p>
+                                    <p class="text-sm text-slate-500">{{ $accessory->sku }} × {{ $accessory->selected_quantity }}</p>
                                 </div>
                                 @if ($accessory->price)
                                     <span class="font-semibold text-slate-900">${{ number_format($accessory->price * $accessory->selected_quantity, 2) }}</span>

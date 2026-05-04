@@ -43,9 +43,9 @@ class AccessoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            "index" => ListAccessories::route("/"),
-            "create" => CreateAccessory::route("/create"),
-            "edit" => EditAccessory::route("/{record}/edit"),
+            'index' => ListAccessories::route('/'),
+            'create' => CreateAccessory::route('/create'),
+            'edit' => EditAccessory::route('/{record}/edit'),
         ];
     }
 }

@@ -22,32 +22,32 @@ use Filament\Tables\Table;
 
 class ProductImagesRelationManager extends RelationManager
 {
-    protected static string $relationship = "productImages";
+    protected static string $relationship = 'productImages';
 
     public function form(Schema $schema): Schema
     {
         return $schema->components([
-            FileUpload::make("image_path")->image()->required(),
-            TextInput::make("alt_text"),
-            TextInput::make("sort_order")->required()->numeric()->default(0),
-            Toggle::make("is_primary")->required(),
+            FileUpload::make('image_path')->image()->required(),
+            TextInput::make('alt_text'),
+            TextInput::make('sort_order')->required()->numeric()->default(0),
+            Toggle::make('is_primary')->required(),
         ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute("alt_text")
+            ->recordTitleAttribute('alt_text')
             ->columns([
-                ImageColumn::make("image_path"),
-                TextColumn::make("alt_text")->searchable(),
-                TextColumn::make("sort_order")->numeric()->sortable(),
-                IconColumn::make("is_primary")->boolean(),
-                TextColumn::make("created_at")
+                ImageColumn::make('image_path'),
+                TextColumn::make('alt_text')->searchable(),
+                TextColumn::make('sort_order')->numeric()->sortable(),
+                IconColumn::make('is_primary')->boolean(),
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make("updated_at")
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
