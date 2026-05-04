@@ -2,4 +2,5 @@
 !private/
 !public/
 !unox_data/
+!unox_data/**
 !.gitignore

@@ -23,6 +23,15 @@ class Accessory extends Model
         "description",
         "short_description",
         "accessory_type",
+        "configurator_position",
+        "configurator_image",
+        "list_image",
+        "list_image_alt",
+        "commercial_name",
+        "accessory_line",
+        "accessory_category",
+        "accessory_subcategory",
+        "labels",
         "width",
         "depth",
         "height",
@@ -34,6 +43,8 @@ class Accessory extends Model
         "quantity",
         "price",
         "is_active",
+        "is_featured",
+        "prefooter",
         "sort_order",
     ];
 
@@ -53,8 +64,11 @@ class Accessory extends Model
             "electric_power" => "decimal:2",
             "min_flow" => "decimal:2",
             "max_flow" => "decimal:2",
+            "labels" => "array",
             "price" => "decimal:2",
             "is_active" => "boolean",
+            "is_featured" => "boolean",
+            "prefooter" => "boolean",
         ];
     }
 

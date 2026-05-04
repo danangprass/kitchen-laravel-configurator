@@ -12,27 +12,34 @@ use Illuminate\Support\Str;
 class UnoxDataSeeder extends Seeder
 {
     private array $categoryMap = [];
+    private array $accessoryIdMap = [];
+    private array $productIdMap = [];
 
     public function run(): void
     {
         $productsJson = json_decode(
-            file_get_contents(storage_path("app/unox_data/products.json")),
+            file_get_contents(storage_path("app/unox_data/products_full.json")),
             true,
         );
         $accessoriesJson = json_decode(
-            file_get_contents(storage_path("app/unox_data/accessories.json")),
+            file_get_contents(
+                storage_path("app/unox_data/accessories_full.json"),
+            ),
             true,
         );
 
         $this->buildCategoryMap();
-        $this->seedProducts($productsJson);
         $this->seedAccessories($accessoriesJson);
-        $this->seedProductAccessoryRelations();
+        $this->seedProducts($productsJson);
+        $this->seedProductAccessoryRelations($productsJson);
 
         $this->command->info("UNOX data imported successfully!");
         $this->command->info(Category::count() . " categories");
         $this->command->info(Product::count() . " products");
         $this->command->info(Accessory::count() . " accessories");
+
+        $relationCount = DB::table("product_accessories")->count();
+        $this->command->info($relationCount . " product-accessory relations");
     }
 
     private function buildCategoryMap(): void
@@ -109,6 +116,7 @@ class UnoxDataSeeder extends Seeder
             $height = $this->parseNumber($p["height"] ?? null);
             $weight = $this->parseNumber($p["weight"] ?? null);
             $electricPower = $this->parseNumber($p["electric_power"] ?? null);
+            $maxGasPower = $this->parseNumber($p["max_gas_power"] ?? null);
 
             $traySize = $p["trays_dimensions"] ?? null;
             $traysNumber = is_numeric($p["trays_number"] ?? null)
@@ -124,18 +132,21 @@ class UnoxDataSeeder extends Seeder
             $ovenSubtype = $p["oven_subtype_title"] ?? null;
             $categoryId = $this->categoryMap[$ovenSubtype] ?? null;
 
-            Product::updateOrCreate(
+            $product = Product::updateOrCreate(
                 ["sku" => $p["code"] ?? Str::uuid()],
                 [
                     "category_id" => $categoryId,
                     "name" => $name,
+                    "line" => $p["line"] ?? null,
                     "slug" => $slug,
                     "sku" => $p["code"] ?? null,
                     "description" => $p["description"] ?? null,
                     "short_description" => $p["oven_subtype_title"] ?? null,
                     "type" => $p["oven_subtype_title"] ?? null,
                     "panel" => null,
+                    "control_type" => $p["control_type"] ?? null,
                     "power_supply" => $p["power_type"] ?? null,
+                    "opening_side" => $p["opening_side"] ?? null,
                     "width" => $width,
                     "depth" => $depth,
                     "height" => $height,
@@ -145,15 +156,22 @@ class UnoxDataSeeder extends Seeder
                     "distance_between_trays" => $distanceBetweenTrays,
                     "voltage" => $p["voltage"] ?? null,
                     "electric_power" => $electricPower,
+                    "max_gas_power" => $maxGasPower,
                     "frequency" => $p["frequency"] ?? null,
                     "consumption_kwh" => null,
                     "co2_emission" => null,
                     "energy_star_certified" => $p["energy_star"] ?? false,
+                    "configurator_image" => $p["configurator_image"] ?? null,
+                    "list_image" => $p["list_image"] ?? null,
+                    "features" => $p["features"] ?? null,
+                    "card_info" => $p["card_info"] ?? null,
                     "price" => $this->parseNumber($p["price"] ?? null),
                     "is_active" => true,
                     "sort_order" => $index + 1,
                 ],
             );
+
+            $this->productIdMap[$p["id"]] = $product->id;
         }
 
         $this->command->info("  " . Product::count() . " products created");
@@ -174,15 +192,26 @@ class UnoxDataSeeder extends Seeder
             $weight = $this->parseNumber($a["weight_kg"] ?? null);
             $electricPower = $this->parseNumber($a["electric_power"] ?? null);
 
-            Accessory::updateOrCreate(
+            $accessory = Accessory::updateOrCreate(
                 ["sku" => $a["code"] ?? Str::uuid()],
                 [
                     "name" => $name,
                     "slug" => $slug,
                     "sku" => $a["code"] ?? null,
+                    "commercial_name" => $a["commercial_name"] ?? null,
                     "description" => $a["description"] ?? null,
                     "short_description" => null,
-                    "accessory_type" => $a["category"] ?? null,
+                    "accessory_type" => $a["accessory_category"] ?? null,
+                    "configurator_position" =>
+                        $a["configurator_position"] ?? null,
+                    "configurator_image" => $a["configurator_image"] ?? null,
+                    "list_image" => $a["list_image"] ?? null,
+                    "list_image_alt" => $a["list_image_alt"] ?? null,
+                    "accessory_line" => $a["accessory_line"] ?? null,
+                    "accessory_category" => $a["accessory_category"] ?? null,
+                    "accessory_subcategory" =>
+                        $a["accessory_subcategory"] ?? null,
+                    "labels" => $a["labels"] ?? null,
                     "width" => $width,
                     "depth" => $depth,
                     "height" => $height,
@@ -194,11 +223,15 @@ class UnoxDataSeeder extends Seeder
                     "min_flow" => $this->parseNumber($a["min_flow"] ?? null),
                     "max_flow" => $this->parseNumber($a["max_flow"] ?? null),
                     "quantity" => $a["buy_multiple"] ?? 1,
+                    "is_featured" => $a["is_featured"] ?? false,
+                    "prefooter" => $a["prefooter"] ?? false,
                     "price" => null,
                     "is_active" => true,
                     "sort_order" => $index + 1,
                 ],
             );
+
+            $this->accessoryIdMap[$a["id"]] = $accessory->id;
         }
 
         $this->command->info(
@@ -206,36 +239,37 @@ class UnoxDataSeeder extends Seeder
         );
     }
 
-    private function seedProductAccessoryRelations(): void
+    private function seedProductAccessoryRelations(array $products): void
     {
         $this->command->info("Linking accessories to products...");
-
-        $products = Product::pluck("id")->toArray();
-        $accessories = Accessory::pluck("id")->toArray();
 
         $inserts = [];
         $usedPairs = [];
 
-        foreach ($products as $productId) {
-            if (rand(1, 100) > 30) {
-                $count = rand(1, min(5, count($accessories)));
-                shuffle($accessories);
-                $selected = array_slice($accessories, 0, $count);
+        foreach ($products as $product) {
+            $productDbId = $this->productIdMap[$product["id"]] ?? null;
+            if (!$productDbId) {
+                continue;
+            }
 
-                foreach ($selected as $accessoryId) {
-                    $key = "{$productId}-{$accessoryId}";
-                    if (!isset($usedPairs[$key])) {
-                        $usedPairs[$key] = true;
-                        $inserts[] = [
-                            "product_id" => $productId,
-                            "accessory_id" => $accessoryId,
-                            "quantity" => 1,
-                            "is_default" => rand(1, 100) <= 30 ? 1 : 0,
-                            "sort_order" => rand(0, 10),
-                            "created_at" => now(),
-                            "updated_at" => now(),
-                        ];
-                    }
+            foreach ($product["accessories"] ?? [] as $accJsonId) {
+                $accessoryDbId = $this->accessoryIdMap[$accJsonId] ?? null;
+                if (!$accessoryDbId) {
+                    continue;
+                }
+
+                $key = "{$productDbId}-{$accessoryDbId}";
+                if (!isset($usedPairs[$key])) {
+                    $usedPairs[$key] = true;
+                    $inserts[] = [
+                        "product_id" => $productDbId,
+                        "accessory_id" => $accessoryDbId,
+                        "quantity" => 1,
+                        "is_default" => false,
+                        "sort_order" => 0,
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                    ];
                 }
             }
         }
@@ -248,7 +282,8 @@ class UnoxDataSeeder extends Seeder
             array_column($inserts, "accessory_id"),
         );
         $linkedCount = count($linkedAccessoryIds);
-        $unlinkedCount = count($accessories) - $linkedCount;
+        $totalAccessories = count($this->accessoryIdMap);
+        $unlinkedCount = $totalAccessories - $linkedCount;
 
         $this->command->info(
             "  " . count($inserts) . " product-accessory relations created",
