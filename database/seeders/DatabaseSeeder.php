@@ -10,11 +10,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::firstOrCreate(
-            ["email" => "admin@unox.com"],
+            ['email' => 'admin@unox.com'],
             [
-                "name" => "Admin",
-                "email" => "admin@unox.com",
-                "password" => "password",
+                'name' => 'Admin',
+                'email' => 'admin@unox.com',
+                'password' => 'password',
             ],
         );
 

@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Http\Controllers\AccessoryController;
+use App\Http\Requests\AccessoryStoreRequest;
+use App\Http\Requests\AccessoryUpdateRequest;
 use App\Models\Accessory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -10,7 +13,7 @@ use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 /**
- * @see \App\Http\Controllers\AccessoryController
+ * @see AccessoryController
  */
 final class AccessoryControllerTest extends TestCase
 {
@@ -27,14 +30,13 @@ final class AccessoryControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function store_uses_form_request_validation(): void
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\AccessoryController::class,
+            AccessoryController::class,
             'store',
-            \App\Http\Requests\AccessoryStoreRequest::class
+            AccessoryStoreRequest::class
         );
     }
 
@@ -72,7 +74,6 @@ final class AccessoryControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function show_behaves_as_expected(): void
     {
@@ -84,14 +85,13 @@ final class AccessoryControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function update_uses_form_request_validation(): void
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\AccessoryController::class,
+            AccessoryController::class,
             'update',
-            \App\Http\Requests\AccessoryUpdateRequest::class
+            AccessoryUpdateRequest::class
         );
     }
 
@@ -127,7 +127,6 @@ final class AccessoryControllerTest extends TestCase
         $this->assertEquals($is_active, $accessory->is_active);
         $this->assertEquals($sort_order, $accessory->sort_order);
     }
-
 
     #[Test]
     public function destroy_deletes_and_responds_with(): void

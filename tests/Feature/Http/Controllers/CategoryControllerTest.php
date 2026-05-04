@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -10,7 +13,7 @@ use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 /**
- * @see \App\Http\Controllers\CategoryController
+ * @see CategoryController
  */
 final class CategoryControllerTest extends TestCase
 {
@@ -27,14 +30,13 @@ final class CategoryControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function store_uses_form_request_validation(): void
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\CategoryController::class,
+            CategoryController::class,
             'store',
-            \App\Http\Requests\CategoryStoreRequest::class
+            CategoryStoreRequest::class
         );
     }
 
@@ -66,7 +68,6 @@ final class CategoryControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function show_behaves_as_expected(): void
     {
@@ -78,14 +79,13 @@ final class CategoryControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function update_uses_form_request_validation(): void
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\CategoryController::class,
+            CategoryController::class,
             'update',
-            \App\Http\Requests\CategoryUpdateRequest::class
+            CategoryUpdateRequest::class
         );
     }
 
@@ -115,7 +115,6 @@ final class CategoryControllerTest extends TestCase
         $this->assertEquals($sort_order, $category->sort_order);
         $this->assertEquals($is_active, $category->is_active);
     }
-
 
     #[Test]
     public function destroy_deletes_and_responds_with(): void

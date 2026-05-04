@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Http\Controllers\ProductController;
+use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,7 +14,7 @@ use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 /**
- * @see \App\Http\Controllers\ProductController
+ * @see ProductController
  */
 final class ProductControllerTest extends TestCase
 {
@@ -28,14 +31,13 @@ final class ProductControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function store_uses_form_request_validation(): void
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\ProductController::class,
+            ProductController::class,
             'store',
-            \App\Http\Requests\ProductStoreRequest::class
+            ProductStoreRequest::class
         );
     }
 
@@ -76,7 +78,6 @@ final class ProductControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function show_behaves_as_expected(): void
     {
@@ -88,14 +89,13 @@ final class ProductControllerTest extends TestCase
         $response->assertJsonStructure([]);
     }
 
-
     #[Test]
     public function update_uses_form_request_validation(): void
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\ProductController::class,
+            ProductController::class,
             'update',
-            \App\Http\Requests\ProductUpdateRequest::class
+            ProductUpdateRequest::class
         );
     }
 
@@ -134,7 +134,6 @@ final class ProductControllerTest extends TestCase
         $this->assertEquals($is_active, $product->is_active);
         $this->assertEquals($sort_order, $product->sort_order);
     }
-
 
     #[Test]
     public function destroy_deletes_and_responds_with(): void

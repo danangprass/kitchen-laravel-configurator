@@ -7,19 +7,19 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get("/", function () {
-    return view("welcome");
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::get("/configurator", Configurator::class)->name("configurator");
+Route::get('/configurator', Configurator::class)->name('configurator');
 
-Route::get("/configurator/pdf", function (Request $request) {
-    $productIds = $request->query("products", []);
-    $columnData = $request->query("column", []);
-    $otherData = $request->query("other", []);
+Route::get('/configurator/pdf', function (Request $request) {
+    $productIds = $request->query('products', []);
+    $columnData = $request->query('column', []);
+    $otherData = $request->query('other', []);
 
-    $selectedProducts = Product::whereIn("id", $productIds)
-        ->orderBy("sort_order")
+    $selectedProducts = Product::whereIn('id', $productIds)
+        ->orderBy('sort_order')
         ->get();
 
     $selectedColumnAccessoriesList = collect();
@@ -57,15 +57,15 @@ Route::get("/configurator/pdf", function (Request $request) {
         $totalPrice = $total;
     }
 
-    $pdf = Pdf::loadView("pdf.configuration", [
-        "selectedProducts" => $selectedProducts,
-        "selectedColumnAccessoriesList" => $selectedColumnAccessoriesList,
-        "selectedOtherAccessoriesList" => $selectedOtherAccessoriesList,
-        "totalPrice" => $totalPrice,
+    $pdf = Pdf::loadView('pdf.configuration', [
+        'selectedProducts' => $selectedProducts,
+        'selectedColumnAccessoriesList' => $selectedColumnAccessoriesList,
+        'selectedOtherAccessoriesList' => $selectedOtherAccessoriesList,
+        'totalPrice' => $totalPrice,
     ]);
-    $pdf->setPaper("a4", "portrait");
+    $pdf->setPaper('a4', 'portrait');
 
     return $pdf->download(
-        "Kitchen_Configuration_" . now()->format("Ymd_His") . ".pdf",
+        'Kitchen_Configuration_'.now()->format('Ymd_His').'.pdf',
     );
-})->name("configurator.pdf");
+})->name('configurator.pdf');

@@ -17,13 +17,13 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        "name",
-        "slug",
-        "parent_id",
-        "description",
-        "image",
-        "sort_order",
-        "is_active",
+        'name',
+        'slug',
+        'parent_id',
+        'description',
+        'image',
+        'sort_order',
+        'is_active',
     ];
 
     /**
@@ -34,15 +34,15 @@ class Category extends Model
     protected function casts(): array
     {
         return [
-            "id" => "integer",
-            "parent_id" => "integer",
-            "is_active" => "boolean",
+            'id' => 'integer',
+            'parent_id' => 'integer',
+            'is_active' => 'boolean',
         ];
     }
 
     public function children(): HasMany
     {
-        return $this->hasMany(Category::class, "parent_id");
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function products(): HasMany
@@ -52,6 +52,6 @@ class Category extends Model
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(Category::class, "parent_id");
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 }

@@ -35,16 +35,16 @@ class ProductImageResource extends Resource
     public static function getRelations(): array
     {
         return [
-                //
-            ];
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            "index" => ListProductImages::route("/"),
-            "create" => CreateProductImage::route("/create"),
-            "edit" => EditProductImage::route("/{record}/edit"),
+            'index' => ListProductImages::route('/'),
+            'create' => CreateProductImage::route('/create'),
+            'edit' => EditProductImage::route('/{record}/edit'),
         ];
     }
 }
