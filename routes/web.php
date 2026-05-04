@@ -40,22 +40,11 @@ Route::get('/configurator/pdf', function (Request $request) {
         }
     }
 
-    $totalPrice = null;
-    $total = 0.0;
-    foreach ($selectedProducts as $product) {
-        $total += (float) ($product->price ?? 0);
-    }
-    foreach ($selectedColumnAccessoriesList as $accessory) {
-        $total +=
-            (float) ($accessory->price ?? 0) * $accessory->selected_quantity;
-    }
-    foreach ($selectedOtherAccessoriesList as $accessory) {
-        $total +=
-            (float) ($accessory->price ?? 0) * $accessory->selected_quantity;
-    }
-    if ($total > 0) {
-        $totalPrice = $total;
-    }
+    $totalPrice = Configurator::calculateTotalPrice(
+        $selectedProducts,
+        $selectedColumnAccessoriesList,
+        $selectedOtherAccessoriesList,
+    );
 
     $pdf = Pdf::loadView('pdf.configuration', [
         'selectedProducts' => $selectedProducts,

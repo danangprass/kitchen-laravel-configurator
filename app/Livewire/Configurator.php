@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Accessory;
 use App\Models\Category;
 use App\Models\Product;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -298,42 +297,37 @@ class Configurator extends Component
 
     public function getTotalPriceProperty(): ?float
     {
+        return self::calculateTotalPrice(
+            $this->selectedProducts,
+            $this->selectedColumnAccessoriesList,
+            $this->selectedOtherAccessoriesList,
+        );
+    }
+
+    public static function calculateTotalPrice(
+        Collection $products,
+        Collection $columnAccessories,
+        Collection $otherAccessories,
+    ): ?float {
         $total = 0.0;
 
-        foreach ($this->selectedProducts as $product) {
+        foreach ($products as $product) {
             $total += (float) ($product->price ?? 0);
         }
 
-        foreach ($this->selectedColumnAccessoriesList as $accessory) {
+        foreach ($columnAccessories as $accessory) {
             $total +=
                 (float) ($accessory->price ?? 0) *
                 $accessory->selected_quantity;
         }
 
-        foreach ($this->selectedOtherAccessoriesList as $accessory) {
+        foreach ($otherAccessories as $accessory) {
             $total +=
                 (float) ($accessory->price ?? 0) *
                 $accessory->selected_quantity;
         }
 
         return $total > 0 ? $total : null;
-    }
-
-    public function downloadPdf()
-    {
-        $data = [
-            'selectedProducts' => $this->selectedProducts,
-            'selectedColumnAccessoriesList' => $this->selectedColumnAccessoriesList,
-            'selectedOtherAccessoriesList' => $this->selectedOtherAccessoriesList,
-            'totalPrice' => $this->totalPrice,
-        ];
-
-        $pdf = Pdf::loadView('pdf.configuration', $data);
-        $pdf->setPaper('a4', 'portrait');
-
-        return response()->streamDownload(function () use ($pdf) {
-            echo $pdf->output();
-        }, 'Kitchen_Configuration_'.now()->format('Ymd_His').'.pdf');
     }
 
     public function render()
