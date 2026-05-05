@@ -1,15 +1,14 @@
 <?php
 
 use App\Livewire\Configurator;
+use App\Livewire\HomePage;
 use App\Models\Accessory;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomePage::class)->name('home');
 
 Route::get('/configurator', Configurator::class)->name('configurator');
 
