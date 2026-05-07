@@ -357,20 +357,19 @@
                                     Energy Star Certified
                                 </div>
                             @endif
-                            @if ($product->video_url)
-                                @php
-                                    $embedUrl = $product->video_url;
-                                    // Convert YouTube watch URLs to embed format
-                                    if (preg_match('/youtube\.com\/watch\?v=([A-Za-z0-9_-]+)/', $embedUrl, $m)) {
-                                        $embedUrl = 'https://www.youtube.com/embed/' . $m[1];
-                                    } elseif (preg_match('/youtu\.be\/([A-Za-z0-9_-]+)/', $embedUrl, $m)) {
-                                        $embedUrl = 'https://www.youtube.com/embed/' . $m[1];
-                                    } elseif (preg_match('/vimeo\.com\/(\d+)/', $embedUrl, $m)) {
-                                        $embedUrl = 'https://player.vimeo.com/video/' . $m[1];
-                                    }
-                                @endphp
+                            @php($embedUrl = \App\Livewire\Configurator::getVideoEmbedUrl($product->video_url))
+                            @if ($embedUrl)
                                 <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-900">
-                                    <iframe src="{{ $embedUrl }}" class="absolute inset-0 w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe
+                                        src="{{ $embedUrl }}"
+                                        class="absolute inset-0 w-full h-full"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        sandbox="allow-scripts allow-same-origin allow-presentation"
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer"
+                                    ></iframe>
                                 </div>
                             @endif
                         </div>
