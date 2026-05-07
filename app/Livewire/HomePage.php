@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\HomepageSection;
+use App\Models\NewsletterSubscriber;
 use Livewire\Component;
 
 class HomePage extends Component
@@ -21,6 +22,8 @@ class HomePage extends Component
     public function subscribe()
     {
         $this->validate(['email' => 'required|email']);
+
+        NewsletterSubscriber::firstOrCreate(['email' => $this->email]);
 
         session()->flash('newsletter_subscribed', $this->email);
         $this->email = '';

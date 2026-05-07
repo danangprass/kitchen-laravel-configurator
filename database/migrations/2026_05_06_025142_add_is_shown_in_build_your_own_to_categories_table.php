@@ -16,9 +16,11 @@ return new class extends Migration
             $table->boolean('is_shown_in_build_your_own')->default(false)->after('is_active');
         });
 
-        DB::table('categories')
-            ->whereNull('parent_id')
-            ->update(['is_shown_in_build_your_own' => true]);
+        if (DB::table('categories')->count() > 0) {
+            DB::table('categories')
+                ->whereNull('parent_id')
+                ->update(['is_shown_in_build_your_own' => true]);
+        }
     }
 
     /**
