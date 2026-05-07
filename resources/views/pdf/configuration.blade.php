@@ -499,6 +499,11 @@ function renderImage($url, $class, $alt = '') {
             <span class="label">Total Estimate</span>
             <span class="amount">${{ number_format($totalPrice, 2) }}</span>
         </div>
+        @else
+        <div class="total-box" style="background: #d97706;">
+            <span class="label">Pricing Information</span>
+            <span class="amount" style="font-size: 10pt;">Contact us for a personalized quote</span>
+        </div>
         @endif
 
         <div class="disclaimer-box" style="margin-top: 25px;">
