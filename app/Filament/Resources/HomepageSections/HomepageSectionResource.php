@@ -5,6 +5,7 @@ namespace App\Filament\Resources\HomepageSections;
 use App\Filament\Resources\HomepageSections\Pages\CreateHomepageSection;
 use App\Filament\Resources\HomepageSections\Pages\EditHomepageSection;
 use App\Filament\Resources\HomepageSections\Pages\ListHomepageSections;
+use App\Filament\Resources\HomepageSections\Pages\ViewHomepageSection;
 use App\Filament\Resources\HomepageSections\Schemas\HomepageSectionForm;
 use App\Filament\Resources\HomepageSections\Tables\HomepageSectionTable;
 use App\Models\HomepageSection;
@@ -48,6 +49,7 @@ class HomepageSectionResource extends Resource
             'index' => ListHomepageSections::route('/'),
             'create' => CreateHomepageSection::route('/create'),
             'edit' => EditHomepageSection::route('/{record}/edit'),
+            'view' => ViewHomepageSection::route('/{record}'),
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ProductImages;
 use App\Filament\Resources\ProductImages\Pages\CreateProductImage;
 use App\Filament\Resources\ProductImages\Pages\EditProductImage;
 use App\Filament\Resources\ProductImages\Pages\ListProductImages;
+use App\Filament\Resources\ProductImages\Pages\ViewProductImage;
 use App\Filament\Resources\ProductImages\Schemas\ProductImageForm;
 use App\Filament\Resources\ProductImages\Tables\ProductImagesTable;
 use App\Models\ProductImage;
@@ -45,6 +46,7 @@ class ProductImageResource extends Resource
             'index' => ListProductImages::route('/'),
             'create' => CreateProductImage::route('/create'),
             'edit' => EditProductImage::route('/{record}/edit'),
+            'view' => ViewProductImage::route('/{record}'),
         ];
     }
 }

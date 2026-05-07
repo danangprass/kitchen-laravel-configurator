@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Accessories;
 use App\Filament\Resources\Accessories\Pages\CreateAccessory;
 use App\Filament\Resources\Accessories\Pages\EditAccessory;
 use App\Filament\Resources\Accessories\Pages\ListAccessories;
+use App\Filament\Resources\Accessories\Pages\ViewAccessory;
 use App\Filament\Resources\Accessories\Schemas\AccessoryForm;
 use App\Filament\Resources\Accessories\Tables\AccessoriesTable;
 use App\Models\Accessory;
@@ -44,6 +45,7 @@ class AccessoryResource extends Resource
             'index' => ListAccessories::route('/'),
             'create' => CreateAccessory::route('/create'),
             'edit' => EditAccessory::route('/{record}/edit'),
+            'view' => ViewAccessory::route('/{record}'),
         ];
     }
 }

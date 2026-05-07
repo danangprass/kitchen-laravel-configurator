@@ -5,6 +5,7 @@ namespace App\Filament\Resources\AccessoryImages;
 use App\Filament\Resources\AccessoryImages\Pages\CreateAccessoryImage;
 use App\Filament\Resources\AccessoryImages\Pages\EditAccessoryImage;
 use App\Filament\Resources\AccessoryImages\Pages\ListAccessoryImages;
+use App\Filament\Resources\AccessoryImages\Pages\ViewAccessoryImage;
 use App\Filament\Resources\AccessoryImages\Schemas\AccessoryImageForm;
 use App\Filament\Resources\AccessoryImages\Tables\AccessoryImagesTable;
 use App\Models\AccessoryImage;
@@ -45,6 +46,7 @@ class AccessoryImageResource extends Resource
             'index' => ListAccessoryImages::route('/'),
             'create' => CreateAccessoryImage::route('/create'),
             'edit' => EditAccessoryImage::route('/{record}/edit'),
+            'view' => ViewAccessoryImage::route('/{record}'),
         ];
     }
 }

@@ -1,6 +1,8 @@
 <div>
     @forelse($sections as $section)
-        @includeIf('partials.homepage.' . $section->type, ['section' => $section])
+        @if(in_array($section->type, $allowedTypes))
+            @includeIf('partials.homepage.' . $section->type, ['section' => $section])
+        @endif
     @empty
         <div class="min-h-[60vh] flex items-center justify-center bg-gray-50">
             <div class="text-center">
