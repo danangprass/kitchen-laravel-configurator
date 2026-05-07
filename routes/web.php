@@ -7,6 +7,7 @@ use App\Livewire\ConsumptionCalculator;
 use App\Livewire\DealerLocator;
 use App\Livewire\HomePage;
 use App\Livewire\ProductComparator;
+use App\Livewire\TestimonialsPage;
 use App\Models\Accessory;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -18,6 +19,8 @@ Route::get("/", HomePage::class)->name("home");
 Route::get("/configurator", Configurator::class)->name("configurator");
 
 Route::livewire("/compare", ProductComparator::class)->name("compare");
+
+Route::get("/testimonials", TestimonialsPage::class)->name("testimonials");
 
 Route::get("/contact", ContactForm::class)->name("contact");
 
