@@ -42,7 +42,8 @@ class SearchBar extends Component
             return ['products' => [], 'accessories' => [], 'categories' => []];
         }
 
-        $search = '%' . $this->query . '%';
+        $escaped = str_replace(['%', '_'], ['\%', '\_'], $this->query);
+        $search = '%'.$escaped.'%';
 
         $products = Product::where('is_active', true)
             ->where(function ($q) use ($search) {
