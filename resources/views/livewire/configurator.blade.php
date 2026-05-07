@@ -111,42 +111,150 @@
                         <span class="text-sm text-slate-500">{{ $this->products->count() }} models available</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-4">{{ $this->selectedSubcategory?->name }}</h3>
+
+                    {{-- Advanced Filters --}}
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden mb-4">
+                        <button type="button" wire:click="$toggle('showFilters')"
+                            class="w-full flex items-center justify-between px-4 py-3 bg-slate-50 hover:bg-slate-100 transition-colors">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                                </svg>
+                                <span class="font-medium text-slate-700 text-sm">Filters</span>
+                                @if ($this->activeFilterCount > 0)
+                                    <span class="bg-slate-600 text-white text-xs font-medium px-2 py-0.5 rounded-full">{{ $this->activeFilterCount }} active</span>
+                                @endif
+                            </div>
+                            <svg class="w-5 h-5 text-slate-400 transition-transform duration-200 {{ $showFilters ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+
+                        @if ($showFilters)
+                            <div class="p-4 border-t border-slate-200 animate-fade-in">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {{-- Tray Type --}}
+                                    <div>
+                                        <label for="filterTraySize" class="block text-xs font-medium text-slate-600 mb-1">Tray Type</label>
+                                        <select id="filterTraySize" wire:model.live="filterTraySize"
+                                            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-slate-500 focus:ring-1 focus:ring-slate-500">
+                                            <option value="">All tray types</option>
+                                            @foreach ($this->traySizeOptions as $option)
+                                                <option value="{{ $option }}">{{ $option }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    {{-- Power Supply --}}
+                                    <div>
+                                        <label for="filterPowerSupply" class="block text-xs font-medium text-slate-600 mb-1">Power Supply</label>
+                                        <select id="filterPowerSupply" wire:model.live="filterPowerSupply"
+                                            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-slate-500 focus:ring-1 focus:ring-slate-500">
+                                            <option value="">All power types</option>
+                                            @foreach ($this->powerSupplyOptions as $option)
+                                                <option value="{{ $option }}">{{ ucfirst($option) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    {{-- ENERGY STAR --}}
+                                    <div>
+                                        <label for="filterEnergyStar" class="block text-xs font-medium text-slate-600 mb-1">ENERGY STAR</label>
+                                        <select id="filterEnergyStar" wire:model.live="filterEnergyStar"
+                                            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-slate-500 focus:ring-1 focus:ring-slate-500">
+                                            <option value="">All</option>
+                                            <option value="1">Certified</option>
+                                            <option value="0">Not certified</option>
+                                        </select>
+                                    </div>
+
+                                    {{-- Number of Trays --}}
+                                    <div>
+                                        <label for="filterTrayCount" class="block text-xs font-medium text-slate-600 mb-1">Number of Trays</label>
+                                        <select id="filterTrayCount" wire:model.live="filterTrayCount"
+                                            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-slate-500 focus:ring-1 focus:ring-slate-500">
+                                            <option value="">All tray counts</option>
+                                            @foreach ($this->trayCountOptions as $option)
+                                                <option value="{{ $option }}">{{ $option }} {{ $option == 1 ? 'tray' : 'trays' }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    {{-- Line Family --}}
+                                    <div>
+                                        <label for="filterLine" class="block text-xs font-medium text-slate-600 mb-1">Line Family</label>
+                                        <select id="filterLine" wire:model.live="filterLine"
+                                            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-slate-500 focus:ring-1 focus:ring-slate-500">
+                                            <option value="">All lines</option>
+                                            @foreach ($this->lineOptions as $option)
+                                                <option value="{{ $option }}">{{ $option }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    {{-- Door Opening --}}
+                                    <div>
+                                        <label for="filterDoorOpening" class="block text-xs font-medium text-slate-600 mb-1">Door Opening</label>
+                                        <select id="filterDoorOpening" wire:model.live="filterDoorOpening"
+                                            class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-slate-500 focus:ring-1 focus:ring-slate-500">
+                                            <option value="">All door types</option>
+                                            @foreach ($this->doorOpeningOptions as $option)
+                                                <option value="{{ $option }}">{{ ucfirst($option) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                @if ($this->activeFilterCount > 0)
+                                    <div class="mt-4 pt-3 border-t border-slate-100 flex justify-end">
+                                        <button type="button" wire:click="clearFilters"
+                                            class="text-sm text-slate-500 hover:text-slate-700 flex items-center transition-colors">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                            Clear all filters
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        @foreach ($this->products as $product)
-                            <div class="bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
-                                <div wire:click="toggleProduct({{ $product->id }})" class="cursor-pointer">
-                                    <div class="flex items-start justify-between">
-                                        <div class="flex-1">
-                                            <h4 class="font-bold text-slate-900 text-sm leading-tight">{!! $product->name !!}</h4>
-                                            @if ($product->line)
-                                                <p class="mt-1 text-xs text-slate-500">{{ $product->line }}</p>
+                        @forelse ($this->products as $product)
+                            <div wire:click="toggleProduct({{ $product->id }})"
+                                class="cursor-pointer bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-slate-900 text-sm leading-tight">{!! $product->name !!}</h4>
+                                        @if ($product->line)
+                                            <p class="mt-1 text-xs text-slate-500">{{ $product->line }}</p>
+                                        @endif
+                                        <div class="mt-2 flex flex-wrap gap-1">
+                                            @if ($product->control_type)
+                                                <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->control_type) }}</span>
                                             @endif
-                                            <div class="mt-2 flex flex-wrap gap-1">
-                                                @if ($product->control_type)
-                                                    <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->control_type) }}</span>
-                                                @endif
-                                                @if ($product->power_supply)
-                                                    <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->power_supply) }}</span>
-                                                @endif
-                                                @if ($product->energy_star_certified)
-                                                    <span class="inline-block bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">Energy Star</span>
-                                                @endif
-                                            </div>
-                                            <div class="mt-2 text-xs text-slate-500 space-y-0.5">
-                                                @if ($product->number_of_trays)
-                                                    <p>{{ $product->number_of_trays }} trays {{ $product->tray_size }}</p>
-                                                @endif
-                                                @if ($product->electric_power)
-                                                    <p>{{ $product->electric_power }} kW</p>
-                                                @endif
-                                            </div>
+                                            @if ($product->power_supply)
+                                                <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->power_supply) }}</span>
+                                            @endif
+                                            @if ($product->energy_star_certified)
+                                                <span class="inline-block bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">Energy Star</span>
+                                            @endif
                                         </div>
-                                        <div class="ml-3">
-                                            <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
-                                                @if (in_array($product->id, $selectedProductIds))
-                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                                                @endif
-                                            </div>
+                                        <div class="mt-2 text-xs text-slate-500 space-y-0.5">
+                                            @if ($product->number_of_trays)
+                                                <p>{{ $product->number_of_trays }} trays {{ $product->tray_size }}</p>
+                                            @endif
+                                            @if ($product->electric_power)
+                                                <p>{{ $product->electric_power }} kW</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
+                                            @if (in_array($product->id, $selectedProductIds))
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +269,18 @@
                                     </label>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="col-span-full text-center py-12 bg-slate-50 rounded-xl">
+                                <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                                <p class="text-slate-500 font-medium">No models match your filters</p>
+                                <button type="button" wire:click="clearFilters" class="mt-2 text-sm text-slate-600 hover:text-slate-800 underline">
+                                    Clear all filters
+                                </button>
+                            </div>
+                        @endforelse
+                    </div>
                     </div>
                 </div>
             @endif

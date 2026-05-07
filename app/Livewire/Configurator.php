@@ -25,6 +25,21 @@ class Configurator extends Component
     /** @var array<int, array{quantity: int, selected: bool}> */
     public array $otherAccessories = [];
 
+    // Advanced product filters (Step 1)
+    public string $filterTraySize = '';
+
+    public string $filterPowerSupply = '';
+
+    public string $filterEnergyStar = '';
+
+    public string $filterTrayCount = '';
+
+    public string $filterLine = '';
+
+    public string $filterDoorOpening = '';
+
+    public bool $showFilters = false;
+
     public function mount(): void
     {
         $this->step = 1;
@@ -39,6 +54,7 @@ class Configurator extends Component
     public function selectSubcategory(int $id): void
     {
         $this->selectedSubcategoryId = $id;
+        $this->clearFilters();
     }
 
     public function toggleProduct(int $id): void
@@ -172,6 +188,7 @@ class Configurator extends Component
         $this->selectedProductIds = [];
         $this->columnAccessories = [];
         $this->otherAccessories = [];
+        $this->clearFilters();
     }
 
     public function getCategoriesProperty(): Collection
@@ -230,8 +247,68 @@ class Configurator extends Component
 
         return Product::where('category_id', $subcategory->id)
             ->where('is_active', true)
+            ->when($this->filterTraySize !== '', function ($query) {
+                $query->where('tray_size', $this->filterTraySize);
+            })
+            ->when($this->filterPowerSupply !== '', function ($query) {
+                $query->where('power_supply', $this->filterPowerSupply);
+            })
+            ->when($this->filterEnergyStar !== '', function ($query) {
+                $query->where('energy_star_certified', $this->filterEnergyStar === '1');
+            })
+            ->when($this->filterTrayCount !== '', function ($query) {
+                $query->where('number_of_trays', (int) $this->filterTrayCount);
+            })
+            ->when($this->filterLine !== '', function ($query) {
+                $query->where('line', $this->filterLine);
+            })
+            ->when($this->filterDoorOpening !== '', function ($query) {
+                $query->where('opening_side', $this->filterDoorOpening);
+            })
             ->orderBy('sort_order')
             ->get();
+    }
+
+    public function getTraySizeOptionsProperty(): Collection
+    {
+        return $this->getDistinctValues('tray_size');
+    }
+
+    public function getPowerSupplyOptionsProperty(): Collection
+    {
+        return $this->getDistinctValues('power_supply');
+    }
+
+    public function getLineOptionsProperty(): Collection
+    {
+        return $this->getDistinctValues('line');
+    }
+
+    public function getDoorOpeningOptionsProperty(): Collection
+    {
+        return $this->getDistinctValues('opening_side');
+    }
+
+    public function getTrayCountOptionsProperty(): Collection
+    {
+        return $this->getDistinctValues('number_of_trays', ascending: true);
+    }
+
+    private function getDistinctValues(string $column, bool $ascending = false): Collection
+    {
+        $subcategory = $this->selectedSubcategory;
+
+        if (! $subcategory) {
+            return collect();
+        }
+
+        $query = Product::where('category_id', $subcategory->id)
+            ->where('is_active', true)
+            ->whereNotNull($column)
+            ->distinct()
+            ->orderBy($column, $ascending ? 'asc' : 'desc');
+
+        return $query->pluck($column);
     }
 
     public function getSelectedProductsProperty(): Collection
@@ -356,6 +433,43 @@ class Configurator extends Component
         }
 
         return $total > 0 ? $total : null;
+    }
+
+    public function clearFilters(): void
+    {
+        $this->filterTraySize = '';
+        $this->filterPowerSupply = '';
+        $this->filterEnergyStar = '';
+        $this->filterTrayCount = '';
+        $this->filterLine = '';
+        $this->filterDoorOpening = '';
+        $this->showFilters = false;
+    }
+
+    public function getActiveFilterCountProperty(): int
+    {
+        $count = 0;
+
+        if ($this->filterTraySize !== '') {
+            $count++;
+        }
+        if ($this->filterPowerSupply !== '') {
+            $count++;
+        }
+        if ($this->filterEnergyStar !== '') {
+            $count++;
+        }
+        if ($this->filterTrayCount !== '') {
+            $count++;
+        }
+        if ($this->filterLine !== '') {
+            $count++;
+        }
+        if ($this->filterDoorOpening !== '') {
+            $count++;
+        }
+
+        return $count;
     }
 
     public function render()
