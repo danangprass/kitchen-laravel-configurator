@@ -219,6 +219,12 @@
                 return div.innerHTML;
             },
 
+            sanitizeUrl(url) {
+                const u = url.trim().toLowerCase();
+                if (u.startsWith('http://') || u.startsWith('https://')) return url;
+                return 'https://' + url;
+            },
+
             popupHtml(dealer) {
                 const name = this.escapeHtml(dealer.name || '');
                 const type = this.escapeHtml(dealer.type || '');
@@ -231,7 +237,7 @@
                 h += '<small>' + type + ' &middot; ' + level + '</small><br>';
                 if (address) h += address + '<br>';
                 if (phone) h += '<a href="tel:' + phone + '">' + phone + '</a><br>';
-                if (website) h += '<a href="' + website + '" target="_blank" rel="noreferrer">Website</a>';
+                if (website) h += '<a href="' + this.sanitizeUrl(website) + '" target="_blank" rel="noopener noreferrer">Website</a>';
                 return h;
             },
 
