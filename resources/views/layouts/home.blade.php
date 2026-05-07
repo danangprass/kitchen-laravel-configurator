@@ -21,6 +21,9 @@
             <div class="flex items-center justify-between h-16">
                 <a href="/" class="text-xl font-semibold tracking-tight">Kitchen</a>
                 <nav class="flex items-center gap-6 text-sm font-medium">
+                    <a href="/calculator" class="hover:text-gray-600 transition-colors">
+                        Calculator
+                    </a>
                     <a href="/configurator" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors">
                         Build your own
                     </a>
@@ -47,6 +50,7 @@
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><a href="/configurator" class="hover:text-white transition-colors">Configurator</a></li>
+                        <li><a href="/calculator" class="hover:text-white transition-colors">Calculator</a></li>
                         <li><a href="/configurator" class="hover:text-white transition-colors">All Products</a></li>
                     </ul>
                 </div>
