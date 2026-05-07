@@ -60,13 +60,20 @@ class ProductComparator extends Component
             return collect();
         }
 
-        return Product::whereIn('id', $this->comparedProductIds)
+        $ids = array_values($this->comparedProductIds);
+        $case = 'CASE id ';
+        $bindings = [];
+
+        foreach ($ids as $position => $id) {
+            $case .= 'WHEN ? THEN ? ';
+            $bindings[] = $id;
+            $bindings[] = $position;
+        }
+        $case .= 'END';
+
+        return Product::whereIn('id', $ids)
             ->where('is_active', true)
-            ->orderByRaw('CASE id '.implode(' ', array_map(
-                fn (int $id, int $i) => "WHEN {$id} THEN {$i}",
-                $this->comparedProductIds,
-                array_keys($this->comparedProductIds),
-            )).' END')
+            ->orderByRaw($case, $bindings)
             ->get();
     }
 
