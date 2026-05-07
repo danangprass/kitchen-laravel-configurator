@@ -40,7 +40,10 @@ class ConsumptionCalculator extends Component
         if (in_array($id, $this->selectedProductIds, true)) {
             $this->selectedProductIds = array_values(array_diff($this->selectedProductIds, [$id]));
         } elseif (count($this->selectedProductIds) < self::MAX_SELECTIONS) {
-            $this->selectedProductIds[] = $id;
+            $product = Product::where('id', $id)->where('is_active', true)->first();
+            if ($product) {
+                $this->selectedProductIds[] = $id;
+            }
         }
     }
 
@@ -93,7 +96,8 @@ class ConsumptionCalculator extends Component
      */
     public function getSelectedProductsProperty(): Collection
     {
-        return Product::whereIn('id', $this->selectedProductIds)
+        return Product::where('is_active', true)
+            ->whereIn('id', $this->selectedProductIds)
             ->orderBy('sort_order')
             ->get();
     }

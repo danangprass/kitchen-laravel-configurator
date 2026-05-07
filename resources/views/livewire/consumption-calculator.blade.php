@@ -46,7 +46,7 @@
                     <div class="flex flex-wrap gap-2">
                         @foreach ($this->selectedProducts as $product)
                             <div class="inline-flex items-center bg-white rounded-lg px-3 py-2 shadow-sm border border-slate-200">
-                                <span class="text-sm font-medium text-slate-800">{!! $product->name !!}</span>
+                                <span class="text-sm font-medium text-slate-800">{{ $product->name }}</span>
                                 <button wire:click="removeProduct({{ $product->id }})" class="ml-2 text-slate-400 hover:text-red-500">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </button>
@@ -63,7 +63,7 @@
                         class="cursor-pointer bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
                         <div class="flex items-start justify-between">
                             <div class="flex-1">
-                                <h4 class="font-bold text-slate-900 text-sm leading-tight">{!! $product->name !!}</h4>
+                                <h4 class="font-bold text-slate-900 text-sm leading-tight">{{ $product->name }}</h4>
                                 @if ($product->line)
                                     <p class="mt-1 text-xs text-slate-500">{{ $product->line }}</p>
                                 @endif
@@ -207,7 +207,7 @@
                 @foreach ($this->results as $result)
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                         <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
-                            <h3 class="font-semibold text-slate-900 text-sm">{!! $result['product']->name !!}</h3>
+                            <h3 class="font-semibold text-slate-900 text-sm">{{ $result['product']->name }}</h3>
                         </div>
                         <div class="p-4 space-y-4">
                             <div class="grid grid-cols-3 gap-3">
