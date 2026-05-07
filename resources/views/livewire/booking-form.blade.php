@@ -58,6 +58,7 @@
                     <div>
                         <label for="preferred_date_start" class="block text-sm font-medium text-gray-700 mb-1">Preferred Start Date *</label>
                         <input type="date" id="preferred_date_start" wire:model="preferred_date_start"
+                            min="{{ date('Y-m-d') }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500">
                         @error('preferred_date_start') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
@@ -65,6 +66,7 @@
                     <div>
                         <label for="preferred_date_end" class="block text-sm font-medium text-gray-700 mb-1">Preferred End Date *</label>
                         <input type="date" id="preferred_date_end" wire:model="preferred_date_end"
+                            min="{{ date('Y-m-d') }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500">
                         @error('preferred_date_end') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
