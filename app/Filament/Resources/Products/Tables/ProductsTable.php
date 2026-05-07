@@ -41,6 +41,10 @@ class ProductsTable
                 TextColumn::make('frequency')->searchable(),
                 TextColumn::make('consumption_kwh')->numeric()->sortable(),
                 TextColumn::make('co2_emission')->numeric()->sortable(),
+                IconColumn::make('video_url')
+                    ->label('Video')
+                    ->icon(fn (?string $state): string => $state ? 'heroicon-o-play-circle' : 'heroicon-o-x-circle')
+                    ->color(fn (?string $state): string => $state ? 'success' : 'gray'),
                 IconColumn::make('energy_star_certified')->boolean(),
                 TextColumn::make('price')->money()->sortable(),
                 IconColumn::make('is_active')->boolean(),

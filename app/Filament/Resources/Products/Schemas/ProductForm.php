@@ -28,6 +28,10 @@ class ProductForm
                     ->columnSpanFull(),
                 Textarea::make('short_description')
                     ->columnSpanFull(),
+                TextInput::make('video_url')
+                    ->url()
+                    ->helperText('YouTube or Vimeo embed URL')
+                    ->placeholder('https://www.youtube.com/embed/...'),
                 TextInput::make('type'),
                 TextInput::make('panel'),
                 TextInput::make('power_supply'),
