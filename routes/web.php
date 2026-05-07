@@ -2,6 +2,7 @@
 
 use App\Livewire\Configurator;
 use App\Livewire\HomePage;
+use App\Livewire\ProductComparator;
 use App\Models\Accessory;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomePage::class)->name('home');
 
 Route::get('/configurator', Configurator::class)->name('configurator');
+
+Route::livewire('/compare', ProductComparator::class)->name('compare');
 
 Route::get('/configurator/pdf', function (Request $request) {
     $productIds = $request->query('products', []);
