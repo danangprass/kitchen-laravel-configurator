@@ -24,6 +24,12 @@ class FaqPage extends Component
 
     public function setCategory(string $category): void
     {
+        $allowedCategories = ['All', 'Products', 'Ordering', 'Shipping', 'Warranty', 'General'];
+
+        if (! in_array($category, $allowedCategories, true)) {
+            return;
+        }
+
         $this->activeCategory = $category;
         $this->expandedFaqs = [];
     }
@@ -43,9 +49,11 @@ class FaqPage extends Component
                 $query->byCategory($this->activeCategory);
             })
             ->when($this->searchQuery !== '', function ($query) {
-                $query->where(function ($q) {
-                    $q->where('question', 'like', '%'.$this->searchQuery.'%')
-                        ->orWhere('answer', 'like', '%'.$this->searchQuery.'%');
+                $escapedSearch = str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $this->searchQuery);
+
+                $query->where(function ($q) use ($escapedSearch) {
+                    $q->where('question', 'like', '%'.$escapedSearch.'%')
+                        ->orWhere('answer', 'like', '%'.$escapedSearch.'%');
                 });
             })
             ->orderBy('sort_order')

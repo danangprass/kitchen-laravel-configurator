@@ -82,7 +82,7 @@
                         >
                             <div class="pt-1 border-t border-gray-100">
                                 <div class="text-sm text-gray-600 leading-relaxed space-y-3 mt-4">
-                                    {!! $faq->answer !!}
+                                    {{ $faq->answer }}
                                 </div>
                             </div>
                         </div>
