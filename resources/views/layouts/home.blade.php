@@ -38,7 +38,7 @@
 
     <footer class="bg-gray-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Kitchen</h4>
                     <p class="text-gray-400 text-sm leading-relaxed">
@@ -53,8 +53,10 @@
                         <li><a href="/calculator" class="hover:text-white transition-colors">Calculator</a></li>
                         <li><a href="/configurator" class="hover:text-white transition-colors">All Products</a></li>
                         <li><a href="/faq" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="{{ route('privacy-policy') }}" class="hover:text-white transition-colors">Privacy Policy</a></li>
                     </ul>
                 </div>
+                <x-newsletter-form />
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Contact</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
@@ -68,5 +70,9 @@
             </div>
         </div>
     </footer>
+
+    <x-cookie-banner />
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>

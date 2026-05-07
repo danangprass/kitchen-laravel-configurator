@@ -10,6 +10,7 @@ use App\Livewire\HomePage;
 use App\Livewire\ProductComparator;
 use App\Livewire\TestimonialsPage;
 use App\Models\Accessory;
+use App\Models\NewsletterSubscriber;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -20,6 +21,25 @@ Route::get("/", HomePage::class)->name("home");
 Route::get("/configurator", Configurator::class)->name("configurator");
 
 Route::livewire("/compare", ProductComparator::class)->name("compare");
+
+Route::get("/privacy-policy", fn() => view("pages.privacy-policy"))->name(
+    "privacy-policy",
+);
+
+Route::post("/newsletter/subscribe", function (Request $request) {
+    $validated = $request->validate([
+        "email" => "required|email|unique:newsletter_subscribers,email",
+        "consent" => "required|accepted",
+    ]);
+
+    NewsletterSubscriber::create(["email" => $validated["email"]]);
+
+    return redirect()
+        ->back()
+        ->with("newsletter_success", "Thanks! You have been subscribed.");
+})
+    ->middleware("throttle:10,60")
+    ->name("newsletter.subscribe");
 
 Route::get("/testimonials", TestimonialsPage::class)->name("testimonials");
 Route::get("/faq", FaqPage::class)->name("faq");
