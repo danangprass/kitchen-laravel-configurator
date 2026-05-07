@@ -113,41 +113,52 @@
                     <h3 class="text-xl font-bold text-slate-900 mb-4">{{ $this->selectedSubcategory?->name }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach ($this->products as $product)
-                            <div wire:click="toggleProduct({{ $product->id }})"
-                                class="cursor-pointer bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
-                                <div class="flex items-start justify-between">
-                                    <div class="flex-1">
-                                        <h4 class="font-bold text-slate-900 text-sm leading-tight">{!! $product->name !!}</h4>
-                                        @if ($product->line)
-                                            <p class="mt-1 text-xs text-slate-500">{{ $product->line }}</p>
-                                        @endif
-                                        <div class="mt-2 flex flex-wrap gap-1">
-                                            @if ($product->control_type)
-                                                <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->control_type) }}</span>
+                            <div class="bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
+                                <div wire:click="toggleProduct({{ $product->id }})" class="cursor-pointer">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-slate-900 text-sm leading-tight">{!! $product->name !!}</h4>
+                                            @if ($product->line)
+                                                <p class="mt-1 text-xs text-slate-500">{{ $product->line }}</p>
                                             @endif
-                                            @if ($product->power_supply)
-                                                <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->power_supply) }}</span>
-                                            @endif
-                                            @if ($product->energy_star_certified)
-                                                <span class="inline-block bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">Energy Star</span>
-                                            @endif
+                                            <div class="mt-2 flex flex-wrap gap-1">
+                                                @if ($product->control_type)
+                                                    <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->control_type) }}</span>
+                                                @endif
+                                                @if ($product->power_supply)
+                                                    <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->power_supply) }}</span>
+                                                @endif
+                                                @if ($product->energy_star_certified)
+                                                    <span class="inline-block bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">Energy Star</span>
+                                                @endif
+                                            </div>
+                                            <div class="mt-2 text-xs text-slate-500 space-y-0.5">
+                                                @if ($product->number_of_trays)
+                                                    <p>{{ $product->number_of_trays }} trays {{ $product->tray_size }}</p>
+                                                @endif
+                                                @if ($product->electric_power)
+                                                    <p>{{ $product->electric_power }} kW</p>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="mt-2 text-xs text-slate-500 space-y-0.5">
-                                            @if ($product->number_of_trays)
-                                                <p>{{ $product->number_of_trays }} trays {{ $product->tray_size }}</p>
-                                            @endif
-                                            @if ($product->electric_power)
-                                                <p>{{ $product->electric_power }} kW</p>
-                                            @endif
+                                        <div class="ml-3">
+                                            <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
+                                                @if (in_array($product->id, $selectedProductIds))
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="ml-3">
-                                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
-                                            @if (in_array($product->id, $selectedProductIds))
-                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <div class="mt-3 pt-3 border-t border-slate-100">
+                                    <label class="flex items-center cursor-pointer" wire:click.stop="toggleCompare({{ $product->id }})">
+                                        <div class="w-5 h-5 rounded border-2 flex items-center justify-center transition {{ in_array($product->id, $this->comparedProductIds) ? 'bg-blue-600 border-blue-600' : 'border-slate-300 hover:border-blue-400' }}">
+                                            @if (in_array($product->id, $this->comparedProductIds))
+                                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                             @endif
                                         </div>
-                                    </div>
+                                        <span class="ml-2 text-xs font-medium {{ in_array($product->id, $this->comparedProductIds) ? 'text-blue-600' : 'text-slate-500' }}">Compare</span>
+                                    </label>
                                 </div>
                             </div>
                         @endforeach
@@ -517,4 +528,28 @@
             </div>
         </div>
     </div>
+
+    {{-- Floating Compare Bar --}}
+    @if ($this->comparedProductCount > 0)
+        <div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 shadow-lg animate-fade-in">
+            <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold">
+                        {{ $this->comparedProductCount }}
+                    </span>
+                    <span class="text-sm font-medium text-slate-700">
+                        {{ $this->comparedProductCount === 1 ? '1 oven' : $this->comparedProductCount . ' ovens' }} selected for comparison
+                    </span>
+                </div>
+                <a href="{{ route('compare') }}" wire:navigate
+                    class="px-5 py-2.5 bg-blue-600 text-white rounded-lg font-semibold text-sm hover:bg-blue-700 transition flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+                    </svg>
+                    Compare
+                </a>
+            </div>
+        </div>
+        <div class="h-14"></div>
+    @endif
 </div>

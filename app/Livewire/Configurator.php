@@ -141,6 +141,29 @@ class Configurator extends Component
         }
     }
 
+    public function toggleCompare(int $productId): void
+    {
+        $ids = session()->get('compared_product_ids', []);
+
+        if (in_array($productId, $ids, true)) {
+            $ids = array_values(array_filter($ids, fn (int $id) => $id !== $productId));
+        } elseif (count($ids) < 3) {
+            $ids[] = $productId;
+        }
+
+        session()->put('compared_product_ids', $ids);
+    }
+
+    public function getComparedProductIdsProperty(): array
+    {
+        return session()->get('compared_product_ids', []);
+    }
+
+    public function getComparedProductCountProperty(): int
+    {
+        return count($this->comparedProductIds);
+    }
+
     public function restart(): void
     {
         $this->step = 1;
