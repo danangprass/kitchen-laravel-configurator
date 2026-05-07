@@ -48,6 +48,7 @@ class Product extends Model
         'list_image',
         'features',
         'card_info',
+        'video_url',
         'price',
         'is_active',
         'sort_order',
