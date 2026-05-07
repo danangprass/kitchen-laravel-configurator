@@ -38,6 +38,12 @@ class TestimonialsPage extends Component
             ->pluck('industry');
     }
 
+    public function selectIndustry(string $industry): void
+    {
+        $this->selectedIndustry = $industry;
+        $this->loadTestimonials();
+    }
+
     public function updatedSelectedIndustry()
     {
         $this->loadTestimonials();
@@ -61,7 +67,7 @@ class TestimonialsPage extends Component
         Testimonial::create([
             'customer_name' => $this->submitName,
             'company' => $this->submitCompany,
-            'quote' => $this->submitQuote,
+            'quote' => strip_tags($this->submitQuote),
             'rating' => $this->submitRating,
             'is_active' => false,
         ]);
