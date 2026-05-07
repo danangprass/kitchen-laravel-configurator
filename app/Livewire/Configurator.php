@@ -327,6 +327,11 @@ class Configurator extends Component
         );
     }
 
+    public function getHasPricingProperty(): bool
+    {
+        return $this->totalPrice !== null;
+    }
+
     public static function calculateTotalPrice(
         Collection $products,
         Collection $columnAccessories,

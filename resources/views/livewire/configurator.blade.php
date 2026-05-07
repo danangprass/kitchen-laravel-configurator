@@ -454,13 +454,25 @@
             @endif
 
             {{-- Total --}}
-            @if ($this->totalPrice !== null)
+            @if ($this->hasPricing)
                 <div class="bg-slate-600 rounded-xl p-6 text-white">
                     <div class="flex items-center justify-between">
                         <span class="text-lg font-medium">Total Estimate</span>
                         <span class="text-3xl font-bold">${{ number_format($this->totalPrice, 2) }}</span>
                     </div>
                     <p class="mt-2 text-sm text-slate-100">Prices are estimates and may vary. Contact us for a formal quote.</p>
+                </div>
+            @else
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
+                    <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-amber-800">Pricing Information Unavailable</h3>
+                    <p class="mt-2 text-amber-700">Detailed pricing information is currently being updated. Please contact us for a personalized quote tailored to your configuration.</p>
+                    <a href="mailto:info@unox.com" class="mt-4 inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        Contact Us for Pricing
+                    </a>
                 </div>
             @endif
 

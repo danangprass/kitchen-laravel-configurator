@@ -1,6 +1,8 @@
 <?php
 
+use App\Livewire\BookingForm;
 use App\Livewire\Configurator;
+use App\Livewire\ContactForm;
 use App\Livewire\HomePage;
 use App\Livewire\ProductComparator;
 use App\Models\Accessory;
@@ -14,6 +16,10 @@ Route::get('/', HomePage::class)->name('home');
 Route::get('/configurator', Configurator::class)->name('configurator');
 
 Route::livewire('/compare', ProductComparator::class)->name('compare');
+
+Route::get('/contact', ContactForm::class)->name('contact');
+
+Route::get('/book-trial', BookingForm::class)->name('book-trial');
 
 Route::get('/configurator/pdf', function (Request $request) {
     $productIds = $request->query('products', []);
