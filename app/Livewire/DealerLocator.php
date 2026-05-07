@@ -52,6 +52,6 @@ class DealerLocator extends Component
     {
         return view('livewire.dealer-locator', [
             'dealers' => $this->dealers,
-        ]);
+        ])->layout('layouts.home');
     }
 }

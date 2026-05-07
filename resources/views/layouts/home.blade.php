@@ -14,6 +14,7 @@
     @else
         <script src="https://cdn.tailwindcss.com"></script>
     @endif
+    @stack('styles')
 </head>
 <body class="bg-white text-gray-900 antialiased">
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100">
@@ -74,6 +75,6 @@
 
     <x-cookie-banner />
 
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @stack('scripts')
 </body>
 </html>
