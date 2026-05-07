@@ -107,7 +107,7 @@
                                 </a>
                             @endif
                             @if($dealer->website)
-                                <a href="{{ $dealer->website }}" target="_blank" rel="noopener"
+                                <a href="{{ $dealer->website }}" target="_blank" rel="noopener noreferrer"
                                    class="hover:text-blue-600 transition" onclick="event.stopPropagation()">
                                     &#127760; Website
                                 </a>
@@ -223,19 +223,25 @@
                     });
                 },
 
+                escapeHtml(str) {
+                    const div = document.createElement('div');
+                    div.textContent = str;
+                    return div.innerHTML;
+                },
+
                 popupHtml(dealer) {
-                    const name = dealer.name || '';
-                    const type = dealer.type || '';
-                    const level = dealer.service_level || '';
-                    const address = dealer.address || '';
-                    const phone = dealer.phone || '';
-                    const website = dealer.website || '';
+                    const name = this.escapeHtml(dealer.name || '');
+                    const type = this.escapeHtml(dealer.type || '');
+                    const level = this.escapeHtml(dealer.service_level || '');
+                    const address = this.escapeHtml(dealer.address || '');
+                    const phone = this.escapeHtml(dealer.phone || '');
+                    const website = this.escapeHtml(dealer.website || '');
 
                     let h = '<strong>' + name + '</strong><br>';
                     h += '<small>' + type + ' &middot; ' + level + '</small><br>';
                     if (address) h += address + '<br>';
                     if (phone) h += '<a href="tel:' + phone + '">' + phone + '</a><br>';
-                    if (website) h += '<a href="' + website + '" target="_blank">Website</a>';
+                    if (website) h += '<a href="' + website + '" target="_blank" rel="noreferrer">Website</a>';
                     return h;
                 },
 
