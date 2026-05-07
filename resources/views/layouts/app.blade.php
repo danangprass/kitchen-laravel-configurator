@@ -10,7 +10,7 @@
             theme: {
                 extend: {
                     colors: {
-                        
+
                         'kitchen-dark': '#1a1a1a',
                     }
                 }
@@ -28,6 +28,7 @@
                     <span class="ml-3 text-sm text-slate-500 hidden sm:inline">Configurator</span>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <livewire:search-bar />
                     <a href="/calculator" class="text-sm text-slate-600 hover:text-slate-700 transition">Calculator</a>
                     <a href="/admin" class="text-sm text-slate-600 hover:text-slate-700 transition">Admin</a>
                 </div>
