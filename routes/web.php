@@ -4,6 +4,7 @@ use App\Livewire\BookingForm;
 use App\Livewire\Configurator;
 use App\Livewire\ContactForm;
 use App\Livewire\ConsumptionCalculator;
+use App\Livewire\DealerLocator;
 use App\Livewire\HomePage;
 use App\Livewire\ProductComparator;
 use App\Models\Accessory;
@@ -23,6 +24,7 @@ Route::get("/contact", ContactForm::class)->name("contact");
 Route::get("/book-trial", BookingForm::class)->name("book-trial");
 
 Route::get("/calculator", ConsumptionCalculator::class)->name("calculator");
+Route::get("/dealers", DealerLocator::class)->name("dealers");
 
 Route::get("/configurator/pdf", function (Request $request) {
     $productIds = $request->query("products", []);
