@@ -21,6 +21,7 @@
             <div class="flex items-center justify-between h-16">
                 <a href="/" class="text-xl font-semibold tracking-tight">Kitchen</a>
                 <nav class="flex items-center gap-6 text-sm font-medium">
+                    <livewire:search-bar />
                     <a href="/calculator" class="hover:text-gray-600 transition-colors">
                         Calculator
                     </a>
