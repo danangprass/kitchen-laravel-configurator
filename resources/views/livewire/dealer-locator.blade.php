@@ -1,30 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dealer & Service Locator — Kitchen</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    @livewireStyles
-    <style>
-        #map { height: 100%; width: 100%; }
-        .dealer-card.active {
-            border-left: 3px solid #2563eb;
-            background-color: #eff6ff;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 h-screen overflow-hidden">
-    <nav class="bg-white border-b border-slate-200 h-14 flex items-center px-4 shrink-0">
-        <a href="/" class="text-xl font-bold text-slate-700">Kitchen</a>
-        <span class="ml-2 text-sm text-slate-500">Dealer &amp; Service Locator</span>
-    </nav>
+<div class="bg-slate-50 h-screen overflow-hidden"
+     x-data="dealerMap()"
+     x-init="init(@json($dealers))">
 
-    <div class="flex h-[calc(100vh-3.5rem)]"
-         x-data="dealerMap()"
-         x-init="init(@json($dealers))">
+    <div class="flex h-[calc(100vh-4rem)]">
 
         {{-- Sidebar --}}
         <div class="w-96 bg-white border-r border-slate-200 flex flex-col shrink-0 overflow-hidden"
@@ -138,137 +116,148 @@
             </button>
         </div>
     </div>
+</div>
 
-    @livewireScripts
+@push('styles')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    #map { height: 100%; width: 100%; }
+    .dealer-card.active {
+        border-left: 3px solid #2563eb;
+        background-color: #eff6ff;
+    }
+</style>
+@endpush
 
-    <script>
-        function dealerMap() {
-            return {
-                sidebarHidden: window.innerWidth < 768,
-                map: null,
-                markers: [],
+@push('scripts')
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    function dealerMap() {
+        return {
+            sidebarHidden: window.innerWidth < 768,
+            map: null,
+            markers: [],
 
-                init(dealerData) {
-                    this.map = L.map('map').setView([-2.5, 118], 5);
+            init(dealerData) {
+                this.map = L.map('map').setView([-2.5, 118], 5);
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                        maxZoom: 19,
-                    }).addTo(this.map);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19,
+                }).addTo(this.map);
 
-                    this.addMarkers(dealerData);
+                this.addMarkers(dealerData);
 
-                    this.$wire.on('filters-updated', () => {
-                        this.sidebarHidden = false;
-                        this.$nextTick(() => {
-                            setTimeout(() => this.syncMarkersFromDom(), 100);
-                        });
+                this.$wire.on('filters-updated', () => {
+                    this.sidebarHidden = false;
+                    this.$nextTick(() => {
+                        setTimeout(() => this.syncMarkersFromDom(), 100);
                     });
+                });
 
-                    window.addEventListener('resize', () => {
-                        this.map.invalidateSize();
-                    });
-                },
+                window.addEventListener('resize', () => {
+                    this.map.invalidateSize();
+                });
+            },
 
-                syncMarkersFromDom() {
-                    const cards = document.querySelectorAll('#dealer-list .dealer-card');
-                    const data = [];
-                    cards.forEach((card) => {
-                        const id = parseInt(card.dataset.dealerId);
-                        const lat = parseFloat(card.dataset.lat);
-                        const lng = parseFloat(card.dataset.lng);
-                        if (!isNaN(id)) {
-                            data.push({ id, lat, lng });
-                        }
-                    });
-                    this.addMarkers(data);
-                },
-
-                addMarkers(dealerData) {
-                    this.clearMarkers();
-
-                    if (!dealerData || !dealerData.length) return;
-
-                    dealerData.forEach((dealer) => {
-                        const lat = parseFloat(dealer.latitude ?? dealer.lat);
-                        const lng = parseFloat(dealer.longitude ?? dealer.lng);
-                        if (!lat || !lng || isNaN(lat) || isNaN(lng)) return;
-
-                        const color = this.getColor(dealer.service_level);
-                        const icon = (dealer.type === 'Unox Office')
-                            ? this.makeIcon(color, '&#9733;', 32, 4)
-                            : this.makeIcon(color, 'D', 28, 50);
-
-                        const marker = L.marker([lat, lng], { icon })
-                            .addTo(this.map)
-                            .bindPopup(this.popupHtml(dealer));
-
-                        marker.dealerId = dealer.id;
-                        this.markers.push(marker);
-                    });
-                },
-
-                getColor(level) {
-                    const colors = { Platinum: '#7c3aed', Gold: '#d97706', Silver: '#6b7280', Authorized: '#475569' };
-                    return colors[level] || '#475569';
-                },
-
-                makeIcon(color, text, size, radius) {
-                    return L.divIcon({
-                        className: 'custom-marker',
-                        html: `<div style="background:${color};width:${size}px;height:${size}px;border-radius:${radius === 50 ? '50%' : radius + 'px'};border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-size:${size * 0.43}px;font-weight:bold;">${text}</div>`,
-                        iconSize: [size, size],
-                        iconAnchor: [size / 2, size / 2],
-                        popupAnchor: [0, -size / 2],
-                    });
-                },
-
-                escapeHtml(str) {
-                    const div = document.createElement('div');
-                    div.textContent = str;
-                    return div.innerHTML;
-                },
-
-                popupHtml(dealer) {
-                    const name = this.escapeHtml(dealer.name || '');
-                    const type = this.escapeHtml(dealer.type || '');
-                    const level = this.escapeHtml(dealer.service_level || '');
-                    const address = this.escapeHtml(dealer.address || '');
-                    const phone = this.escapeHtml(dealer.phone || '');
-                    const website = this.escapeHtml(dealer.website || '');
-
-                    let h = '<strong>' + name + '</strong><br>';
-                    h += '<small>' + type + ' &middot; ' + level + '</small><br>';
-                    if (address) h += address + '<br>';
-                    if (phone) h += '<a href="tel:' + phone + '">' + phone + '</a><br>';
-                    if (website) h += '<a href="' + website + '" target="_blank" rel="noreferrer">Website</a>';
-                    return h;
-                },
-
-                focusDealer(id, lat, lng) {
-                    const latitude = parseFloat(lat);
-                    const longitude = parseFloat(lng);
-
-                    if (latitude && longitude && !isNaN(latitude) && !isNaN(longitude)) {
-                        this.map.setView([latitude, longitude], 15);
-                        const marker = this.markers.find((m) => m.dealerId === parseInt(id));
-                        if (marker) marker.openPopup();
+            syncMarkersFromDom() {
+                const cards = document.querySelectorAll('#dealer-list .dealer-card');
+                const data = [];
+                cards.forEach((card) => {
+                    const id = parseInt(card.dataset.dealerId);
+                    const lat = parseFloat(card.dataset.lat);
+                    const lng = parseFloat(card.dataset.lng);
+                    if (!isNaN(id)) {
+                        data.push({ id, lat, lng });
                     }
+                });
+                this.addMarkers(data);
+            },
 
-                    document.querySelectorAll('.dealer-card').forEach((el) => el.classList.remove('active'));
-                    const card = document.querySelector('.dealer-card[data-dealer-id="' + id + '"]');
-                    if (card) {
-                        card.classList.add('active');
-                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
-                },
+            addMarkers(dealerData) {
+                this.clearMarkers();
 
-                clearMarkers() {
-                    this.markers.forEach((m) => this.map.removeLayer(m));
-                    this.markers = [];
-                },
-            };
-        }
-    </script>
-</body>
-</html>
+                if (!dealerData || !dealerData.length) return;
+
+                dealerData.forEach((dealer) => {
+                    const lat = parseFloat(dealer.latitude ?? dealer.lat);
+                    const lng = parseFloat(dealer.longitude ?? dealer.lng);
+                    if (!lat || !lng || isNaN(lat) || isNaN(lng)) return;
+
+                    const color = this.getColor(dealer.service_level);
+                    const icon = (dealer.type === 'Unox Office')
+                        ? this.makeIcon(color, '&#9733;', 32, 4)
+                        : this.makeIcon(color, 'D', 28, 50);
+
+                    const marker = L.marker([lat, lng], { icon })
+                        .addTo(this.map)
+                        .bindPopup(this.popupHtml(dealer));
+
+                    marker.dealerId = dealer.id;
+                    this.markers.push(marker);
+                });
+            },
+
+            getColor(level) {
+                const colors = { Platinum: '#7c3aed', Gold: '#d97706', Silver: '#6b7280', Authorized: '#475569' };
+                return colors[level] || '#475569';
+            },
+
+            makeIcon(color, text, size, radius) {
+                return L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background:${color};width:${size}px;height:${size}px;border-radius:${radius === 50 ? '50%' : radius + 'px'};border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-size:${size * 0.43}px;font-weight:bold;">${text}</div>`,
+                    iconSize: [size, size],
+                    iconAnchor: [size / 2, size / 2],
+                    popupAnchor: [0, -size / 2],
+                });
+            },
+
+            escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            },
+
+            popupHtml(dealer) {
+                const name = this.escapeHtml(dealer.name || '');
+                const type = this.escapeHtml(dealer.type || '');
+                const level = this.escapeHtml(dealer.service_level || '');
+                const address = this.escapeHtml(dealer.address || '');
+                const phone = this.escapeHtml(dealer.phone || '');
+                const website = this.escapeHtml(dealer.website || '');
+
+                let h = '<strong>' + name + '</strong><br>';
+                h += '<small>' + type + ' &middot; ' + level + '</small><br>';
+                if (address) h += address + '<br>';
+                if (phone) h += '<a href="tel:' + phone + '">' + phone + '</a><br>';
+                if (website) h += '<a href="' + website + '" target="_blank" rel="noreferrer">Website</a>';
+                return h;
+            },
+
+            focusDealer(id, lat, lng) {
+                const latitude = parseFloat(lat);
+                const longitude = parseFloat(lng);
+
+                if (latitude && longitude && !isNaN(latitude) && !isNaN(longitude)) {
+                    this.map.setView([latitude, longitude], 15);
+                    const marker = this.markers.find((m) => m.dealerId === parseInt(id));
+                    if (marker) marker.openPopup();
+                }
+
+                document.querySelectorAll('.dealer-card').forEach((el) => el.classList.remove('active'));
+                const card = document.querySelector('.dealer-card[data-dealer-id="' + id + '"]');
+                if (card) {
+                    card.classList.add('active');
+                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            },
+
+            clearMarkers() {
+                this.markers.forEach((m) => this.map.removeLayer(m));
+                this.markers = [];
+            },
+        };
+    }
+</script>
+@endpush
