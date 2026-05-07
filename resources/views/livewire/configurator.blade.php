@@ -118,18 +118,30 @@
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <h4 class="font-bold text-slate-900 text-sm leading-tight">{!! $product->name !!}</h4>
-                                        @if ($product->line)
-                                            <p class="mt-1 text-xs text-slate-500">{{ $product->line }}</p>
-                                        @endif
                                         <div class="mt-2 flex flex-wrap gap-1">
-                                            @if ($product->control_type)
-                                                <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->control_type) }}</span>
+                                            @if ($product->line)
+                                                <span class="inline-flex items-center bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded-full">
+                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                                                    {{ $product->line }}
+                                                </span>
                                             @endif
-                                            @if ($product->power_supply)
-                                                <span class="inline-block bg-slate-100 text-slate-600 text-xs px-2 py-0.5 rounded">{{ ucfirst($product->power_supply) }}</span>
+                                            @if ($product->consumption_kwh)
+                                                <span class="inline-flex items-center bg-teal-50 text-teal-700 text-xs px-2 py-0.5 rounded-full">
+                                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                                                    {{ $product->consumption_kwh }} kWh/day
+                                                </span>
+                                            @endif
+                                            @if ($product->co2_emission)
+                                                <span class="inline-flex items-center bg-sky-50 text-sky-700 text-xs px-2 py-0.5 rounded-full">
+                                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"/></svg>
+                                                    {{ $product->co2_emission }} kg/day
+                                                </span>
                                             @endif
                                             @if ($product->energy_star_certified)
-                                                <span class="inline-block bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">Energy Star</span>
+                                                <span class="inline-flex items-center bg-amber-50 text-amber-700 text-xs px-2 py-0.5 rounded-full">
+                                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                                    ENERGY STAR
+                                                </span>
                                             @endif
                                         </div>
                                         <div class="mt-2 text-xs text-slate-500 space-y-0.5">
