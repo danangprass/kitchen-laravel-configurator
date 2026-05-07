@@ -27,6 +27,10 @@
             Subscribe
         </button>
 
+        <p class="text-gray-500 text-xs mt-2">
+            You can unsubscribe at any time via the link in our emails.
+        </p>
+
         @if (session('newsletter_success'))
             <p class="text-green-400 text-sm mt-2">{{ session('newsletter_success') }}</p>
         @endif

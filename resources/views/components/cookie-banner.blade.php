@@ -1,7 +1,15 @@
 <div
     x-data="{ visible: false }"
     x-init="
-        if (!localStorage.getItem('cookie-consent')) {
+        const consent = localStorage.getItem('cookie-consent');
+        const timestamp = localStorage.getItem('cookie-consent-timestamp');
+        const sixMonthsMs = 6 * 30 * 24 * 60 * 60 * 1000;
+
+        if (!consent || !timestamp) {
+            visible = true;
+        } else if (Date.now() - parseInt(timestamp) > sixMonthsMs) {
+            localStorage.removeItem('cookie-consent');
+            localStorage.removeItem('cookie-consent-timestamp');
             visible = true;
         }
     "
@@ -25,6 +33,7 @@
                 <button
                     @@click="
                         localStorage.setItem('cookie-consent', 'declined');
+                        localStorage.setItem('cookie-consent-timestamp', Date.now());
                         visible = false;
                     "
                     class="px-4 py-2 text-sm rounded-lg border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white transition-colors"
@@ -34,6 +43,7 @@
                 <button
                     @@click="
                         localStorage.setItem('cookie-consent', 'accepted');
+                        localStorage.setItem('cookie-consent-timestamp', Date.now());
                         visible = false;
                     "
                     class="px-4 py-2 text-sm rounded-lg bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors"

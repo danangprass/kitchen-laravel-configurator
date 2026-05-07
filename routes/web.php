@@ -37,7 +37,9 @@ Route::post("/newsletter/subscribe", function (Request $request) {
     return redirect()
         ->back()
         ->with("newsletter_success", "Thanks! You have been subscribed.");
-})->name("newsletter.subscribe");
+})
+    ->middleware("throttle:10,60")
+    ->name("newsletter.subscribe");
 
 Route::get("/testimonials", TestimonialsPage::class)->name("testimonials");
 Route::get("/faq", FaqPage::class)->name("faq");

@@ -53,27 +53,19 @@ class NewsletterSubscriberResource extends Resource
                     ->label('Export CSV')
                     ->icon(Heroicon::OutlinedArrowDownTray)
                     ->action(function () {
-                        $subscribers = NewsletterSubscriber::orderBy('created_at', 'desc')->get();
+                        return response()->streamDownload(function () {
+                            $handle = fopen('php://output', 'w');
+                            fputcsv($handle, ['Email', 'Subscribed At']);
 
-                        $csv = fopen('php://temp', 'r+');
-                        fputcsv($csv, ['Email', 'Subscribed At']);
+                            foreach (NewsletterSubscriber::orderBy('created_at', 'desc')->cursor() as $subscriber) {
+                                fputcsv($handle, [
+                                    $subscriber->email,
+                                    $subscriber->created_at->toDateTimeString(),
+                                ]);
+                            }
 
-                        foreach ($subscribers as $subscriber) {
-                            fputcsv($csv, [
-                                $subscriber->email,
-                                $subscriber->created_at->toDateTimeString(),
-                            ]);
-                        }
-
-                        rewind($csv);
-                        $content = stream_get_contents($csv);
-                        fclose($csv);
-
-                        return response()->streamDownload(
-                            fn () => print ($content),
-                            'newsletter_subscribers_'.now()->format('Ymd_His').'.csv',
-                            ['Content-Type' => 'text/csv'],
-                        );
+                            fclose($handle);
+                        }, 'newsletter_subscribers_'.now()->format('Ymd_His').'.csv', ['Content-Type' => 'text/csv']);
                     }),
             ]);
     }
