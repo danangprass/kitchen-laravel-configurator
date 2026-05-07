@@ -5,6 +5,7 @@ use App\Livewire\Configurator;
 use App\Livewire\ContactForm;
 use App\Livewire\ConsumptionCalculator;
 use App\Livewire\DealerLocator;
+use App\Livewire\FaqPage;
 use App\Livewire\HomePage;
 use App\Livewire\ProductComparator;
 use App\Livewire\TestimonialsPage;
@@ -21,6 +22,7 @@ Route::get("/configurator", Configurator::class)->name("configurator");
 Route::livewire("/compare", ProductComparator::class)->name("compare");
 
 Route::get("/testimonials", TestimonialsPage::class)->name("testimonials");
+Route::get("/faq", FaqPage::class)->name("faq");
 
 Route::get("/contact", ContactForm::class)->name("contact");
 

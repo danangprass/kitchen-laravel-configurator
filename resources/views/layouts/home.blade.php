@@ -52,6 +52,7 @@
                         <li><a href="/configurator" class="hover:text-white transition-colors">Configurator</a></li>
                         <li><a href="/calculator" class="hover:text-white transition-colors">Calculator</a></li>
                         <li><a href="/configurator" class="hover:text-white transition-colors">All Products</a></li>
+                        <li><a href="/faq" class="hover:text-white transition-colors">FAQ</a></li>
                     </ul>
                 </div>
                 <div>
