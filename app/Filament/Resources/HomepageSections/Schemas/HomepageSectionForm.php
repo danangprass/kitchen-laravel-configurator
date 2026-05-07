@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\HomepageSections\Schemas;
 
-use Filament\Forms\Components\JsonEditor;
+use App\Models\Product;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -51,7 +52,7 @@ class HomepageSectionForm
                     ->maxLength(255),
                 Select::make('product_ids')
                     ->label('Featured Products')
-                    ->relationship('products', 'name')
+                    ->options(fn () => Product::orderBy('sort_order')->pluck('name', 'id')->toArray())
                     ->multiple()
                     ->searchable()
                     ->preload()
@@ -60,8 +61,11 @@ class HomepageSectionForm
                     ->label('Line Family')
                     ->maxLength(255)
                     ->visible(fn ($get) => $get('type') === 'line_showcase'),
-                JsonEditor::make('content')
+                Textarea::make('content')
                     ->label('Section Content (JSON)')
+                    ->rows(8)
+                    ->formatStateUsing(fn ($state) => is_array($state) ? json_encode($state, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) : $state)
+                    ->dehydrateStateUsing(fn ($state) => is_string($state) ? json_decode($state, true) : $state)
                     ->columnSpanFull(),
                 Toggle::make('is_active')
                     ->default(true),

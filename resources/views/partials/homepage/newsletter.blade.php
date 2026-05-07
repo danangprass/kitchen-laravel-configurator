@@ -7,13 +7,17 @@
             <p class="text-gray-400 mb-8">{{ $section->subtitle }}</p>
         @endif
 
-        <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input type="email" placeholder="Your email address" required
-                   class="flex-1 px-4 py-3 rounded-md bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-white/40">
-            <button type="submit"
-                    class="px-6 py-3 bg-white text-gray-900 rounded-md font-medium hover:bg-gray-100 transition-colors">
-                {{ $section->cta_text ?: 'Subscribe' }}
-            </button>
-        </form>
+        @if (session()->has('newsletter_subscribed'))
+            <p class="text-green-400 text-sm">Thanks! We'll be in touch.</p>
+        @else
+            <form wire:submit.prevent="subscribe" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" wire:model="email" placeholder="Your email address" required
+                       class="flex-1 px-4 py-3 rounded-md bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-white/40">
+                <button type="submit"
+                        class="px-6 py-3 bg-white text-gray-900 rounded-md font-medium hover:bg-gray-100 transition-colors">
+                    {{ $section->cta_text ?: 'Subscribe' }}
+                </button>
+            </form>
+        @endif
     </div>
 </section>

@@ -19,6 +19,7 @@ class CategorySeeder extends Seeder
                 'description' => 'Combination ovens offering versatile cooking modes',
                 'sort_order' => 1,
                 'is_active' => true,
+                'is_shown_in_build_your_own' => true,
                 'children' => [
                     [
                         'name' => 'Countertop',
@@ -42,6 +43,7 @@ class CategorySeeder extends Seeder
                 'description' => 'High-speed cooking ovens for rapid service',
                 'sort_order' => 2,
                 'is_active' => true,
+                'is_shown_in_build_your_own' => true,
                 'children' => [
                     [
                         'name' => 'Combi',
@@ -65,6 +67,7 @@ class CategorySeeder extends Seeder
                 'description' => 'Convection ovens with humidity control for perfect baking',
                 'sort_order' => 3,
                 'is_active' => true,
+                'is_shown_in_build_your_own' => true,
                 'children' => [
                     [
                         'name' => 'Countertop',
@@ -81,6 +84,7 @@ class CategorySeeder extends Seeder
                 'description' => 'Traditional convention ovens for standard cooking needs',
                 'sort_order' => 4,
                 'is_active' => true,
+                'is_shown_in_build_your_own' => true,
                 'children' => [
                     [
                         'name' => 'Countertop',
@@ -97,6 +101,7 @@ class CategorySeeder extends Seeder
                 'description' => 'Food preservation units to maintain optimal serving temperatures',
                 'sort_order' => 5,
                 'is_active' => true,
+                'is_shown_in_build_your_own' => true,
                 'children' => [
                     [
                         'name' => 'Countertop',

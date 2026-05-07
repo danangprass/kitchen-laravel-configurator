@@ -5,7 +5,7 @@
         @endif
         @if (!empty($section->content['body']))
             <div class="prose prose-gray max-w-none text-gray-600 leading-relaxed text-sm">
-                {!! $section->content['body'] !!}
+                {!! strip_tags($section->content['body'], '<p><a><strong><em><ul><ol><li><h3><h4><br><span>') !!}
             </div>
         @endif
     </div>

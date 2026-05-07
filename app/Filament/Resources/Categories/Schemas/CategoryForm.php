@@ -31,6 +31,7 @@ class CategoryForm
                     ->default(0),
                 Toggle::make('is_active')
                     ->required(),
+                Toggle::make('is_shown_in_build_your_own'),
             ]);
     }
 }

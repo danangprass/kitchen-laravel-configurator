@@ -1,8 +1,14 @@
-<div class="space-y-6" x-data="{}" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
+<div class="space-y-6" x-data="{ showRestartModal: false }" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
 
     {{-- Step Navigation --}}
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
         <div class="flex items-center justify-between max-w-4xl mx-auto">
+            <button type="button" x-on:click="showRestartModal = true" @disabled($step === 1)
+                class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+                Restart
+            </button>
+
             @foreach ([
                 1 => ['icon' => 'oven', 'label' => 'Choose oven/s'],
                 2 => ['icon' => 'layout', 'label' => 'Arrangement'],
@@ -476,4 +482,27 @@
             </form>
         </div>
     @endif
+
+    {{-- Restart Confirmation Modal --}}
+    <div x-show="showRestartModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center" x-transition.opacity>
+        <div class="absolute inset-0 bg-black/50" x-on:click="showRestartModal = false"></div>
+        <div class="relative bg-white rounded-xl shadow-2xl p-6 max-w-md w-full mx-4" x-on:click.outside="showRestartModal = false">
+            <div class="text-center">
+                <div class="mx-auto w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Restart configuration?</h3>
+                <p class="mt-2 text-sm text-slate-600">This will clear all your selections and return to Step 1. This action cannot be undone.</p>
+            </div>
+            <div class="mt-6 flex justify-center space-x-3">
+                <button type="button" x-on:click="showRestartModal = false" class="px-6 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition">
+                    Cancel
+                </button>
+                <button type="button" x-on:click="showRestartModal = false; $wire.restart()" class="px-6 py-2.5 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+                    Yes, restart
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

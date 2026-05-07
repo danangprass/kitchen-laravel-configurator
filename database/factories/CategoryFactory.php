@@ -19,6 +19,7 @@ class CategoryFactory extends Factory
             'image' => fake()->regexify('[A-Za-z0-9]{255}'),
             'sort_order' => fake()->numberBetween(-10000, 10000),
             'is_active' => fake()->boolean(),
+            'is_shown_in_build_your_own' => false,
         ];
     }
 }

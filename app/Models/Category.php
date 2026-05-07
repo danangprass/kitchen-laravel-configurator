@@ -24,6 +24,7 @@ class Category extends Model
         'image',
         'sort_order',
         'is_active',
+        'is_shown_in_build_your_own',
     ];
 
     /**
@@ -37,6 +38,7 @@ class Category extends Model
             'id' => 'integer',
             'parent_id' => 'integer',
             'is_active' => 'boolean',
+            'is_shown_in_build_your_own' => 'boolean',
         ];
     }
 
