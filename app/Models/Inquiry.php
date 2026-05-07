@@ -17,7 +17,6 @@ class Inquiry extends Model
         'country',
         'category',
         'message',
-        'is_read',
     ];
 
     protected function casts(): array

@@ -118,23 +118,7 @@
                     </div>
                 </div>
 
-                {{-- reCAPTCHA-like visual element --}}
-                <div class="mt-6 flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                    <div class="flex-shrink-0 mt-0.5">
-                        <div class="w-5 h-5 rounded border-2 border-slate-300 bg-white flex items-center justify-center">
-                            <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-sm text-slate-600">Protected by reCAPTCHA</p>
-                        <p class="text-xs text-slate-400 mt-0.5">
-                            <a href="#" class="hover:text-slate-600 underline">Privacy</a> &middot;
-                            <a href="#" class="hover:text-slate-600 underline">Terms</a>
-                        </p>
-                    </div>
-                </div>
+                <p class="mt-6 text-xs text-slate-400 text-center">This form is protected by spam filters</p>
 
                 <div class="mt-6">
                     <button
