@@ -28,6 +28,7 @@ class PageForm
                 GrapesJs::make('content')
                     ->label('Page Content')
                     ->minHeight(700)
+                    ->default('<h2 class="text-2xl font-bold text-gray-900">Welcome</h2><p class="text-base text-gray-700 leading-relaxed">Start editing your page content here. Drag blocks from the right panel to build your page.</p>')
                     ->columnSpanFull(),
                 Textarea::make('meta_description')
                     ->label('Meta Description (SEO)')
