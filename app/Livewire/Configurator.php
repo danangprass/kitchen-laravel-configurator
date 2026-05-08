@@ -26,17 +26,17 @@ class Configurator extends Component
     public array $otherAccessories = [];
 
     // Advanced product filters (Step 1)
-    public string $filterTraySize = "";
+    public string $filterTraySize = '';
 
-    public string $filterPowerSupply = "";
+    public string $filterPowerSupply = '';
 
-    public string $filterEnergyStar = "";
+    public string $filterEnergyStar = '';
 
-    public string $filterTrayCount = "";
+    public string $filterTrayCount = '';
 
-    public string $filterLine = "";
+    public string $filterLine = '';
 
-    public string $filterDoorOpening = "";
+    public string $filterDoorOpening = '';
 
     public bool $showFilters = false;
 
@@ -109,8 +109,8 @@ class Configurator extends Component
             unset($this->columnAccessories[$accessoryId]);
         } else {
             $this->columnAccessories[$accessoryId] = [
-                "quantity" => 1,
-                "selected" => true,
+                'quantity' => 1,
+                'selected' => true,
             ];
         }
     }
@@ -126,7 +126,7 @@ class Configurator extends Component
         }
 
         if (isset($this->columnAccessories[$accessoryId])) {
-            $this->columnAccessories[$accessoryId]["quantity"] = $quantity;
+            $this->columnAccessories[$accessoryId]['quantity'] = $quantity;
         }
     }
 
@@ -136,8 +136,8 @@ class Configurator extends Component
             unset($this->otherAccessories[$accessoryId]);
         } else {
             $this->otherAccessories[$accessoryId] = [
-                "quantity" => 1,
-                "selected" => true,
+                'quantity' => 1,
+                'selected' => true,
             ];
         }
     }
@@ -153,28 +153,28 @@ class Configurator extends Component
         }
 
         if (isset($this->otherAccessories[$accessoryId])) {
-            $this->otherAccessories[$accessoryId]["quantity"] = $quantity;
+            $this->otherAccessories[$accessoryId]['quantity'] = $quantity;
         }
     }
 
     public function toggleCompare(int $productId): void
     {
-        $ids = session()->get("compared_product_ids", []);
+        $ids = session()->get('compared_product_ids', []);
 
         if (in_array($productId, $ids, true)) {
             $ids = array_values(
-                array_filter($ids, fn(int $id) => $id !== $productId),
+                array_filter($ids, fn (int $id) => $id !== $productId),
             );
         } elseif (count($ids) < 3) {
             $ids[] = $productId;
         }
 
-        session()->put("compared_product_ids", $ids);
+        session()->put('compared_product_ids', $ids);
     }
 
     public function getComparedProductIdsProperty(): array
     {
-        return session()->get("compared_product_ids", []);
+        return session()->get('compared_product_ids', []);
     }
 
     public function getComparedProductCountProperty(): int
@@ -195,46 +195,46 @@ class Configurator extends Component
 
     public function getCategoriesProperty(): Collection
     {
-        return Category::with("children")
-            ->whereNull("parent_id")
-            ->where("is_active", true)
-            ->orderBy("sort_order")
+        return Category::with('children')
+            ->whereNull('parent_id')
+            ->where('is_active', true)
+            ->orderBy('sort_order')
             ->get();
     }
 
     public function getSelectedCategoryProperty(): ?Category
     {
-        if (!$this->selectedCategoryId) {
+        if (! $this->selectedCategoryId) {
             return null;
         }
 
-        return $this->categories->firstWhere("id", $this->selectedCategoryId);
+        return $this->categories->firstWhere('id', $this->selectedCategoryId);
     }
 
     public function getSubcategoriesProperty(): Collection
     {
         $category = $this->selectedCategory;
 
-        if (!$category) {
+        if (! $category) {
             return collect();
         }
 
         return $category
             ->children()
-            ->withCount("products")
-            ->where("is_active", true)
-            ->orderBy("sort_order")
+            ->withCount('products')
+            ->where('is_active', true)
+            ->orderBy('sort_order')
             ->get();
     }
 
     public function getSelectedSubcategoryProperty(): ?Category
     {
-        if (!$this->selectedSubcategoryId) {
+        if (! $this->selectedSubcategoryId) {
             return null;
         }
 
         return $this->subcategories->firstWhere(
-            "id",
+            'id',
             $this->selectedSubcategoryId,
         );
     }
@@ -243,60 +243,60 @@ class Configurator extends Component
     {
         $subcategory = $this->selectedSubcategory;
 
-        if (!$subcategory) {
+        if (! $subcategory) {
             return collect();
         }
 
-        return Product::where("category_id", $subcategory->id)
-            ->where("is_active", true)
-            ->when($this->filterTraySize !== "", function ($query) {
-                $query->where("tray_size", $this->filterTraySize);
+        return Product::where('category_id', $subcategory->id)
+            ->where('is_active', true)
+            ->when($this->filterTraySize !== '', function ($query) {
+                $query->where('tray_size', $this->filterTraySize);
             })
-            ->when($this->filterPowerSupply !== "", function ($query) {
-                $query->where("power_supply", $this->filterPowerSupply);
+            ->when($this->filterPowerSupply !== '', function ($query) {
+                $query->where('power_supply', $this->filterPowerSupply);
             })
-            ->when($this->filterEnergyStar !== "", function ($query) {
+            ->when($this->filterEnergyStar !== '', function ($query) {
                 $query->where(
-                    "energy_star_certified",
-                    $this->filterEnergyStar === "1",
+                    'energy_star_certified',
+                    $this->filterEnergyStar === '1',
                 );
             })
-            ->when($this->filterTrayCount !== "", function ($query) {
-                $query->where("number_of_trays", (int) $this->filterTrayCount);
+            ->when($this->filterTrayCount !== '', function ($query) {
+                $query->where('number_of_trays', (int) $this->filterTrayCount);
             })
-            ->when($this->filterLine !== "", function ($query) {
-                $query->where("line", $this->filterLine);
+            ->when($this->filterLine !== '', function ($query) {
+                $query->where('line', $this->filterLine);
             })
-            ->when($this->filterDoorOpening !== "", function ($query) {
-                $query->where("opening_side", $this->filterDoorOpening);
+            ->when($this->filterDoorOpening !== '', function ($query) {
+                $query->where('opening_side', $this->filterDoorOpening);
             })
-            ->orderBy("sort_order")
+            ->orderBy('sort_order')
             ->get();
     }
 
     public function getTraySizeOptionsProperty(): Collection
     {
-        return $this->getDistinctValues("tray_size");
+        return $this->getDistinctValues('tray_size');
     }
 
     public function getPowerSupplyOptionsProperty(): Collection
     {
-        return $this->getDistinctValues("power_supply");
+        return $this->getDistinctValues('power_supply');
     }
 
     public function getLineOptionsProperty(): Collection
     {
-        return $this->getDistinctValues("line");
+        return $this->getDistinctValues('line');
     }
 
     public function getDoorOpeningOptionsProperty(): Collection
     {
-        return $this->getDistinctValues("opening_side");
+        return $this->getDistinctValues('opening_side');
     }
 
     public function getTrayCountOptionsProperty(): Collection
     {
-        return $this->getDistinctValues("number_of_trays", ascending: true);
+        return $this->getDistinctValues('number_of_trays', ascending: true);
     }
 
     private function getDistinctValues(
@@ -305,15 +305,15 @@ class Configurator extends Component
     ): Collection {
         $subcategory = $this->selectedSubcategory;
 
-        if (!$subcategory) {
+        if (! $subcategory) {
             return collect();
         }
 
-        $query = Product::where("category_id", $subcategory->id)
-            ->where("is_active", true)
+        $query = Product::where('category_id', $subcategory->id)
+            ->where('is_active', true)
             ->whereNotNull($column)
             ->distinct()
-            ->orderBy($column, $ascending ? "asc" : "desc");
+            ->orderBy($column, $ascending ? 'asc' : 'desc');
 
         return $query->pluck($column);
     }
@@ -324,9 +324,9 @@ class Configurator extends Component
             return collect();
         }
 
-        return Product::whereIn("id", $this->selectedProductIds)
-            ->with("category.parent")
-            ->orderBy("sort_order")
+        return Product::whereIn('id', $this->selectedProductIds)
+            ->with('category.parent')
+            ->orderBy('sort_order')
             ->get();
     }
 
@@ -336,13 +336,13 @@ class Configurator extends Component
             return collect();
         }
 
-        return Accessory::whereHas("products", function ($query) {
-            $query->whereIn("products.id", $this->selectedProductIds);
+        return Accessory::whereHas('products', function ($query) {
+            $query->whereIn('products.id', $this->selectedProductIds);
         })
-            ->whereIn("configurator_position", ["upper", "bottom"])
-            ->where("is_active", true)
-            ->orderBy("sort_order")
-            ->orderBy("name")
+            ->whereIn('configurator_position', ['upper', 'bottom'])
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('name')
             ->get();
     }
 
@@ -352,17 +352,17 @@ class Configurator extends Component
             return collect();
         }
 
-        return Accessory::whereHas("products", function ($query) {
-            $query->whereIn("products.id", $this->selectedProductIds);
+        return Accessory::whereHas('products', function ($query) {
+            $query->whereIn('products.id', $this->selectedProductIds);
         })
             ->where(function ($query) {
                 $query
-                    ->where("configurator_position", "other")
-                    ->orWhereNull("configurator_position");
+                    ->where('configurator_position', 'other')
+                    ->orWhereNull('configurator_position');
             })
-            ->where("is_active", true)
-            ->orderBy("sort_order")
-            ->orderBy("name")
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('name')
             ->get();
     }
 
@@ -374,11 +374,11 @@ class Configurator extends Component
 
         $ids = array_keys($this->columnAccessories);
 
-        return Accessory::whereIn("id", $ids)
+        return Accessory::whereIn('id', $ids)
             ->get()
             ->map(function (Accessory $accessory) {
                 $accessory->selected_quantity =
-                    $this->columnAccessories[$accessory->id]["quantity"] ?? 1;
+                    $this->columnAccessories[$accessory->id]['quantity'] ?? 1;
 
                 return $accessory;
             });
@@ -392,11 +392,11 @@ class Configurator extends Component
 
         $ids = array_keys($this->otherAccessories);
 
-        return Accessory::whereIn("id", $ids)
+        return Accessory::whereIn('id', $ids)
             ->get()
             ->map(function (Accessory $accessory) {
                 $accessory->selected_quantity =
-                    $this->otherAccessories[$accessory->id]["quantity"] ?? 1;
+                    $this->otherAccessories[$accessory->id]['quantity'] ?? 1;
 
                 return $accessory;
             });
@@ -444,12 +444,12 @@ class Configurator extends Component
 
     public function clearFilters(): void
     {
-        $this->filterTraySize = "";
-        $this->filterPowerSupply = "";
-        $this->filterEnergyStar = "";
-        $this->filterTrayCount = "";
-        $this->filterLine = "";
-        $this->filterDoorOpening = "";
+        $this->filterTraySize = '';
+        $this->filterPowerSupply = '';
+        $this->filterEnergyStar = '';
+        $this->filterTrayCount = '';
+        $this->filterLine = '';
+        $this->filterDoorOpening = '';
         $this->showFilters = false;
     }
 
@@ -457,22 +457,22 @@ class Configurator extends Component
     {
         $count = 0;
 
-        if ($this->filterTraySize !== "") {
+        if ($this->filterTraySize !== '') {
             $count++;
         }
-        if ($this->filterPowerSupply !== "") {
+        if ($this->filterPowerSupply !== '') {
             $count++;
         }
-        if ($this->filterEnergyStar !== "") {
+        if ($this->filterEnergyStar !== '') {
             $count++;
         }
-        if ($this->filterTrayCount !== "") {
+        if ($this->filterTrayCount !== '') {
             $count++;
         }
-        if ($this->filterLine !== "") {
+        if ($this->filterLine !== '') {
             $count++;
         }
-        if ($this->filterDoorOpening !== "") {
+        if ($this->filterDoorOpening !== '') {
             $count++;
         }
 
@@ -491,35 +491,35 @@ class Configurator extends Component
 
         $host = parse_url($url, PHP_URL_HOST);
 
-        if (!$host) {
+        if (! $host) {
             return null;
         }
 
         $host = strtolower($host);
         $allowedHosts = [
-            "youtube.com",
-            "www.youtube.com",
-            "youtu.be",
-            "vimeo.com",
-            "www.vimeo.com",
+            'youtube.com',
+            'www.youtube.com',
+            'youtu.be',
+            'vimeo.com',
+            'www.vimeo.com',
         ];
 
-        if (!in_array($host, $allowedHosts, true)) {
+        if (! in_array($host, $allowedHosts, true)) {
             return null;
         }
 
         // Convert YouTube watch URLs to embed format
         if (preg_match("/youtube\.com\/watch\?v=([A-Za-z0-9_-]+)/", $url, $m)) {
-            return "https://www.youtube.com/embed/" . $m[1];
+            return 'https://www.youtube.com/embed/'.$m[1];
         }
 
         if (preg_match("/youtu\.be\/([A-Za-z0-9_-]+)/", $url, $m)) {
-            return "https://www.youtube.com/embed/" . $m[1];
+            return 'https://www.youtube.com/embed/'.$m[1];
         }
 
         // Convert Vimeo URLs to embed format
         if (preg_match("/vimeo\.com\/(\d+)/", $url, $m)) {
-            return "https://player.vimeo.com/video/" . $m[1];
+            return 'https://player.vimeo.com/video/'.$m[1];
         }
 
         return null;
@@ -527,8 +527,8 @@ class Configurator extends Component
 
     public function render()
     {
-        return view("livewire.configurator")->layout("layouts.app", [
-            "title" => "Kitchen Oven Configurator",
+        return view('livewire.configurator')->layout('layouts.app', [
+            'title' => 'Kitchen Oven Configurator',
         ]);
     }
 
@@ -540,8 +540,8 @@ class Configurator extends Component
 
     private function initializeAccessorySelections(): void
     {
-        $columnIds = $this->compatibleColumnAccessories->pluck("id")->toArray();
-        $otherIds = $this->compatibleOtherAccessories->pluck("id")->toArray();
+        $columnIds = $this->compatibleColumnAccessories->pluck('id')->toArray();
+        $otherIds = $this->compatibleOtherAccessories->pluck('id')->toArray();
 
         $this->columnAccessories = array_intersect_key(
             $this->columnAccessories,

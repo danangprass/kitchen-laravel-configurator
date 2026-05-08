@@ -6,12 +6,12 @@ use App\Filament\Resources\NewsletterSubscriber\Pages\ListNewsletterSubscribers;
 use App\Filament\Resources\NewsletterSubscriber\Pages\ViewNewsletterSubscriber;
 use App\Models\NewsletterSubscriber;
 use BackedEnum;
-use Filament\Resources\Resource;
-use Filament\Support\Icons\Heroicon;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Resources\Resource;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
