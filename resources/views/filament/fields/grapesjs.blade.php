@@ -24,10 +24,10 @@
 
 @once
     @push('styles')
-        <link rel="stylesheet" href="https://unpkg.com/grapesjs@0.22.8/dist/css/grapes.min.css" integrity="sha384-x816i0ECbKBtxr8Q4lF7Soy0fs9o2+yHMw75961NkXfH8ZTu/ixZmzG5MRM4ztt6" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/grapesjs@0.22.8/dist/css/grapes.min.css" integrity="sha384-VbFAygpbyrPUPa4C5XDgQX3CitfqHh6E5d55hhHN0lFGE90ROZejCvzuoXeZwlU7" crossorigin="anonymous">
     @endpush
     @push('scripts')
-        <script src="https://unpkg.com/grapesjs@0.22.8/dist/grapes.min.js" integrity="sha384-mIjj4ftVICoc16u1tYRkgNpUTxrZqDGrtXbYaCj/mKKlV30F7zW3nCx5d2546QpN" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/grapesjs@0.22.8/dist/grapes.min.js" integrity="sha384-Unm0kUAg9bT7D7/1+3UMXeMDz9LVyPHATC1W/lwMgfi6gZb6xcbCGROMhE+aU6bx" crossorigin="anonymous"></script>
     @endpush
 @endonce
 
