@@ -10,7 +10,7 @@
 | Bakomatic Design System
 |--------------------------------------------------------------------------
 | Inspired by bakomatic.com — premium industrial bakery equipment
-| Dark + Gold palette, Funnel Display headings, generous rounding
+| Dark + White palette, Funnel Display headings, generous rounding
 */
 
 @theme {
@@ -29,24 +29,24 @@
     |--------------------------------------------------------------------
     | Bakomatic Color Palette
     |--------------------------------------------------------------------
-    | --color-gold-*        Primary accent (amber-gold)
+    | --color-accent-light-*  Accent colors (white-based)
     | --color-midnight-*    Near-black (headings, dark surfaces)
     | --color-charcoal-*    Dark gray (body text)
     | --color-steel-*       Light gray (borders)
     | --color-ice-*         Very light gray (section backgrounds)
     | --color-warm-white-*  Off-white (page background)
     */
-    --color-gold-50: #fff8e1;
-    --color-gold-100: #ffecb3;
-    --color-gold-200: #ffe082;
-    --color-gold-300: #ffd54f;
-    --color-gold-400: #ffca28;
-    --color-gold-500: #ffbf00;
-    --color-gold-600: #e5ad03;
-    --color-gold-700: #c09402;
-    --color-gold-800: #9a7a02;
-    --color-gold-900: #735f01;
-    --color-gold-950: #4d4101;
+    --color-accent-light-50: #ffffff;
+    --color-accent-light-100: #f9fafb;
+    --color-accent-light-200: #f3f4f6;
+    --color-accent-light-300: #e5e7eb;
+    --color-accent-light-400: #d1d5db;
+    --color-accent-light-500: #ffffff;
+    --color-accent-light-600: #f3f4f6;
+    --color-accent-light-700: #e5e7eb;
+    --color-accent-light-800: #d1d5db;
+    --color-accent-light-900: #9ca3af;
+    --color-accent-light-950: #6b7280;
 
     --color-midnight-50: #e6e7e8;
     --color-midnight-100: #b1b3b6;
@@ -108,9 +108,9 @@
     | Semantic Aliases (matching Bakomatic CSS custom properties)
     |--------------------------------------------------------------------
     */
-    --color-accent: var(--color-gold-500);
-    --color-accent-hover: var(--color-gold-600);
-    --color-accent-link: #e0a903;
+    --color-accent: #ffffff;
+    --color-accent-hover: #e5e7eb;
+    --color-accent-link: #ffffff;
     --color-surface-dark: var(--color-midnight-500);
     --color-surface-header: #121b1f;
     --color-text-body: var(--color-charcoal-500);
@@ -262,12 +262,12 @@
         color: #ffffff;
     }
 
-    .btn-pill-gold {
+    .btn-pill-accent {
         background-color: var(--color-accent);
         color: var(--color-surface-dark);
     }
 
-    .btn-pill-gold:hover {
+    .btn-pill-accent:hover {
         background-color: var(--color-accent-hover);
     }
 
@@ -352,11 +352,11 @@
     }
 
     /* Animated underline on hover */
-    .hover-underline-gold {
+    .hover-underline-accent {
         position: relative;
     }
 
-    .hover-underline-gold::after {
+    .hover-underline-accent::after {
         content: "";
         position: absolute;
         bottom: -2px;
@@ -367,7 +367,7 @@
         transition: width 0.3s ease;
     }
 
-    .hover-underline-gold:hover::after {
+    .hover-underline-accent:hover::after {
         width: 100%;
     }
 }

@@ -30,6 +30,14 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 "primary" => "#080C0E",
             ])
+            ->renderHook(
+                "panels::head.end",
+                fn() => "<style>" .
+                    file_get_contents(
+                        resource_path("css/filament/admin/theme.css"),
+                    ) .
+                    "</style>",
+            )
             ->discoverResources(
                 in: app_path("Filament/Resources"),
                 for: "App\Filament\Resources",

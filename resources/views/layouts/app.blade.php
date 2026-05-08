@@ -196,8 +196,8 @@
                     {{-- Admin link with pill style --}}
                     <a href="/admin"
                        class="inline-flex items-center px-4 py-2 rounded-button text-sm font-medium
-                              bg-gold-500 text-midnight-500 hover:bg-gold-600
-                              transition-colors duration-200 shadow-sm shadow-gold-500/25">
+                              bg-white text-midnight-500 hover:bg-gray-200
+                              transition-colors duration-200 shadow-sm shadow-white/25">
                         Admin
                     </a>
                 </div>
