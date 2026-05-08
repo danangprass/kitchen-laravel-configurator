@@ -21,7 +21,16 @@ class Page extends Model
     {
         static::saving(function (Page $page) {
             if (empty($page->slug)) {
-                $page->slug = Str::slug($page->title);
+                $baseSlug = Str::slug($page->title);
+                $slug = $baseSlug;
+                $counter = 1;
+
+                while (static::where('slug', $slug)->where('id', '!=', $page->id ?? 0)->exists()) {
+                    $slug = $baseSlug.'-'.$counter;
+                    $counter++;
+                }
+
+                $page->slug = $slug;
             }
         });
     }

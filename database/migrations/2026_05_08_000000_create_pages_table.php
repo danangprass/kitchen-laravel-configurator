@@ -14,8 +14,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('content')->nullable();
             $table->string('meta_description')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->integer('sort_order')->default(0);
+            $table->boolean('is_active')->default(true)->index();
+            $table->integer('sort_order')->default(0)->index();
             $table->timestamps();
         });
     }

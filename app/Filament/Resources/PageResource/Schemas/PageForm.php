@@ -23,6 +23,7 @@ class PageForm
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(255)
+                    ->regex('/^[a-z0-9\-]+$/')
                     ->unique('pages', 'slug', ignoreRecord: true),
                 GrapesJs::make('content')
                     ->label('Page Content')
