@@ -1,11 +1,373 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../storage/framework/views/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+/*
+|--------------------------------------------------------------------------
+| Bakomatic Design System
+|--------------------------------------------------------------------------
+| Inspired by bakomatic.com — premium industrial bakery equipment
+| Dark + Gold palette, Funnel Display headings, generous rounding
+*/
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /*
+    |--------------------------------------------------------------------
+    | Font Families
+    |--------------------------------------------------------------------
+    */
+    --font-sans:
+        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+    --font-display: "Funnel Display", ui-sans-serif, system-ui, sans-serif;
+
+    /*
+    |--------------------------------------------------------------------
+    | Bakomatic Color Palette
+    |--------------------------------------------------------------------
+    | --color-gold-*        Primary accent (amber-gold)
+    | --color-midnight-*    Near-black (headings, dark surfaces)
+    | --color-charcoal-*    Dark gray (body text)
+    | --color-steel-*       Light gray (borders)
+    | --color-ice-*         Very light gray (section backgrounds)
+    | --color-warm-white-*  Off-white (page background)
+    */
+    --color-gold-50: #fff8e1;
+    --color-gold-100: #ffecb3;
+    --color-gold-200: #ffe082;
+    --color-gold-300: #ffd54f;
+    --color-gold-400: #ffca28;
+    --color-gold-500: #ffbf00;
+    --color-gold-600: #e5ad03;
+    --color-gold-700: #c09402;
+    --color-gold-800: #9a7a02;
+    --color-gold-900: #735f01;
+    --color-gold-950: #4d4101;
+
+    --color-midnight-50: #e6e7e8;
+    --color-midnight-100: #b1b3b6;
+    --color-midnight-200: #8b8e92;
+    --color-midnight-300: #565b60;
+    --color-midnight-400: #353b41;
+    --color-midnight-500: #080c0e;
+    --color-midnight-600: #070b0d;
+    --color-midnight-700: #06080a;
+    --color-midnight-800: #040608;
+    --color-midnight-900: #030506;
+
+    --color-charcoal-50: #eeefef;
+    --color-charcoal-100: #c9cccc;
+    --color-charcoal-200: #afb3b4;
+    --color-charcoal-300: #8a8f91;
+    --color-charcoal-400: #73797b;
+    --color-charcoal-500: #515455;
+    --color-charcoal-600: #4a4c4d;
+    --color-charcoal-700: #3a3c3c;
+    --color-charcoal-800: #2d2e2f;
+    --color-charcoal-900: #222324;
+
+    --color-steel-50: #f4f6f7;
+    --color-steel-100: #f0f3f5;
+    --color-steel-200: #ecf0f3;
+    --color-steel-300: #dce5ea;
+    --color-steel-400: #c5d1d9;
+    --color-steel-500: #e1e8ed;
+    --color-steel-600: #a3b5c1;
+    --color-steel-700: #7f93a0;
+    --color-steel-800: #627382;
+    --color-steel-900: #4b5a68;
+
+    --color-ice-50: #f8f9fa;
+    --color-ice-100: #f5f7f8;
+    --color-ice-200: #f3f5f7;
+    --color-ice-300: #eef2f4;
+    --color-ice-400: #e8edf0;
+    --color-ice-500: #f2f5f7;
+    --color-ice-600: #c4cdd3;
+    --color-ice-700: #96a3ab;
+    --color-ice-800: #6e7c84;
+    --color-ice-900: #546068;
+
+    --color-warm-white-50: #ffffff;
+    --color-warm-white-100: #fefefe;
+    --color-warm-white-200: #fefefe;
+    --color-warm-white-300: #fdfcfb;
+    --color-warm-white-400: #fcfbf9;
+    --color-warm-white-500: #fafbfc;
+    --color-warm-white-600: #c8c9ca;
+    --color-warm-white-700: #969797;
+    --color-warm-white-800: #646565;
+    --color-warm-white-900: #323333;
+
+    /*
+    |--------------------------------------------------------------------
+    | Semantic Aliases (matching Bakomatic CSS custom properties)
+    |--------------------------------------------------------------------
+    */
+    --color-accent: var(--color-gold-500);
+    --color-accent-hover: var(--color-gold-600);
+    --color-accent-link: #e0a903;
+    --color-surface-dark: var(--color-midnight-500);
+    --color-surface-header: #121b1f;
+    --color-text-body: var(--color-charcoal-500);
+    --color-text-heading: var(--color-midnight-500);
+    --color-border-default: var(--color-steel-500);
+    --color-bg-section: var(--color-ice-500);
+    --color-bg-page: var(--color-warm-white-500);
+
+    /*
+    |--------------------------------------------------------------------
+    | Typography Scale (matching Bakomatic)
+    |--------------------------------------------------------------------
+    */
+    --text-body: 1.0625rem; /* 17px */
+    --text-body--line-height: 1.65;
+
+    --font-weight-display: 700;
+
+    /*
+    |--------------------------------------------------------------------
+    | Border Radii (matching Bakomatic's generous rounding)
+    |--------------------------------------------------------------------
+    */
+    --radius-card: 1.875rem; /* 30px */
+    --radius-form: 1.875rem; /* 30px */
+    --radius-pill: 6.25rem; /* 100px */
+    --radius-button: 6.25rem; /* 100px - pill shaped */
+
+    /*
+    |--------------------------------------------------------------------
+    | Form Field Tokens
+    |--------------------------------------------------------------------
+    */
+    --spacing-form-field-height: 3.4375rem; /* 55px */
+    --spacing-section-vertical: 3.75rem; /* 60px */
+
+    /*
+    |--------------------------------------------------------------------
+    | Container
+    |--------------------------------------------------------------------
+    */
+    --container-max-width: 80.625rem; /* 1290px */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Base Layer Overrides
+|--------------------------------------------------------------------------
+*/
+
+@layer base {
+    html {
+        font-size: var(--text-body);
+        line-height: var(--text-body--line-height);
+        color: var(--color-text-body);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        background-color: var(--color-bg-page);
+        color: var(--color-text-body);
+        font-family: var(--font-sans);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-display);
+        font-weight: var(--font-weight-display);
+        color: var(--color-text-heading);
+        line-height: 1.5;
+    }
+
+    h1 {
+        font-size: 2.5rem; /* 40px */
+    }
+
+    h2 {
+        font-size: 2.1875rem; /* 35px */
+    }
+
+    h3 {
+        font-size: 1.875rem; /* 30px */
+    }
+
+    h4 {
+        font-size: 1.5625rem; /* 25px */
+    }
+
+    h5 {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    h6 {
+        font-size: 1rem; /* 16px */
+    }
+
+    a {
+        color: var(--color-accent-link);
+        transition: color 0.2s ease;
+    }
+
+    a:hover {
+        color: var(--color-accent);
+    }
+
+    /* Selection styling */
+    ::selection {
+        background-color: #676767;
+        color: #ffffff;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Component Layer — Bakomatic UI Patterns
+|--------------------------------------------------------------------------
+*/
+
+@layer components {
+    /* Pill button — Bakomatic's signature button style */
+    .btn-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.5rem; /* 40px */
+        padding: 0.9375rem 1.875rem; /* 15px 30px */
+        font-weight: 500;
+        font-size: 1rem; /* 16px */
+        border-radius: var(--radius-pill);
+        border: none;
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease;
+        cursor: pointer;
+    }
+
+    .btn-pill-primary {
+        background-color: var(--color-surface-dark);
+        color: #ffffff;
+    }
+
+    .btn-pill-primary:hover {
+        background-color: var(--color-accent-hover);
+        color: #ffffff;
+    }
+
+    .btn-pill-gold {
+        background-color: var(--color-accent);
+        color: var(--color-surface-dark);
+    }
+
+    .btn-pill-gold:hover {
+        background-color: var(--color-accent-hover);
+    }
+
+    /* Card — 30px rounded corners */
+    .card-bakomatic {
+        background-color: #ffffff;
+        border-radius: var(--radius-card);
+        border: 1px solid var(--color-border-default);
+        overflow: hidden;
+    }
+
+    /* Section container with vertical spacing */
+    .section-bakomatic {
+        padding-top: var(--spacing-section-vertical);
+        padding-bottom: var(--spacing-section-vertical);
+    }
+
+    /* Glass panel (for offcanvas/modals) */
+    .glass-panel {
+        background-color: rgba(7, 11, 13, 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: var(--radius-card);
+    }
+
+    /* Form input — matching Bakomatic's style */
+    .input-bakomatic {
+        height: var(--spacing-form-field-height);
+        border-radius: var(--radius-form);
+        border: 2px solid var(--color-border-default);
+        padding: 0 1.25rem;
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
+        background-color: #ffffff;
+    }
+
+    .input-bakomatic:focus {
+        border-color: var(--color-accent);
+        outline: none;
+        ring: 2px solid var(--color-accent);
+    }
+
+    /* Newsletter subscribe block */
+    .newsletter-block {
+        background-color: #ffffff;
+        border-radius: var(--radius-card);
+        box-shadow: 0px 50px 90px rgba(210, 213, 218, 0.4);
+        padding: 2rem;
+    }
+
+    /* Tag/chip filter button */
+    .filter-chip {
+        border-radius: var(--radius-pill);
+        padding: 0.5rem 1.25rem;
+        font-weight: 600;
+        font-size: 0.75rem; /* 12px */
+        text-transform: uppercase;
+        background-color: var(--color-steel-500);
+        color: var(--color-midnight-500);
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .filter-chip:hover,
+    .filter-chip.active {
+        background-color: var(--color-midnight-500);
+        color: #ffffff;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Utility Layer — Custom Utilities
+|--------------------------------------------------------------------------
+*/
+
+@layer utilities {
+    /* Funnel Display heading utility */
+    .font-display {
+        font-family: var(--font-display);
+    }
+
+    /* Animated underline on hover */
+    .hover-underline-gold {
+        position: relative;
+    }
+
+    .hover-underline-gold::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-accent);
+        transition: width 0.3s ease;
+    }
+
+    .hover-underline-gold:hover::after {
+        width: 100%;
+    }
 }

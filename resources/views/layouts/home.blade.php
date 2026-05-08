@@ -2,77 +2,300 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 
-    <title>{{ config('app.name', 'Kitchen') }} — Commercial Ovens</title>
+    <title>@yield('title', config('app.name', 'Kitchen')) — Commercial Kitchen Solutions</title>
 
+    {{-- Fonts: Funnel Display (headings) + Instrument Sans (body) — matching Bakomatic --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=funnel-display:400,500,600,700,800|instrument-sans:400,500,600,700" rel="stylesheet" />
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
         <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['"Instrument Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                            display: ['"Funnel Display"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        },
+                        colors: {
+                            gold: {
+                                50: '#fff8e1',
+                                100: '#ffecb3',
+                                200: '#ffe082',
+                                300: '#ffd54f',
+                                400: '#ffca28',
+                                500: '#FFBF00',
+                                600: '#E5AD03',
+                                700: '#C09402',
+                                800: '#9A7A02',
+                                900: '#735F01',
+                                950: '#4D4101',
+                            },
+                            midnight: {
+                                50: '#e6e7e8',
+                                100: '#b1b3b6',
+                                200: '#8b8e92',
+                                300: '#565b60',
+                                400: '#353b41',
+                                500: '#080C0E',
+                                600: '#070b0d',
+                                700: '#06080a',
+                                800: '#040608',
+                                900: '#030506',
+                            },
+                            charcoal: {
+                                50: '#eeefef',
+                                100: '#c9cccc',
+                                200: '#afb3b4',
+                                300: '#8a8f91',
+                                400: '#73797b',
+                                500: '#515455',
+                                600: '#4a4c4d',
+                                700: '#3a3c3c',
+                                800: '#2d2e2f',
+                                900: '#222324',
+                            },
+                            steel: {
+                                50: '#f4f6f7',
+                                100: '#f0f3f5',
+                                200: '#ecf0f3',
+                                300: '#dce5ea',
+                                400: '#c5d1d9',
+                                500: '#E1E8ED',
+                                600: '#a3b5c1',
+                                700: '#7f93a0',
+                                800: '#627382',
+                                900: '#4b5a68',
+                            },
+                            ice: {
+                                50: '#f8f9fa',
+                                100: '#f5f7f8',
+                                200: '#f3f5f7',
+                                300: '#eef2f4',
+                                400: '#e8edf0',
+                                500: '#F2F5F7',
+                                600: '#c4cdd3',
+                                700: '#96a3ab',
+                                800: '#6e7c84',
+                                900: '#546068',
+                            },
+                            'warm-white': {
+                                50: '#ffffff',
+                                100: '#fefefe',
+                                200: '#fefefe',
+                                300: '#fdfcfb',
+                                400: '#fcfbf9',
+                                500: '#FAFBFC',
+                                600: '#c8c9ca',
+                                700: '#969797',
+                                800: '#646565',
+                                900: '#323333',
+                            },
+                        },
+                        borderRadius: {
+                            'card': '1.875rem',
+                            'form': '1.875rem',
+                            'pill': '6.25rem',
+                            'button': '6.25rem',
+                        },
+                        fontSize: {
+                            'body': ['1.0625rem', { lineHeight: '1.65' }],
+                        },
+                    }
+                }
+            }
+        </script>
+        <style>
+            :root {
+                --color-accent: #FFBF00;
+                --color-accent-hover: #E5AD03;
+                --color-accent-link: #E0A903;
+                --color-surface-dark: #080C0E;
+                --color-text-body: #515455;
+                --color-text-heading: #080C0E;
+            }
+
+            html {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            body {
+                background-color: #FAFBFC;
+                color: #515455;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Funnel Display', ui-sans-serif, system-ui, sans-serif;
+                font-weight: 700;
+                color: #080C0E;
+                line-height: 1.5;
+            }
+
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2.1875rem; }
+            h3 { font-size: 1.875rem; }
+            h4 { font-size: 1.5625rem; }
+            h5 { font-size: 1.25rem; }
+            h6 { font-size: 1rem; }
+
+            a {
+                color: #E0A903;
+                transition: color 0.2s ease;
+            }
+
+            a:hover {
+                color: #FFBF00;
+            }
+
+            ::selection {
+                background-color: #676767;
+                color: #ffffff;
+            }
+        </style>
     @endif
+
     @stack('styles')
 </head>
-<body class="bg-white text-gray-900 antialiased">
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100">
+<body class="antialiased">
+
+    {{-- Sticky Header — Dark background with gold accents, matching Bakomatic --}}
+    <header class="sticky top-0 z-50 bg-midnight-500/95 backdrop-blur border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <a href="/" class="text-xl font-semibold tracking-tight">Kitchen</a>
-                <nav class="flex items-center gap-6 text-sm font-medium">
+            <div class="flex items-center justify-between h-[75px]">
+
+                {{-- Logo --}}
+                <a href="/" class="flex items-center gap-2 shrink-0">
+                    <span class="text-xl font-display font-bold text-white tracking-tight">
+                        {{ config('app.name', 'Kitchen') }}
+                    </span>
+                </a>
+
+                {{-- Desktop Navigation --}}
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
                     <livewire:search-bar />
-                    <a href="/calculator" class="hover:text-gray-600 transition-colors">
+                    <a href="/products"
+                       class="text-white/70 hover:text-white transition-colors duration-200">
+                        Products
+                    </a>
+                    <a href="/configurator"
+                       class="text-white/70 hover:text-white transition-colors duration-200">
+                        Configurator
+                    </a>
+                    <a href="/calculator"
+                       class="text-white/70 hover:text-white transition-colors duration-200">
                         Calculator
                     </a>
-                    <a href="/configurator" class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors">
+                    <a href="/contact"
+                       class="text-white/70 hover:text-white transition-colors duration-200">
+                        Contact
+                    </a>
+                    <a href="/configurator"
+                       class="inline-flex items-center px-6 py-2.5 rounded-button text-sm font-medium
+                              bg-gold-500 text-midnight-500 hover:bg-gold-600
+                              transition-colors duration-200 shadow-sm shadow-gold-500/25">
                         Build your own
                     </a>
                 </nav>
+
+                {{-- Mobile menu trigger --}}
+                <button class="lg:hidden text-white/70 hover:text-white transition-colors p-2"
+                        aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
 
+    {{-- Main Content --}}
     <main>
         {{ $slot }}
     </main>
 
-    <footer class="bg-gray-900 text-white py-16">
+    {{-- Footer — Dark with gold accents, matching Bakomatic --}}
+    <footer class="bg-midnight-500 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+
+                {{-- Brand --}}
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Kitchen</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Commercial ovens to build your success.<br>
-                        Professional kitchen solutions for every need.
+                    <h4 class="text-lg font-display font-bold mb-4 text-white">
+                        {{ config('app.name', 'Kitchen') }}
+                    </h4>
+                    <p class="text-white/60 text-sm leading-relaxed">
+                        Commercial kitchen solutions<br>
+                        engineered for consistency,<br>
+                        built for your success.
                     </p>
                 </div>
+
+                {{-- Quick Links --}}
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="/configurator" class="hover:text-white transition-colors">Configurator</a></li>
-                        <li><a href="/calculator" class="hover:text-white transition-colors">Calculator</a></li>
-                        <li><a href="/configurator" class="hover:text-white transition-colors">All Products</a></li>
-                        <li><a href="/faq" class="hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="{{ route('privacy-policy') }}" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    <h4 class="text-lg font-display font-bold mb-4 text-white">Quick Links</h4>
+                    <ul class="space-y-2.5 text-sm text-white/60">
+                        <li><a href="/configurator" class="hover:text-gold-500 transition-colors duration-200">Configurator</a></li>
+                        <li><a href="/calculator" class="hover:text-gold-500 transition-colors duration-200">Calculator</a></li>
+                        <li><a href="/products" class="hover:text-gold-500 transition-colors duration-200">All Products</a></li>
+                        <li><a href="/faq" class="hover:text-gold-500 transition-colors duration-200">FAQ</a></li>
+                        <li><a href="{{ route('privacy-policy') }}" class="hover:text-gold-500 transition-colors duration-200">Privacy Policy</a></li>
+                        <li><a href="/terms" class="hover:text-gold-500 transition-colors duration-200">Terms &amp; Conditions</a></li>
                     </ul>
                 </div>
+
+                {{-- Newsletter --}}
                 <x-newsletter-form />
+
+                {{-- Contact --}}
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>info@kitchen.com</li>
-                        <li>+62 81908852999</li>
+                    <h4 class="text-lg font-display font-bold mb-4 text-white">Contact</h4>
+                    <ul class="space-y-2.5 text-sm text-white/60">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 mt-0.5 text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>info@kitchen.com</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 mt-0.5 text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            <span>+62 81908852999</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 mt-0.5 text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>Jakarta, Indonesia</span>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500">
-                &copy; {{ date('Y') }} Kitchen. All rights reserved.
+
+            {{-- Bottom Bar --}}
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
+                <p>&copy; {{ date('Y') }} {{ config('app.name', 'Kitchen') }}. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <a href="{{ route('privacy-policy') }}" class="hover:text-white/70 transition-colors duration-200">Privacy Policy</a>
+                    <a href="/terms" class="hover:text-white/70 transition-colors duration-200">Terms &amp; Conditions</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    {{-- Cookie Consent Banner --}}
     <x-cookie-banner />
 
     @stack('scripts')
