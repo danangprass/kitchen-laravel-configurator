@@ -39,9 +39,9 @@
                 <div class="flex flex-wrap gap-4">
                     <a href="/configurator"
                        class="inline-flex items-center px-8 py-3.5 rounded-button text-sm font-semibold
-                              bg-white text-midnight-500 hover:bg-gray-200
+                              bg-white text-midnight-500 hover:bg-white/90
                               transition-all duration-300 shadow-lg shadow-white/25
-                              hover:shadow-xl hover:shadow-white/30 hover:-translate-y-0.5">
+                              hover:shadow-xl hover:shadow-white/30 hover:-translate-y-0.5 hover:scale-[1.01]">
                         Build Your Configuration
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -343,8 +343,9 @@
                 <div class="relative flex flex-wrap justify-center gap-4">
                     <a href="/configurator"
                        class="inline-flex items-center px-8 py-3.5 rounded-button text-sm font-semibold
-                              bg-white text-midnight-500 hover:bg-gray-200
-                              transition-all duration-300 shadow-lg shadow-white/25">
+                              bg-white text-midnight-500 hover:bg-white/90
+                              transition-all duration-300 shadow-lg shadow-white/25
+                              hover:shadow-xl hover:shadow-white/30 hover:scale-[1.01]">
                         Launch Configurator
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

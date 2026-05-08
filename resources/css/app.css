@@ -109,7 +109,7 @@
     |--------------------------------------------------------------------
     */
     --color-accent: #ffffff;
-    --color-accent-hover: #e5e7eb;
+    --color-accent-hover: rgba(255, 255, 255, 0.9);
     --color-accent-link: #ffffff;
     --color-surface-dark: var(--color-midnight-500);
     --color-surface-header: #121b1f;

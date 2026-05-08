@@ -23,17 +23,17 @@
                         },
                         colors: {
                             gold: {
-                                50: '#fff8e1',
-                                100: '#ffecb3',
-                                200: '#ffe082',
-                                300: '#ffd54f',
-                                400: '#ffca28',
-                                500: '#FFBF00',
-                                600: '#E5AD03',
-                                700: '#C09402',
-                                800: '#9A7A02',
-                                900: '#735F01',
-                                950: '#4D4101',
+                                50: '#ffffff',
+                                100: '#f9fafb',
+                                200: '#f3f4f6',
+                                300: '#e5e7eb',
+                                400: '#d1d5db',
+                                500: '#ffffff',
+                                600: '#f3f4f6',
+                                700: '#e5e7eb',
+                                800: '#d1d5db',
+                                900: '#9ca3af',
+                                950: '#6b7280',
                             },
                             midnight: {
                                 50: '#e6e7e8',
@@ -111,9 +111,9 @@
         </script>
         <style>
             :root {
-                --color-accent: #FFBF00;
-                --color-accent-hover: #E5AD03;
-                --color-accent-link: #E0A903;
+                --color-accent: #ffffff;
+                --color-accent-hover: #e5e7eb;
+                --color-accent-link: #ffffff;
                 --color-surface-dark: #080C0E;
                 --color-text-body: #515455;
                 --color-text-heading: #080C0E;
@@ -196,8 +196,8 @@
                     {{-- Admin link with pill style --}}
                     <a href="/admin"
                        class="inline-flex items-center px-4 py-2 rounded-button text-sm font-medium
-                              bg-white text-midnight-500 hover:bg-gray-200
-                              transition-colors duration-200 shadow-sm shadow-white/25">
+                              bg-white text-midnight-500 hover:bg-white/90 hover:scale-[1.02]
+                              transition-all duration-200 shadow-sm shadow-white/25 hover:shadow-md hover:shadow-white/30">
                         Admin
                     </a>
                 </div>
