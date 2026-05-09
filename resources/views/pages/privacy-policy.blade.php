@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — Kitchen</title>
+    <title>Privacy Policy — Bakomatic</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
 <body class="bg-white text-gray-900 antialiased">
     <header class="border-b border-gray-100">
         <div class="max-w-3xl mx-auto px-4 py-6">
-            <a href="/" class="text-xl font-semibold tracking-tight">Kitchen</a>
+            <a href="/" class="text-xl font-semibold tracking-tight">Bakomatic</a>
         </div>
     </header>
 
@@ -79,7 +79,7 @@
                 <h2 class="text-xl font-semibold text-gray-900 mb-3">8. Contact</h2>
                 <p>If you have questions about this privacy policy or wish to exercise your data rights, please contact us at:</p>
                 <ul class="list-none space-y-1 mt-2">
-                    <li>Email: info@kitchen.com</li>
+                    <li>Email: info@bakomatic.com</li>
                     <li>Phone: +62 81908852999</li>
                 </ul>
             </section>
@@ -89,7 +89,7 @@
 
     <footer class="border-t border-gray-100 py-8">
         <div class="max-w-3xl mx-auto px-4 text-center text-sm text-gray-400">
-            &copy; {{ date('Y') }} Kitchen. All rights reserved.
+            &copy; {{ date('Y') }} Bakomatic. All rights reserved.
         </div>
     </footer>
 </body>

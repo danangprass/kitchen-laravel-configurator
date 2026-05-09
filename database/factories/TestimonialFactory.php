@@ -29,16 +29,16 @@ class TestimonialFactory extends Factory
         ];
 
         $quotes = [
-            'Oven UNOX benar-benar mengubah cara kami bekerja di dapur. Hasil masakan lebih konsisten dan waktu memasak lebih cepat. Sangat direkomendasikan untuk restoran profesional.',
-            'Kami telah menggunakan oven UNOX selama 3 tahun dan tidak pernah kecewa. Perawatannya mudah dan hasilnya selalu sempurna. Tim support juga sangat responsif.',
-            'Sebagai pastry chef, konsistensi adalah segalanya. UNOX memberikan hasil yang sama setiap kali. Kue dan roti kami selalu mengembang sempurna.',
+            'Oven BAKOMATIC benar-benar mengubah cara kami bekerja di dapur. Hasil masakan lebih konsisten dan waktu memasak lebih cepat. Sangat direkomendasikan untuk restoran profesional.',
+            'Kami telah menggunakan oven BAKOMATIC selama 3 tahun dan tidak pernah kecewa. Perawatannya mudah dan hasilnya selalu sempurna. Tim support juga sangat responsif.',
+            'Sebagai pastry chef, konsistensi adalah segalanya. BAKOMATIC memberikan hasil yang sama setiap kali. Kue dan roti kami selalu mengembang sempurna.',
             'Investasi terbaik yang pernah kami lakukan untuk dapur hotel. Efisiensi energi dan kualitas masakan benar-benar di atas ekspektasi.',
-            'Dari semua oven komersial yang pernah kami gunakan, UNOX adalah yang paling andal. Fitur self-cleaning-nya menghemat banyak waktu staf dapur kami.',
-            'Kami membuka cabang baru dan langsung menggunakan UNOX di semua outlet. Standarisasi rasa antar cabang jadi lebih mudah dengan teknologi mereka.',
-            'Chef kami sangat puas dengan presisi suhu oven UNOX. Tidak ada lagi keluhan tentang kematangan yang tidak merata. Game changer untuk dapur profesional!',
-            'Pelanggan kami langsung merasakan perbedaan sejak kami beralih ke UNOX. Tekstur dan rasa lebih baik, dan kami bisa melayani lebih banyak pesanan.',
-            'Dukungan teknis UNOX di Indonesia sangat membantu. Mereka datang langsung untuk training staf kami. Layanan purna jual yang luar biasa.',
-            'Sebagai konsultan dapur komersial, saya selalu merekomendasikan UNOX ke klien. Rasio harga dan performa tidak ada yang menandingi di kelasnya.',
+            'Dari semua oven komersial yang pernah kami gunakan, BAKOMATIC adalah yang paling andal. Fitur self-cleaning-nya menghemat banyak waktu staf dapur kami.',
+            'Kami membuka cabang baru dan langsung menggunakan BAKOMATIC di semua outlet. Standarisasi rasa antar cabang jadi lebih mudah dengan teknologi mereka.',
+            'Chef kami sangat puas dengan presisi suhu oven BAKOMATIC. Tidak ada lagi keluhan tentang kematangan yang tidak merata. Game changer untuk dapur profesional!',
+            'Pelanggan kami langsung merasakan perbedaan sejak kami beralih ke BAKOMATIC. Tekstur dan rasa lebih baik, dan kami bisa melayani lebih banyak pesanan.',
+            'Dukungan teknis BAKOMATIC di Indonesia sangat membantu. Mereka datang langsung untuk training staf kami. Layanan purna jual yang luar biasa.',
+            'Sebagai konsultan dapur komersial, saya selalu merekomendasikan BAKOMATIC ke klien. Rasio harga dan performa tidak ada yang menandingi di kelasnya.',
         ];
 
         return [

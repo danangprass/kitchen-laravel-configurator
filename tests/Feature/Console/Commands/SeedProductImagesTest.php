@@ -24,12 +24,12 @@ final class SeedProductImagesTest extends TestCase
     {
         Storage::fake('public');
         Http::fake([
-            'https://www.unox.com/unox/media/contents/test-product.png' => Http::response('fake-image-data', 200),
+            'https://www.bakomatic.com/bakomatic/media/contents/test-product.png' => Http::response('fake-image-data', 200),
         ]);
 
         $product = Product::factory()->create([
-            'configurator_image' => '/unox/media/contents/test-product.png',
-            'list_image' => '/unox/media/contents/test-product.png',
+            'configurator_image' => '/bakomatic/media/contents/test-product.png',
+            'list_image' => '/bakomatic/media/contents/test-product.png',
         ]);
 
         $command = new SeedProductImages;
@@ -51,11 +51,11 @@ final class SeedProductImagesTest extends TestCase
     {
         Storage::fake('public');
         Http::fake([
-            'https://www.unox.com/unox/media/contents/test-accessory.png' => Http::response('fake-image-data', 200),
+            'https://www.bakomatic.com/bakomatic/media/contents/test-accessory.png' => Http::response('fake-image-data', 200),
         ]);
 
         $accessory = Accessory::factory()->create([
-            'configurator_image' => '/unox/media/contents/test-accessory.png',
+            'configurator_image' => '/bakomatic/media/contents/test-accessory.png',
             'list_image' => null,
         ]);
 
@@ -78,13 +78,13 @@ final class SeedProductImagesTest extends TestCase
     {
         Storage::fake('public');
         Http::fake([
-            'https://www.unox.com/unox/media/contents/config.png' => Http::response('fake-config-data', 200),
-            'https://www.unox.com/unox/media/contents/list.png' => Http::response('fake-list-data', 200),
+            'https://www.bakomatic.com/bakomatic/media/contents/config.png' => Http::response('fake-config-data', 200),
+            'https://www.bakomatic.com/bakomatic/media/contents/list.png' => Http::response('fake-list-data', 200),
         ]);
 
         $product = Product::factory()->create([
-            'configurator_image' => '/unox/media/contents/config.png',
-            'list_image' => '/unox/media/contents/list.png',
+            'configurator_image' => '/bakomatic/media/contents/config.png',
+            'list_image' => '/bakomatic/media/contents/list.png',
         ]);
 
         $command = new SeedProductImages;
@@ -110,11 +110,11 @@ final class SeedProductImagesTest extends TestCase
     {
         Storage::fake('public');
         Http::fake([
-            'https://www.unox.com/unox/media/contents/test.png' => Http::response('fake-image-data', 200),
+            'https://www.bakomatic.com/bakomatic/media/contents/test.png' => Http::response('fake-image-data', 200),
         ]);
 
         $product = Product::factory()->create([
-            'configurator_image' => '/unox/media/contents/test.png',
+            'configurator_image' => '/bakomatic/media/contents/test.png',
         ]);
 
         $command = new SeedProductImages;
@@ -135,11 +135,11 @@ final class SeedProductImagesTest extends TestCase
     {
         Storage::fake('public');
         Http::fake([
-            'https://www.unox.com/unox/media/contents/missing.png' => Http::response('', 404),
+            'https://www.bakomatic.com/bakomatic/media/contents/missing.png' => Http::response('', 404),
         ]);
 
         Product::factory()->create([
-            'configurator_image' => '/unox/media/contents/missing.png',
+            'configurator_image' => '/bakomatic/media/contents/missing.png',
         ]);
 
         $command = new SeedProductImages;

@@ -58,7 +58,7 @@
                             <div>
                                 <h3 class="font-medium text-slate-800 text-sm">{{ $dealer->name }}</h3>
                                 <span class="inline-block text-xs px-2 py-0.5 rounded-full mt-1
-                                    @if($dealer->type === 'Unox Office') bg-blue-100 text-blue-700 @else bg-green-100 text-green-700 @endif">
+                                    @if($dealer->type === 'Bakomatic Office') bg-blue-100 text-blue-700 @else bg-green-100 text-green-700 @endif">
                                     {{ $dealer->type }}
                                 </span>
                             </div>
@@ -185,7 +185,7 @@
                     if (!lat || !lng || isNaN(lat) || isNaN(lng)) return;
 
                     const color = this.getColor(dealer.service_level);
-                    const icon = (dealer.type === 'Unox Office')
+                    const icon = (dealer.type === 'Bakomatic Office')
                         ? this.makeIcon(color, '&#9733;', 32, 4)
                         : this.makeIcon(color, 'D', 28, 50);
 

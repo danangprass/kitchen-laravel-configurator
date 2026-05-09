@@ -13,9 +13,9 @@ class HomepageSectionSeeder extends Seeder
             [
                 'type' => 'hero',
                 'title' => 'Mastering Every Bake',
-                'subtitle' => 'Commercial kitchen equipment that blends artisan tradition with smart technology, delivering consistent results every single time.',
+                'subtitle' => 'Commercial bakomatic equipment that blends artisan tradition with smart technology, delivering consistent results every single time.',
                 'content' => [
-                    'eyebrow' => 'Professional Kitchen Solutions',
+                    'eyebrow' => 'Professional Bakomatic Solutions',
                     'secondary_cta_text' => 'Calculate ROI',
                     'secondary_cta_url' => '/calculator',
                     'trust_indicators' => [
@@ -45,17 +45,17 @@ class HomepageSectionSeeder extends Seeder
             ],
             [
                 'type' => 'product-slider',
-                'title' => 'Pillars of Your Professional Kitchen',
+                'title' => 'Pillars of Your Professional Bakomatic',
                 'subtitle' => 'Every piece of equipment is purpose-built for the demanding standards of modern bakery and pastry operations.',
                 'content' => ['max_items' => 8, 'show_energy_badges' => true],
                 'cta_text' => 'View All Products',
-                'cta_url' => '/configurator',
+                'cta_url' => '/products',
                 'sort_order' => 30,
                 'is_active' => true,
             ],
             [
                 'type' => 'cta-banner',
-                'title' => 'Ready to Build Your Kitchen?',
+                'title' => 'Ready to Build Your Bakomatic?',
                 'subtitle' => 'Use our interactive configurator to design the perfect layout, compare equipment, and get an instant estimate — all in one place.',
                 'content' => [
                     'style' => 'light',
@@ -96,12 +96,12 @@ class HomepageSectionSeeder extends Seeder
                         [
                             'icon' => 'lightning',
                             'title' => 'Speed & Power',
-                            'description' => 'From rapid speed ovens to high-capacity combi ovens — match the right power to your kitchen volume.',
+                            'description' => 'From rapid speed ovens to high-capacity combi ovens — match the right power to your bakomatic volume.',
                         ],
                         [
                             'icon' => 'chart',
                             'title' => 'Data Driven',
-                            'description' => 'Connect your ovens for real-time analytics, HACCP monitoring, and remote kitchen management.',
+                            'description' => 'Connect your ovens for real-time analytics, HACCP monitoring, and remote bakomatic management.',
                         ],
                     ],
                 ],
@@ -111,7 +111,7 @@ class HomepageSectionSeeder extends Seeder
             [
                 'type' => 'newsletter',
                 'title' => 'Achieve Consistency in Every Bake',
-                'subtitle' => 'Get technical guides, kitchen optimization tips, and the latest equipment updates delivered straight to your inbox.',
+                'subtitle' => 'Get technical guides, bakomatic optimization tips, and the latest equipment updates delivered straight to your inbox.',
                 'content' => [
                     'eyebrow' => 'Stay Updated',
                 ],
@@ -121,9 +121,9 @@ class HomepageSectionSeeder extends Seeder
             ],
             [
                 'type' => 'seo-text',
-                'title' => 'UNOX Commercial Ovens',
+                'title' => 'BAKOMATIC Commercial Ovens',
                 'content' => [
-                    'body' => '<p>UNOX is a leading manufacturer of <strong>professional commercial ovens</strong> for the food service, bakery, and pastry industries. Our product range includes <strong>combi ovens</strong>, <strong>speed ovens</strong>, <strong>convection ovens</strong>, and specialized baking solutions. With intelligent cooking technology, energy-efficient design, and global support, UNOX ovens help chefs achieve consistent, high-quality results every day.</p><p>Whether you run a restaurant, bakery, hotel, or catering operation, UNOX has the right oven for your kitchen. Every oven is engineered as a long-term investment — explore our configurator to build your perfect setup.</p>',
+                    'body' => '<p>BAKOMATIC is a leading manufacturer of <strong>professional commercial ovens</strong> for the food service, bakery, and pastry industries. Our product range includes <strong>combi ovens</strong>, <strong>speed ovens</strong>, <strong>convection ovens</strong>, and specialized baking solutions. With intelligent cooking technology, energy-efficient design, and global support, BAKOMATIC ovens help chefs achieve consistent, high-quality results every day.</p><p>Whether you run a restaurant, bakery, hotel, or catering operation, BAKOMATIC has the right oven for your bakomatic. Every oven is engineered as a long-term investment — explore our configurator to build your perfect setup.</p>',
                 ],
                 'sort_order' => 70,
                 'is_active' => true,

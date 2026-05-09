@@ -10,10 +10,10 @@ class DealerSeeder extends Seeder
     public function run(): void
     {
         $dealers = [
-            // Unox Offices
+            // Bakomatic Offices
             [
-                'name' => 'Kitchen Indonesia Office - Jakarta',
-                'type' => 'Unox Office',
+                'name' => 'Bakomatic Indonesia Office - Jakarta',
+                'type' => 'Bakomatic Office',
                 'service_level' => 'Platinum',
                 'address' => 'Jl. Sudirman Raya No. 50, Jakarta Selatan',
                 'latitude' => -6.2270,
@@ -23,8 +23,8 @@ class DealerSeeder extends Seeder
                 'website' => null,
             ],
             [
-                'name' => 'Kitchen Indonesia Office - Surabaya',
-                'type' => 'Unox Office',
+                'name' => 'Bakomatic Indonesia Office - Surabaya',
+                'type' => 'Bakomatic Office',
                 'service_level' => 'Platinum',
                 'address' => 'Jl. Pemuda No. 30, Surabaya',
                 'latitude' => -7.2830,
@@ -68,7 +68,7 @@ class DealerSeeder extends Seeder
                 'website' => null,
             ],
             [
-                'name' => 'UD Berkah Kitchen Equipment - Pontianak',
+                'name' => 'UD Berkah Bakomatic Equipment - Pontianak',
                 'type' => 'Dealer',
                 'service_level' => 'Gold',
                 'address' => 'Jl. Gajah Mada No. 45, Pontianak',
@@ -136,7 +136,7 @@ class DealerSeeder extends Seeder
                 'website' => null,
             ],
             [
-                'name' => 'CV Nusantara Kitchen Supply - Banjarmasin',
+                'name' => 'CV Nusantara Bakomatic Supply - Banjarmasin',
                 'type' => 'Dealer',
                 'service_level' => 'Authorized',
                 'address' => 'Jl. Ahmad Yani No. 55, Banjarmasin',

@@ -1,4 +1,4 @@
-<div class="space-y-6" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
+<div class="space-y-6 pb-32" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
 
     {{-- Step Indicators --}}
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
@@ -11,18 +11,18 @@
             ] as $num => $info)
                 <div class="flex flex-col items-center relative flex-1">
                     @if ($num > 1)
-                        <div class="absolute top-5 -left-1/2 w-full h-0.5 {{ $step >= $num ? 'bg-slate-600' : 'bg-slate-200' }}"></div>
+                        <div class="absolute top-5 -left-1/2 w-full h-0.5 {{ $step >= $num ? 'bg-[#0f0f1a]' : 'bg-slate-200' }}"></div>
                     @endif
                     <button wire:click="goToStep({{ $num }})"
                         class="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-200
-                        {{ $step === $num ? 'bg-slate-600 text-white ring-4 ring-slate-200' : ($step > $num ? 'bg-slate-600 text-white' : 'bg-slate-100 text-slate-400') }}">
+                        {{ $step === $num ? 'bg-[#0f0f1a] text-white ring-4 ring-slate-200' : ($step > $num ? 'bg-[#0f0f1a] text-white' : 'bg-slate-100 text-slate-400') }}">
                         @if ($step > $num)
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                         @else
                             {{ $num }}
                         @endif
                     </button>
-                    <span class="mt-2 text-xs font-medium {{ $step === $num ? 'text-slate-600' : 'text-slate-400' }}">{{ $info['label'] }}</span>
+                    <span class="mt-2 text-xs font-medium {{ $step === $num ? 'text-[#0f0f1a]' : 'text-slate-400' }}">{{ $info['label'] }}</span>
                 </div>
             @endforeach
         </div>
@@ -60,7 +60,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($this->products as $product)
                     <div wire:click="toggleProduct({{ $product->id }})"
-                        class="cursor-pointer bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
+                        class="cursor-pointer bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-[#0f0f1a] ring-2 ring-slate-200' : 'border-slate-200 hover:border-[#0f0f1a]' }} p-4 transition-all duration-200 hover:shadow-md">
                         <div class="flex items-start justify-between">
                             <div class="flex-1">
                                 <h4 class="font-bold text-slate-900 text-sm leading-tight">{{ $this->productLabel($product) }}</h4>
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="ml-3">
-                                <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
+                                <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-[#0f0f1a] border-[#0f0f1a]' : 'border-slate-300' }}">
                                     @if (in_array($product->id, $selectedProductIds))
                                         <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                     @endif
@@ -102,14 +102,6 @@
                 @endforeach
             </div>
 
-            {{-- Navigation --}}
-            <div class="flex justify-end pt-4 border-t border-slate-200">
-                <button wire:click="nextStep" @disabled(count($selectedProductIds) === 0)
-                    class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
-                    Next: Usage Mode
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
         </div>
     @endif
 
@@ -125,12 +117,12 @@
                 @foreach ($usageModeLabels as $value => $label)
                     <label wire:click="$set('usageMode', '{{ $value }}')"
                         class="cursor-pointer flex items-center p-4 rounded-xl border-2 transition-all duration-200
-                        {{ $usageMode === $value ? 'border-slate-600 bg-slate-50 ring-2 ring-slate-200' : 'border-slate-200 bg-white hover:border-slate-300' }}">
+                        {{ $usageMode === $value ? 'border-[#0f0f1a] bg-slate-50 ring-2 ring-slate-200' : 'border-slate-200 bg-white hover:border-[#0f0f1a]' }}">
                         <input type="radio" name="usageMode" value="{{ $value }}" wire:model.live="usageMode" class="sr-only">
                         <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center mr-4
-                            {{ $usageMode === $value ? 'border-slate-600' : 'border-slate-300' }}">
+                            {{ $usageMode === $value ? 'border-[#0f0f1a]' : 'border-slate-300' }}">
                             @if ($usageMode === $value)
-                                <div class="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#0f0f1a]"></div>
                             @endif
                         </div>
                         <div>
@@ -140,16 +132,6 @@
                 @endforeach
             </div>
 
-            <div class="flex justify-between pt-4 border-t border-slate-200">
-                <button wire:click="prevStep" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                    Back
-                </button>
-                <button wire:click="nextStep" class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-                    Next: Energy Source
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
         </div>
     @endif
 
@@ -165,12 +147,12 @@
                 @foreach ($energySourceLabels as $value => $label)
                     <label wire:click="$set('energySource', '{{ $value }}')"
                         class="cursor-pointer flex items-center p-4 rounded-xl border-2 transition-all duration-200
-                        {{ $energySource === $value ? 'border-slate-600 bg-slate-50 ring-2 ring-slate-200' : 'border-slate-200 bg-white hover:border-slate-300' }}">
+                        {{ $energySource === $value ? 'border-[#0f0f1a] bg-slate-50 ring-2 ring-slate-200' : 'border-slate-200 bg-white hover:border-[#0f0f1a]' }}">
                         <input type="radio" name="energySource" value="{{ $value }}" wire:model.live="energySource" class="sr-only">
                         <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center mr-4
-                            {{ $energySource === $value ? 'border-slate-600' : 'border-slate-300' }}">
+                            {{ $energySource === $value ? 'border-[#0f0f1a]' : 'border-slate-300' }}">
                             @if ($energySource === $value)
-                                <div class="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#0f0f1a]"></div>
                             @endif
                         </div>
                         <div>
@@ -180,16 +162,6 @@
                 @endforeach
             </div>
 
-            <div class="flex justify-between pt-4 border-t border-slate-200">
-                <button wire:click="prevStep" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                    Back
-                </button>
-                <button wire:click="nextStep" class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-                    View Results
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
         </div>
     @endif
 
@@ -250,7 +222,7 @@
             @endphp
 
             @if (count($this->results) > 1)
-                <div class="bg-slate-600 rounded-xl p-6 text-white">
+                <div class="bg-[#0f0f1a] rounded-xl p-6 text-white">
                     <h3 class="text-lg font-semibold mb-4">Combined Totals</h3>
                     <div class="grid grid-cols-3 gap-4">
                         <div class="text-center">
@@ -274,17 +246,48 @@
                 <p>These calculations are estimates based on standard usage assumptions. Actual energy consumption and costs may vary depending on installation conditions, menu complexity, ambient temperature, and local utility rates.</p>
             </div>
 
-            <div class="flex justify-between pt-4 border-t border-slate-200">
-                <button wire:click="prevStep" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                    Back
-                </button>
-                <button wire:click="restart" class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                    Start Over
-                </button>
-            </div>
         </div>
     @endif
+
+    {{-- Sticky Bottom Navigation --}}
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            @if ($step > 1)
+                <button wire:click="prevStep" type="button"
+                    class="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+            @else
+                <div></div>
+            @endif
+
+            @if ($step === 1)
+                <button wire:click="nextStep" type="button" @disabled(count($selectedProductIds) === 0)
+                    class="px-5 py-2.5 bg-[#0f0f1a] text-white rounded-lg font-medium hover:bg-[#0f0f1a]/90 transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Next: Usage Mode
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            @elseif ($step === 2)
+                <button wire:click="nextStep" type="button"
+                    class="px-5 py-2.5 bg-[#0f0f1a] text-white rounded-lg font-medium hover:bg-[#0f0f1a]/90 transition flex items-center gap-2">
+                    Next: Energy Source
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            @elseif ($step === 3)
+                <button wire:click="nextStep" type="button"
+                    class="px-5 py-2.5 bg-[#0f0f1a] text-white rounded-lg font-medium hover:bg-[#0f0f1a]/90 transition flex items-center gap-2">
+                    View Results
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            @elseif ($step === 4)
+                <button wire:click="restart" type="button"
+                    class="px-5 py-2.5 bg-[#0f0f1a] text-white rounded-lg font-medium hover:bg-[#0f0f1a]/90 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Start Over
+                </button>
+            @endif
+        </div>
+    </div>
 
 </div>

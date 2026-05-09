@@ -5,7 +5,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-4xl md:text-5xl font-display font-bold tracking-tight mb-3">All Products</h1>
             <p class="text-white/60 text-lg max-w-2xl">
-                Browse our full range of commercial kitchen solutions. Filter by category or search to find the right oven for your operation.
+                Browse our full range of commercial bakomatic solutions. Filter by category or search to find the right oven for your operation.
             </p>
             <div class="mt-6 flex gap-3">
                 <a href="/compare"

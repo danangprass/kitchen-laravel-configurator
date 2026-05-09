@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Testimonials</h1>
             <p class="text-lg text-gray-300 max-w-2xl mx-auto">
-                Hear from chefs, hoteliers, and restaurant owners who trust Kitchen ovens to deliver
+                Hear from chefs, hoteliers, and restaurant owners who trust Bakomatic ovens to deliver
                 exceptional results every day.
             </p>
         </div>
@@ -129,7 +129,7 @@
                 </div>
             @elseif ($submitForm)
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">Share Your Experience</h2>
-                <p class="text-gray-600 mb-8">We would love to hear how Kitchen ovens have helped your business.</p>
+                <p class="text-gray-600 mb-8">We would love to hear how Bakomatic ovens have helped your business.</p>
 
                 <form wire:submit="submitTestimonial" class="max-w-xl mx-auto space-y-5 text-left">
                     <div>
@@ -152,7 +152,7 @@
                         <label for="submitQuote" class="block text-sm font-medium text-gray-700 mb-1">Your Testimonial *</label>
                         <textarea id="submitQuote" wire:model="submitQuote" rows="4"
                             class="w-full rounded-lg border-gray-300 shadow-sm focus:border-gray-900 focus:ring-gray-900"
-                            placeholder="Tell us about your experience with Kitchen ovens..."></textarea>
+                            placeholder="Tell us about your experience with Bakomatic ovens..."></textarea>
                         @error('submitQuote') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
 
@@ -184,7 +184,7 @@
                 </form>
             @else
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">Share Your Experience</h2>
-                <p class="text-gray-600 mb-8">Join hundreds of satisfied customers. Tell us how Kitchen ovens have transformed your kitchen.</p>
+                <p class="text-gray-600 mb-8">Join hundreds of satisfied customers. Tell us how Bakomatic ovens have transformed your bakomatic.</p>
                 <button wire:click="toggleSubmitForm"
                     class="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors text-lg">
                     Share Your Story

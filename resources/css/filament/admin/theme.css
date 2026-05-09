@@ -1,0 +1,270 @@
+/*
+|--------------------------------------------------------------------------
+| Bakomatic Admin Theme — Black Buttons + White Text
+|--------------------------------------------------------------------------
+| Overrides Filament's default action button styling so buttons render
+| with near-black (#080C0E) background and white text, matching the
+| Bakomatic design system.
+|
+| Filament action buttons use:
+|   fi-bg-color-400 (background) + fi-text-color-950 (text)
+|
+| To get black bg + white text we override:
+|   --primary-300 / --primary-400 → dark (button bg + hover)
+|   --primary-800 / --primary-950 → white (button text)
+*/
+
+/* ── Primary Color Overrides (Bakomatic Near-Black) ────────────── */
+:root {
+    /*
+     * Filament normally generates a smooth 50→950 palette from the
+     * hex. We force the shades that matter for buttons:
+     *
+     *   shade 300 = button hover background
+     *   shade 400 = button default background
+     *   shade 500 = primary ring / focus
+     *   shade 800 = button hover text
+     *   shade 950 = button default text
+     */
+
+    --primary-50: oklch(0.97 0.01 264);
+    --primary-100: oklch(0.93 0.02 264);
+    --primary-200: oklch(0.85 0.03 264);
+    --primary-300: oklch(0.15 0.02 264);   /* dark — hover bg */
+    --primary-400: oklch(0.08 0.02 264);   /* near-black — default bg */
+    --primary-500: oklch(0.08 0.02 264);   /* near-black — ring/focus */
+    --primary-600: oklch(0.06 0.02 264);
+    --primary-700: oklch(0.04 0.02 264);
+    --primary-800: oklch(0.98 0 0);        /* white — hover text */
+    --primary-900: oklch(0.99 0 0);
+    --primary-950: oklch(0.99 0 0);        /* white — default text */
+}
+
+/* ── Action Buttons (Sign In, Save, Create, etc.) ─────────────── */
+.fi-ac-btn-action,
+.fi-btn.fi-ac-btn-action {
+    background-color: var(--primary-400);
+    color: var(--primary-950);
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.fi-ac-btn-action:hover,
+.fi-btn.fi-ac-btn-action:hover {
+    background-color: var(--primary-300);
+    color: var(--primary-800);
+}
+
+.fi-ac-btn-action:focus-visible {
+    box-shadow: 0 0 0 2px var(--primary-500);
+}
+
+/* ── Primary Color Utility — force bg/color mappings ──────────── */
+.fi-color-primary.fi-bg-color-300 {
+    background-color: var(--primary-300) !important;
+}
+
+.fi-color-primary.fi-bg-color-400 {
+    background-color: var(--primary-400) !important;
+}
+
+.fi-color-primary.fi-bg-color-500 {
+    background-color: var(--primary-500) !important;
+}
+
+.fi-color-primary.fi-bg-color-600 {
+    background-color: var(--primary-600) !important;
+}
+
+.fi-color-primary.fi-text-color-800 {
+    color: var(--primary-800) !important;
+}
+
+.fi-color-primary.fi-text-color-900 {
+    color: var(--primary-900) !important;
+}
+
+.fi-color-primary.fi-text-color-950 {
+    color: var(--primary-950) !important;
+}
+
+/* ── Hover variants ───────────────────────────────────────────── */
+.hover\:fi-bg-color-300:hover {
+    background-color: var(--primary-300) !important;
+}
+
+.hover\:fi-bg-color-400:hover {
+    background-color: var(--primary-400) !important;
+}
+
+.hover\:fi-text-color-800:hover {
+    color: var(--primary-800) !important;
+}
+
+.hover\:fi-text-color-900:hover {
+    color: var(--primary-900) !important;
+}
+
+/* ── All Buttons — general button treatment ───────────────────── */
+.fi-btn {
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.fi-btn.fi-color-primary {
+    background-color: var(--primary-400);
+    color: var(--primary-950);
+}
+
+.fi-btn.fi-color-primary:hover {
+    background-color: var(--primary-300);
+    color: var(--primary-800);
+}
+
+/* ── Outlined / Secondary Buttons ─────────────────────────────── */
+.fi-btn.fi-color-primary.fi-btn-outlined {
+    background-color: transparent;
+    color: var(--primary-400);
+    border: 1px solid var(--primary-400);
+}
+
+.fi-btn.fi-color-primary.fi-btn-outlined:hover {
+    background-color: var(--primary-400);
+    color: var(--primary-950);
+}
+
+/* ── Ghost Buttons ────────────────────────────────────────────── */
+.fi-btn.fi-color-primary.fi-btn-ghost {
+    background-color: transparent;
+    color: var(--primary-400);
+}
+
+.fi-btn.fi-color-primary.fi-btn-ghost:hover {
+    background-color: var(--primary-100);
+    color: var(--primary-400);
+}
+
+/* ── Sidebar / Navigation ─────────────────────────────────────── */
+.fi-sidebar-item-active .fi-sidebar-item-button {
+    background-color: var(--primary-400);
+    color: var(--primary-950);
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button:hover {
+    background-color: var(--primary-300);
+    color: var(--primary-800);
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-icon {
+    color: var(--primary-950);
+}
+
+/* ── Badges / Tags ────────────────────────────────────────────── */
+.fi-badge.fi-color-primary {
+    background-color: var(--primary-400);
+    color: var(--primary-950);
+}
+
+/* ── Toggle / Switch ──────────────────────────────────────────── */
+.fi-toggle[data-state="on"] {
+    background-color: var(--primary-400);
+}
+
+/* ── Checkbox / Radio ─────────────────────────────────────────── */
+.fi-checkbox-input:checked,
+.fi-radio-input:checked {
+    background-color: var(--primary-400);
+    border-color: var(--primary-400);
+}
+
+/* ── Links ────────────────────────────────────────────────────── */
+.fi-link.fi-color-primary {
+    color: var(--primary-400);
+}
+
+.fi-link.fi-color-primary:hover {
+    color: var(--primary-300);
+}
+
+/* ── Pagination ───────────────────────────────────────────────── */
+.fi-pagination-item-active .fi-pagination-item-button {
+    background-color: var(--primary-400);
+    color: var(--primary-950);
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────── */
+.fi-tabs-item-active {
+    color: var(--primary-400);
+    border-color: var(--primary-400);
+}
+
+/* ── Form Field Focus Ring ────────────────────────────────────── */
+.fi-input:focus,
+.fi-select-input:focus,
+.fi-textarea:focus {
+    border-color: var(--primary-400);
+    box-shadow: 0 0 0 2px rgba(8, 12, 14, 0.2);
+}
+
+/* ── Table Row Selection ──────────────────────────────────────── */
+.fi-ta-row.fi-selected {
+    background-color: rgba(8, 12, 14, 0.08);
+}
+
+/* ── Filament Info Widget (fix icon color) ────────────────────── */
+.fi-wi-filament-info .fi-icon {
+    color: var(--primary-400);
+}
+
+/* ── Loading Indicator ────────────────────────────────────────── */
+.fi-loading-indicator {
+    color: currentColor;
+}
+
+/* ── Dark Mode Overrides — keep buttons dark on dark bg ───────── */
+.dark .fi-btn.fi-color-primary {
+    background-color: oklch(0.25 0.02 264);
+    color: oklch(0.98 0 0);
+}
+
+.dark .fi-btn.fi-color-primary:hover {
+    background-color: oklch(0.35 0.02 264);
+    color: oklch(0.99 0 0);
+}
+
+.dark .fi-ac-btn-action,
+.dark .fi-btn.fi-ac-btn-action {
+    background-color: oklch(0.25 0.02 264);
+    color: oklch(0.98 0 0);
+}
+
+.dark .fi-ac-btn-action:hover,
+.dark .fi-btn.fi-ac-btn-action:hover {
+    background-color: oklch(0.35 0.02 264);
+    color: oklch(0.99 0 0);
+}
+
+.dark .fi-btn.fi-color-primary.fi-btn-outlined {
+    border-color: oklch(0.5 0.02 264);
+    color: oklch(0.9 0 0);
+}
+
+.dark .fi-btn.fi-color-primary.fi-btn-outlined:hover {
+    background-color: oklch(0.3 0.02 264);
+    color: oklch(0.99 0 0);
+}
+
+/* ── Ring / Focus visible ─────────────────────────────────────── */
+.fi-btn:focus-visible {
+    outline: 2px solid var(--primary-400);
+    outline-offset: 2px;
+}
+
+/* ── Ensure text stays white on dark button ───────────────────── */
+.fi-btn.fi-color-primary .fi-btn-label,
+.fi-ac-btn-action .fi-btn-label,
+.fi-btn.fi-ac-btn-action span {
+    color: inherit;
+}

@@ -3,7 +3,7 @@
         <div class="text-center mb-10">
             <h1 class="text-3xl font-bold text-gray-900">Book a Free Oven Trial</h1>
             <p class="mt-3 text-lg text-gray-600">
-                Experience our ovens firsthand with a complimentary on-site demonstration tailored to your kitchen needs.
+                Experience our ovens firsthand with a complimentary on-site demonstration tailored to your bakomatic needs.
             </p>
         </div>
 

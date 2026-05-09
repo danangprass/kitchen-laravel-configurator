@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dealers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type')->comment('Dealer or Unox Office');
+            $table->string('type')->comment('Dealer or Bakomatic Office');
             $table->string('service_level')->comment('Platinum, Gold, Silver, or Authorized');
             $table->text('address')->nullable();
             $table->decimal('latitude', 10, 7)->nullable();

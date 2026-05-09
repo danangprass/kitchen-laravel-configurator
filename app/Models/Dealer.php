@@ -36,7 +36,7 @@ class Dealer extends Model
 
     public static function types(): array
     {
-        return ['Dealer', 'Unox Office'];
+        return ['Dealer', 'Bakomatic Office'];
     }
 
     public static function serviceLevels(): array

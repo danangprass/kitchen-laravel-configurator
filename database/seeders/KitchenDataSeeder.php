@@ -35,7 +35,7 @@ class KitchenDataSeeder extends Seeder
         $this->seedProducts($productsJson);
         $this->seedProductAccessoryRelations($productsJson);
 
-        $this->command->info('Kitchen data imported successfully!');
+        $this->command->info('Bakomatic data imported successfully!');
         $this->command->info(Category::count().' categories');
         $this->command->info(Product::count().' products');
         $this->command->info(Accessory::count().' accessories');

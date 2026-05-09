@@ -10,7 +10,7 @@
                     Engineering kitchens that<br class="hidden sm:block"> perform at every service.
                 </h1>
                 <p class="text-white/70 text-lg leading-relaxed">
-                    We build commercial ovens and kitchen equipment that chefs rely on day after day —
+                    We build commercial ovens and bakomatic equipment that chefs rely on day after day —
                     engineered for consistency, designed for your workflow, and backed by a team that
                     understands professional kitchens from the inside out.
                 </p>
@@ -48,7 +48,7 @@
             <div>
                 <h2 class="text-3xl font-display font-bold text-midnight-500 mb-4">Our Mission</h2>
                 <p class="text-charcoal-500 leading-relaxed mb-4">
-                    To help food businesses operate at their best by delivering kitchen equipment that
+                    To help food businesses operate at their best by delivering bakomatic equipment that
                     is reliable, energy-efficient, and easy to work with — from a single café to a
                     large-scale catering operation.
                 </p>
@@ -69,7 +69,7 @@
                     <div>
                         <h3 class="font-semibold text-midnight-500 mb-1">Reliability first</h3>
                         <p class="text-sm text-charcoal-500 leading-relaxed">
-                            Every product is tested under real kitchen conditions before it reaches your operation.
+                            Every product is tested under real bakomatic conditions before it reaches your operation.
                         </p>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
             <h2 class="text-3xl font-display font-bold mb-4">Ready to see it in action?</h2>
             <p class="text-white/60 mb-8 max-w-xl mx-auto">
                 Book a no-obligation trial and experience the difference firsthand.
-                Our team will walk you through the right configuration for your kitchen.
+                Our team will walk you through the right configuration for your bakomatic.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="/book-trial"

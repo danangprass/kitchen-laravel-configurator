@@ -3,8 +3,8 @@ function resolveImageUrl($url) {
     if (empty($url)) {
         return null;
     }
-    if (str_starts_with($url, '/unox/') || str_starts_with($url, '/')) {
-        return 'https://unox.com' . $url;
+    if (str_starts_with($url, '/bakomatic/') || str_starts_with($url, '/')) {
+        return 'https://bakomatic.com' . $url;
     }
     return $url;
 }
@@ -22,7 +22,7 @@ function renderImage($url, $class, $alt = '') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your configuration - Kitchen</title>
+    <title>Your configuration - Bakomatic</title>
     <style>
         @page {
             margin: 15mm 20mm;
@@ -276,19 +276,19 @@ function renderImage($url, $class, $alt = '') {
 
         <div class="disclaimer-box">
             <strong>Note</strong><br>
-            *Images and photographs in the configurator may not reflect the actual appearance of the finished product. The factory reserves the right to make changes to product prices, colors, materials, construction and equipment without prior notice. To find out the exact specifications of each item you can contact Kitchen Customer Service.<br><br>
-            This document is provided for informational purposes only and does not constitute a final order confirmation. The generated document is subject to review and confirmation by the Kitchen back office team. Kindly contact the back office responsible for your reference market or your sales representative in order to proceed with the order.
+            *Images and photographs in the configurator may not reflect the actual appearance of the finished product. The factory reserves the right to make changes to product prices, colors, materials, construction and equipment without prior notice. To find out the exact specifications of each item you can contact Bakomatic Customer Service.<br><br>
+            This document is provided for informational purposes only and does not constitute a final order confirmation. The generated document is subject to review and confirmation by the Bakomatic back office team. Kindly contact the back office responsible for your reference market or your sales representative in order to proceed with the order.
         </div>
 
         <div class="promo-box">
             <h3>Individual Cooking Experience</h3>
-            <p>Go beyond the classic demo and try the oven for yourself. It's free! One of our experienced Kitchen Active Marketing Chefs will be by your side to answer your questions and help you make the right choice for your business. Book your Individual Cooking Experience now!</p>
+            <p>Go beyond the classic demo and try the oven for yourself. It's free! One of our experienced Bakomatic Active Marketing Chefs will be by your side to answer your questions and help you make the right choice for your business. Book your Individual Cooking Experience now!</p>
         </div>
 
         <div style="margin-top: 40px; font-size: 8pt; color: #888;">
-            <strong>Kitchen S.p.a.</strong><br>
+            <strong>Bakomatic S.p.a.</strong><br>
             Make a sustainable choice: do not print this document unless it is necessary.<br>
-            For further info please visit www.unox.com or email info@unox.com.
+            For further info please visit www.bakomatic.com or email info@bakomatic.com.
         </div>
     </div>
 
@@ -508,13 +508,13 @@ function renderImage($url, $class, $alt = '') {
 
         <div class="disclaimer-box" style="margin-top: 25px;">
             <strong>Important</strong><br>
-            Prices are estimates and may vary. This document is provided for informational purposes only and does not constitute a final order confirmation. Contact Kitchen Customer Service or your sales representative for a formal quote.
+            Prices are estimates and may vary. This document is provided for informational purposes only and does not constitute a final order confirmation. Contact Bakomatic Customer Service or your sales representative for a formal quote.
         </div>
 
         <div style="margin-top: 40px; font-size: 8pt; color: #888; text-align: center;">
-            <strong>Kitchen S.p.a.</strong><br>
+            <strong>Bakomatic S.p.a.</strong><br>
             Make a sustainable choice: do not print this document unless it is necessary.<br>
-            For further info please visit www.unox.com or email info@unox.com.<br>
+            For further info please visit www.bakomatic.com or email info@bakomatic.com.<br>
             {{ now()->format('d.m.Y') }}
         </div>
     </div>

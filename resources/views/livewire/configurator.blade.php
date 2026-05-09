@@ -1,10 +1,10 @@
-<div class="space-y-6 pb-24" x-data="{ showRestartModal: false }" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
+<div class="space-y-6 pb-20" x-data="{ showRestartModal: false }" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
 
     {{-- Step Navigation --}}
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
         <div class="flex items-center justify-between max-w-4xl mx-auto">
             <button type="button" x-on:click="showRestartModal = true" @disabled($step === 1)
-                class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                class="px-6 py-3 bg-[#0f0f1a] text-white rounded-lg font-semibold hover:bg-[#0f0f1a]/90 transition flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
                 Restart
             </button>
@@ -18,11 +18,11 @@
             ] as $num => $info)
                 <div class="flex flex-col items-center relative flex-1">
                     @if ($num > 1)
-                        <div class="absolute top-5 -left-1/2 w-full h-0.5 {{ $step >= $num ? 'bg-slate-600' : 'bg-slate-200' }}"></div>
+                        <div class="absolute top-5 -left-1/2 w-full h-0.5 {{ $step >= $num ? 'bg-[#0f0f1a]' : 'bg-slate-200' }}"></div>
                     @endif
                     <button wire:click="goToStep({{ $num }})"
                         class="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-200
-                        {{ $step === $num ? 'bg-slate-600 text-white ring-4 ring-slate-200' : ($step > $num ? 'bg-slate-600 text-white' : 'bg-slate-100 text-slate-400') }}">
+                        {{ $step === $num ? 'bg-[#0f0f1a] text-white ring-4 ring-slate-200' : ($step > $num ? 'bg-[#0f0f1a] text-white' : 'bg-slate-100 text-slate-400') }}">
                         @if ($step > $num)
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                         @else
@@ -68,8 +68,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach ($this->categories as $category)
                         <button wire:click="selectCategory({{ $category->id }})"
-                            class="group bg-white rounded-xl border-2 border-slate-200 hover:border-slate-600 p-6 text-left transition-all duration-200 hover:shadow-lg">
-                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-slate-600">{{ $category->name }}</h3>
+                            class="group bg-white rounded-xl border-2 border-slate-200 hover:border-[#0f0f1a] p-6 text-left transition-all duration-200 hover:shadow-lg">
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#0f0f1a]">{{ $category->name }}</h3>
                             <p class="mt-2 text-sm text-slate-500">{{ $category->description ?? 'Professional ' . strtolower($category->name) . ' ovens' }}</p>
                             <div class="mt-4 flex items-center text-slate-600 text-sm font-medium">
                                 Select
@@ -91,8 +91,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         @foreach ($this->subcategories as $subcategory)
                             <button wire:click="selectSubcategory({{ $subcategory->id }})"
-                                class="group bg-white rounded-xl border-2 border-slate-200 hover:border-slate-600 p-6 text-left transition-all duration-200 hover:shadow-lg">
-                                <h4 class="text-lg font-bold text-slate-900 group-hover:text-slate-600">{{ $subcategory->name }}</h4>
+                                class="group bg-white rounded-xl border-2 border-slate-200 hover:border-[#0f0f1a] p-6 text-left transition-all duration-200 hover:shadow-lg">
+                                <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#0f0f1a]">{{ $subcategory->name }}</h4>
                                 <p class="mt-1 text-sm text-slate-500">{{ $subcategory->products_count ?? 0 }} models</p>
                             </button>
                         @endforeach
@@ -223,7 +223,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @forelse ($this->products as $product)
                             <div wire:click="toggleProduct({{ $product->id }})"
-                                class="cursor-pointer bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md relative">
+                                class="cursor-pointer bg-white rounded-xl border-2 {{ in_array($product->id, $selectedProductIds) ? 'border-[#0f0f1a] ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md relative">
                                 @if ($product->video_url)
                                     <div class="absolute top-2 right-2 z-10 w-8 h-8 bg-slate-900/60 rounded-full flex items-center justify-center hover:bg-slate-900/80 transition">
                                         <svg class="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -268,7 +268,7 @@
                                         </div>
                                     </div>
                                     <div class="ml-3">
-                                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
+                                        <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ in_array($product->id, $selectedProductIds) ? 'bg-[#0f0f1a] border-[#0f0f1a]' : 'border-slate-300' }}">
                                             @if (in_array($product->id, $selectedProductIds))
                                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                             @endif
@@ -298,18 +298,9 @@
                             </div>
                         @endforelse
                     </div>
-                    </div>
                 </div>
             @endif
 
-            {{-- Navigation --}}
-            <div class="flex justify-end pt-4 border-t border-slate-200">
-                <button wire:click="nextStep" @disabled(count($selectedProductIds) === 0)
-                    class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
-                    Next: Arrangement
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
         </div>
     @endif
 
@@ -357,7 +348,9 @@
                                     Energy Star Certified
                                 </div>
                             @endif
-                            @php($embedUrl = \App\Livewire\Configurator::getVideoEmbedUrl($product->video_url))
+                            @php
+                                $embedUrl = \App\Livewire\Configurator::getVideoEmbedUrl($product->video_url);
+                            @endphp
                             @if ($embedUrl)
                                 <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-900">
                                     <iframe
@@ -377,16 +370,6 @@
                 @endforeach
             </div>
 
-            <div class="flex justify-between pt-4 border-t border-slate-200">
-                <button wire:click="prevStep" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                    Back
-                </button>
-                <button wire:click="nextStep" class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-                    Next: Column Accessories
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
         </div>
     @endif
 
@@ -406,7 +389,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach ($this->compatibleColumnAccessories as $accessory)
                         <div wire:click="toggleColumnAccessory({{ $accessory->id }})"
-                            class="cursor-pointer bg-white rounded-xl border-2 {{ isset($columnAccessories[$accessory->id]) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
+                            class="cursor-pointer bg-white rounded-xl border-2 {{ isset($columnAccessories[$accessory->id]) ? 'border-[#0f0f1a] ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
                                     <h4 class="font-bold text-slate-900 text-sm">{{ $accessory->commercial_name ?? $accessory->name }}</h4>
@@ -423,7 +406,7 @@
                                     @endif
                                 </div>
                                 <div class="ml-3">
-                                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ isset($columnAccessories[$accessory->id]) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
+                                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ isset($columnAccessories[$accessory->id]) ? 'bg-[#0f0f1a] border-[#0f0f1a]' : 'border-slate-300' }}">
                                         @if (isset($columnAccessories[$accessory->id]))
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                         @endif
@@ -445,16 +428,6 @@
                 </div>
             @endif
 
-            <div class="flex justify-between pt-4 border-t border-slate-200">
-                <button wire:click="prevStep" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                    Back
-                </button>
-                <button wire:click="nextStep" class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-                    Next: Other Accessories
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
         </div>
     @endif
 
@@ -474,7 +447,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach ($this->compatibleOtherAccessories as $accessory)
                         <div wire:click="toggleOtherAccessory({{ $accessory->id }})"
-                            class="cursor-pointer bg-white rounded-xl border-2 {{ isset($otherAccessories[$accessory->id]) ? 'border-slate-600 ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
+                            class="cursor-pointer bg-white rounded-xl border-2 {{ isset($otherAccessories[$accessory->id]) ? 'border-[#0f0f1a] ring-2 ring-slate-200' : 'border-slate-200 hover:border-slate-300' }} p-4 transition-all duration-200 hover:shadow-md">
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
                                     <h4 class="font-bold text-slate-900 text-sm">{{ $accessory->commercial_name ?? $accessory->name }}</h4>
@@ -491,7 +464,7 @@
                                     @endif
                                 </div>
                                 <div class="ml-3">
-                                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ isset($otherAccessories[$accessory->id]) ? 'bg-slate-600 border-slate-600' : 'border-slate-300' }}">
+                                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center {{ isset($otherAccessories[$accessory->id]) ? 'bg-[#0f0f1a] border-[#0f0f1a]' : 'border-slate-300' }}">
                                         @if (isset($otherAccessories[$accessory->id]))
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                         @endif
@@ -513,16 +486,6 @@
                 </div>
             @endif
 
-            <div class="flex justify-between pt-4 border-t border-slate-200">
-                <button wire:click="prevStep" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                    Back
-                </button>
-                <button wire:click="nextStep" class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-                    Next: Summary
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
         </div>
     @endif
 
@@ -620,19 +583,15 @@
                     </div>
                     <h3 class="text-lg font-bold text-amber-800">Pricing Information Unavailable</h3>
                     <p class="mt-2 text-amber-700">Detailed pricing information is currently being updated. Please contact us for a personalized quote tailored to your configuration.</p>
-                    <a href="mailto:info@unox.com" class="mt-4 inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition">
+                    <a href="mailto:info@bakomatic.com" class="mt-4 inline-flex items-center px-4 py-2 bg-amber-600 text-white rounded-lg font-medium hover:bg-amber-700 transition">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         Contact Us for Pricing
                     </a>
                 </div>
             @endif
 
-            <form action="{{ route('configurator.pdf') }}" method="GET" target="_blank" class="flex justify-between pt-4 border-t border-slate-200">
-                <button type="button" wire:click="prevStep" class="px-6 py-3 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                    Back
-                </button>
-
+            {{-- Hidden form for PDF export (buttons rendered in sticky nav) --}}
+            <form id="pdf-export-form" action="{{ route('configurator.pdf') }}" method="GET" target="_blank">
                 @foreach($selectedProductIds as $id)
                     <input type="hidden" name="products[]" value="{{ $id }}">
                 @endforeach
@@ -642,23 +601,12 @@
                 @foreach($otherAccessories as $id => $data)
                     <input type="hidden" name="other[{{ $id }}]" value="{{ $data['quantity'] }}">
                 @endforeach
-
-                <div class="flex items-center space-x-3">
-                    <button type="submit" class="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        Export to PDF
-                    </button>
-                    <button type="button" wire:click="restart" class="px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                        Start Over
-                    </button>
-                </div>
             </form>
         </div>
     @endif
 
     {{-- Restart Confirmation Modal --}}
-    <div x-show="showRestartModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center" x-transition.opacity>
+    <div x-show="showRestartModal" x-cloak x-on:open-restart-modal.window="showRestartModal = true" class="fixed inset-0 z-50 flex items-center justify-center" x-transition.opacity>
         <div class="absolute inset-0 bg-black/50" x-on:click="showRestartModal = false"></div>
         <div class="relative bg-white rounded-xl shadow-2xl p-6 max-w-md w-full mx-4" x-on:click.outside="showRestartModal = false">
             <div class="text-center">
@@ -703,4 +651,49 @@
         </div>
         <div class="h-14"></div>
     @endif
+
+    {{-- Sticky Bottom Navigation Bar (Livewire-native, no Alpine bridge needed) --}}
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+
+            {{-- Back / empty spacer --}}
+            @if ($step > 1)
+                <button wire:click="prevStep" type="button"
+                        class="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition flex items-center text-sm gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    Back
+                </button>
+            @else
+                <div></div>
+            @endif
+
+            {{-- Next / Export --}}
+            @if ($step < 5)
+                @php
+                    $nextLabels = [1 => 'Next: Arrangement', 2 => 'Next: Column Accessories', 3 => 'Next: Other Accessories', 4 => 'Next: Summary'];
+                @endphp
+                <button wire:click="nextStep" type="button"
+                        @disabled($step === 1 && count($selectedProductIds) === 0)
+                        class="px-5 py-2.5 bg-[#0f0f1a] text-white rounded-lg font-semibold hover:bg-[#0f0f1a]/90 transition flex items-center text-sm gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {{ $nextLabels[$step] ?? 'Next' }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            @endif
+
+            @if ($step === 5)
+                <div class="flex items-center gap-2">
+                    <button type="submit" form="pdf-export-form"
+                            class="px-5 py-2.5 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition flex items-center text-sm gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Export to PDF
+                    </button>
+                    <button type="button" wire:click="restart"
+                            class="px-5 py-2.5 bg-[#0f0f1a] text-white rounded-lg font-semibold hover:bg-[#0f0f1a]/90 transition flex items-center text-sm gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        Start Over
+                    </button>
+                </div>
+            @endif
+        </div>
+    </div>
 </div>

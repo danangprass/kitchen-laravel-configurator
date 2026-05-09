@@ -4,13 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
 
-    <title>@yield('title', config('app.name', 'Kitchen')) — Commercial Kitchen Solutions</title>
+    <title>@yield('title', config('app.name', 'Bakomatic')) — Commercial Bakomatic Solutions</title>
 
     {{-- Fonts: Funnel Display (headings) + Instrument Sans (body) — matching Bakomatic --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=funnel-display:400,500,600,700,800|instrument-sans:400,500,600,700" rel="stylesheet" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if(file_exists(public_path('build/manifest.json')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Funnel Display', 'sans-serif'],
+                        sans: ['Instrument Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        midnight: { 500: '#0f0f1a' },
+                    },
+                    borderRadius: {
+                        form: '0.5rem',
+                        button: '0.5rem',
+                    },
+                }
+            }
+        }
+        </script>
+    @endif
     @livewireStyles
 
     @stack('styles')
@@ -26,7 +49,7 @@
                 {{-- Logo --}}
                 <a href="/" class="flex items-center gap-2 shrink-0">
                     <span class="text-xl font-display font-bold text-white tracking-tight">
-                        {{ config('app.name', 'Kitchen') }}
+                        {{ config('app.name', 'Bakomatic') }}
                     </span>
                 </a>
 
@@ -187,10 +210,10 @@
                 {{-- Brand --}}
                 <div>
                     <h4 class="text-lg font-display font-bold mb-4 text-white">
-                        {{ config('app.name', 'Kitchen') }}
+                        {{ config('app.name', 'Bakomatic') }}
                     </h4>
                     <p class="text-white/60 text-sm leading-relaxed mb-6">
-                        Commercial kitchen solutions<br>
+                        Commercial bakomatic solutions<br>
                         engineered for consistency,<br>
                         built for your success.
                     </p>
@@ -294,7 +317,7 @@
 
             {{-- Bottom Bar --}}
             <div class="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
-                <p>&copy; {{ date('Y') }} {{ config('app.name', 'Kitchen') }}. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} {{ config('app.name', 'Bakomatic') }}. All rights reserved.</p>
                 <div class="flex items-center gap-6">
                     <a href="{{ route('privacy-policy') }}" class="hover:text-white/70 transition-colors duration-200">Privacy Policy</a>
                     <a href="/terms" class="hover:text-white/70 transition-colors duration-200">Terms &amp; Conditions</a>

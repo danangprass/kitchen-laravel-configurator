@@ -37,8 +37,8 @@ class DealerFactory extends Factory
         $type = fake()->randomElement(Dealer::types());
 
         return [
-            'name' => $type === 'Unox Office'
-                ? 'UNOX Indonesia Office - '.$city
+            'name' => $type === 'Bakomatic Office'
+                ? 'BAKOMATIC Indonesia Office - '.$city
                 : fake()->company().' - '.$city,
             'type' => $type,
             'service_level' => fake()->randomElement(Dealer::serviceLevels()),

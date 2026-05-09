@@ -98,7 +98,7 @@ Route::get('/configurator/pdf', function (Request $request) {
     $pdf->setPaper('a4', 'portrait');
 
     return $pdf->download(
-        'Kitchen_Configuration_'.now()->format('Ymd_His').'.pdf',
+        'Bakomatic_Configuration_'.now()->format('Ymd_His').'.pdf',
     );
 })->name('configurator.pdf');
 

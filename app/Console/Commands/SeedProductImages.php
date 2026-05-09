@@ -16,9 +16,9 @@ class SeedProductImages extends Command
 {
     protected $signature = 'images:seed {--skip-existing : Skip items that already have images}';
 
-    protected $description = 'Download and seed product and accessory images from UNOX CDN';
+    protected $description = 'Download and seed product and accessory images from BAKOMATIC CDN';
 
-    private const BASE_URL = 'https://www.unox.com';
+    private const BASE_URL = 'https://www.bakomatic.com';
 
     public function handle(): int
     {

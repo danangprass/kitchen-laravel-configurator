@@ -66,6 +66,7 @@ class Configurator extends Component
         } else {
             $this->selectedProductIds[] = $id;
         }
+        $this->syncNavState();
     }
 
     public function removeProduct(int $id): void
@@ -74,6 +75,7 @@ class Configurator extends Component
             $id,
         ]);
         $this->resetAccessorySelections();
+        $this->syncNavState();
     }
 
     public function goToStep(int $step): void
@@ -91,6 +93,7 @@ class Configurator extends Component
         if ($step === 3 || $step === 4) {
             $this->initializeAccessorySelections();
         }
+        $this->syncNavState();
     }
 
     public function nextStep(): void
@@ -191,6 +194,15 @@ class Configurator extends Component
         $this->columnAccessories = [];
         $this->otherAccessories = [];
         $this->clearFilters();
+        $this->syncNavState();
+    }
+
+    private function syncNavState(): void
+    {
+        $this->dispatch('configurator-nav-state',
+            step: $this->step,
+            selectedCount: count($this->selectedProductIds),
+        );
     }
 
     public function getCategoriesProperty(): Collection
@@ -528,7 +540,7 @@ class Configurator extends Component
     public function render()
     {
         return view('livewire.configurator')->layout('layouts.app', [
-            'title' => 'Kitchen Oven Configurator',
+            'title' => 'Bakomatic Oven Configurator',
         ]);
     }
 

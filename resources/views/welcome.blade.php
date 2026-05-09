@@ -2,7 +2,7 @@
   Bakomatic-Inspired Landing Page
   Premium industrial feel — dark + white, generous rounding, data-driven sections
 --}}
-@section('title', config('app.name', 'Kitchen') . ' — Commercial Kitchen Solutions')
+@section('title', config('app.name', 'Bakomatic') . ' — Commercial Bakomatic Solutions')
 
 <x-layouts.home>
 
@@ -21,7 +21,7 @@
             <div class="max-w-3xl">
                 {{-- Eyebrow — uppercase white label --}}
                 <span class="inline-block text-white font-semibold text-xs tracking-widest uppercase mb-6">
-                    Professional Kitchen Solutions
+                    Professional Bakomatic Solutions
                 </span>
 
                 {{-- Main heading — large Funnel Display --}}
@@ -31,7 +31,7 @@
 
                 {{-- Subtitle — charcoal body text on dark --}}
                 <p class="text-lg sm:text-xl text-white/60 max-w-xl mb-10 leading-relaxed">
-                    Commercial kitchen equipment that blends artisan tradition with smart technology,
+                    Commercial bakomatic equipment that blends artisan tradition with smart technology,
                     delivering consistent results every single time.
                 </p>
 
@@ -111,7 +111,7 @@
                     </h2>
                     <p class="text-charcoal-500 text-lg leading-relaxed mb-6">
                         We are part of a larger manufacturing ecosystem with decades of experience
-                        in commercial kitchen equipment. Every oven and machine we build is engineered
+                        in commercial bakomatic equipment. Every oven and machine we build is engineered
                         as a long-term investment for your business.
                     </p>
                     <p class="text-charcoal-400 leading-relaxed mb-8">
@@ -166,7 +166,7 @@
                     Core Equipment
                 </span>
                 <h2 class="font-display font-bold text-4xl lg:text-5xl text-midnight-500 mt-4 mb-6">
-                    Pillars of Your<br> Professional Kitchen
+                    Pillars of Your<br> Professional Bakomatic
                 </h2>
                 <p class="text-charcoal-400 text-lg leading-relaxed">
                     Every piece of equipment is purpose-built for the demanding
@@ -334,7 +334,7 @@
                      aria-hidden="true"></div>
 
                 <h2 class="relative font-display font-bold text-3xl lg:text-4xl text-white mb-4">
-                    Ready to Build Your Kitchen?
+                    Ready to Build Your Bakomatic?
                 </h2>
                 <p class="relative text-white/60 text-lg mb-8 max-w-lg mx-auto leading-relaxed">
                     Use our interactive configurator to design the perfect layout,
@@ -376,7 +376,7 @@
                 Achieve Consistency<br> in Every Bake
             </h2>
             <p class="text-charcoal-400 mb-8 leading-relaxed">
-                Get technical guides, kitchen optimization tips, and the latest
+                Get technical guides, bakomatic optimization tips, and the latest
                 equipment updates delivered straight to your inbox.
             </p>
 
