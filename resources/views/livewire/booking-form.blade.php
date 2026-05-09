@@ -14,9 +14,10 @@
             </div>
         @else
             <form wire:submit="submit" class="bg-white shadow-sm rounded-lg p-8 space-y-6">
+                <p class="text-sm text-gray-500 mb-4">Fields marked <span class="text-red-500">*</span> are required.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="text" id="name" wire:model="name"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 placeholder-gray-400"
                             placeholder="Your full name">
@@ -24,7 +25,7 @@
                     </div>
 
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="email" id="email" wire:model="email"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 placeholder-gray-400"
                             placeholder="you@example.com">
@@ -32,7 +33,7 @@
                     </div>
 
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="tel" id="phone" wire:model="phone"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 placeholder-gray-400"
                             placeholder="+62 ...">
@@ -40,7 +41,7 @@
                     </div>
 
                     <div>
-                        <label for="company_name" class="block text-sm font-medium text-gray-700 mb-1">Company Name *</label>
+                        <label for="company_name" class="block text-sm font-medium text-gray-700 mb-1">Company Name <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="text" id="company_name" wire:model="company_name"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 placeholder-gray-400"
                             placeholder="Your restaurant or business">
@@ -48,7 +49,7 @@
                     </div>
 
                     <div class="md:col-span-2">
-                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address *</label>
+                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address <span class="text-red-500 ml-0.5">*</span></label>
                         <textarea id="address" wire:model="address" rows="3"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 placeholder-gray-400"
                             placeholder="Your business address"></textarea>
@@ -56,7 +57,7 @@
                     </div>
 
                     <div>
-                        <label for="preferred_date_start" class="block text-sm font-medium text-gray-700 mb-1">Preferred Start Date *</label>
+                        <label for="preferred_date_start" class="block text-sm font-medium text-gray-700 mb-1">Preferred Start Date <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="date" id="preferred_date_start" wire:model="preferred_date_start"
                             min="{{ date('Y-m-d') }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500">
@@ -64,7 +65,7 @@
                     </div>
 
                     <div>
-                        <label for="preferred_date_end" class="block text-sm font-medium text-gray-700 mb-1">Preferred End Date *</label>
+                        <label for="preferred_date_end" class="block text-sm font-medium text-gray-700 mb-1">Preferred End Date <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="date" id="preferred_date_end" wire:model="preferred_date_end"
                             min="{{ date('Y-m-d') }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500">
@@ -72,7 +73,7 @@
                     </div>
 
                     <div>
-                        <label for="oven_interest" class="block text-sm font-medium text-gray-700 mb-1">Oven Interest *</label>
+                        <label for="oven_interest" class="block text-sm font-medium text-gray-700 mb-1">Oven Interest <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="text" id="oven_interest" wire:model="oven_interest"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 placeholder-gray-400"
                             placeholder="e.g. Bakertop Mind.Maps">
@@ -80,7 +81,7 @@
                     </div>
 
                     <div>
-                        <label for="meals_per_day" class="block text-sm font-medium text-gray-700 mb-1">Meals Per Day *</label>
+                        <label for="meals_per_day" class="block text-sm font-medium text-gray-700 mb-1">Meals Per Day <span class="text-red-500 ml-0.5">*</span></label>
                         <input type="number" id="meals_per_day" wire:model="meals_per_day" min="1"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 placeholder-gray-400"
                             placeholder="e.g. 200">
