@@ -9,6 +9,7 @@ use App\Livewire\DealerLocator;
 use App\Livewire\FaqPage;
 use App\Livewire\HomePage;
 use App\Livewire\ProductComparator;
+use App\Livewire\ProductsPage;
 use App\Livewire\TestimonialsPage;
 use App\Models\Accessory;
 use App\Models\NewsletterSubscriber;
@@ -42,6 +43,7 @@ Route::post('/newsletter/subscribe', function (Request $request) {
     ->middleware('throttle:10,60')
     ->name('newsletter.subscribe');
 
+Route::get('/products', ProductsPage::class)->name('products');
 Route::get('/testimonials', TestimonialsPage::class)->name('testimonials');
 Route::get('/faq', FaqPage::class)->name('faq');
 
