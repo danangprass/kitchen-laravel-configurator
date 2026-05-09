@@ -28,9 +28,9 @@
                     <button
                         wire:click="selectCategory('{{ $tab }}')"
                         @class([
-                            'px-4 py-3 text-sm font-medium transition border-b-2',
-                            'border-orange-500 text-orange-600 bg-orange-50/50' => $category === $tab,
-                            'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50' => $category !== $tab,
+                            'px-4 py-3 text-sm transition border-b-4',
+                            'font-semibold border-orange-500 text-orange-600 bg-orange-50' => $category === $tab,
+                            'font-medium border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50' => $category !== $tab,
                         ])
                     >
                         {{ $tab }}
