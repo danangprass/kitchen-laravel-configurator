@@ -74,7 +74,13 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "jasonmccreary/laravel-test-assertions",
+                "laravel-shift/blueprint",
+                "laravel/pail",
+                "laravel/pao",
+                "nunomaduro/collision"
+            ]
         }
     },
     "config": {
