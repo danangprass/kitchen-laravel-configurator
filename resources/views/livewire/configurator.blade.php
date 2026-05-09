@@ -1,4 +1,4 @@
-<div class="space-y-6" x-data="{ showRestartModal: false }" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
+<div class="space-y-6 pb-24" x-data="{ showRestartModal: false }" x-init="$wire.on('stepChanged', () => window.scrollTo({top: 0, behavior: 'smooth'}))">
 
     {{-- Step Navigation --}}
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
