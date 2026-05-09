@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,7 +18,7 @@ class ProductsPage extends Component
 
     public string $sortBy = 'name';
 
-    public $categories;
+    public Collection $categories;
 
     public function mount(): void
     {

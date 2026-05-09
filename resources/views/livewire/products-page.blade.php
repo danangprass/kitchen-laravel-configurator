@@ -88,7 +88,7 @@
                 <p class="text-sm text-charcoal-400 mb-5" wire:loading.class="opacity-50">
                     {{ $products->total() }} {{ Str::plural('product', $products->total()) }} found
                     @if ($search)
-                        for <span class="font-medium text-midnight-500">"{{ $search }}"</span>
+                        for <span class="font-medium text-midnight-500">"{{ e($search) }}"</span>
                     @endif
                 </p>
 
@@ -187,13 +187,13 @@
 
                                     {{-- Actions --}}
                                     <div class="flex items-center gap-2">
-                                        <a href="/configurator"
+                                        <a href="/configurator?product={{ $product->id }}"
                                            class="flex-1 inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium
                                                   bg-midnight-500 text-white hover:bg-midnight-400
                                                   transition-colors duration-150">
                                             Configure
                                         </a>
-                                        <a href="/compare"
+                                        <a href="/compare?product={{ $product->id }}"
                                            class="inline-flex items-center justify-center px-3 py-2 rounded-lg text-sm font-medium
                                                   border border-steel-300 text-charcoal-500 hover:border-midnight-300 hover:text-midnight-500
                                                   transition-colors duration-150"
