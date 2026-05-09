@@ -11,6 +11,7 @@
     <link href="https://fonts.bunny.net/css?family=funnel-display:400,500,600,700,800|instrument-sans:400,500,600,700" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 
     @stack('styles')
 </head>
@@ -305,6 +306,7 @@
     {{-- Cookie Consent Banner --}}
     <x-cookie-banner />
 
+    @livewireScripts
     @stack('scripts')
 </body>
 </html>
