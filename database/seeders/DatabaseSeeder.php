@@ -18,6 +18,13 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $this->call([CategorySeeder::class, KitchenDataSeeder::class, HomepageSectionSeeder::class, DealerSeeder::class]);
+        $this->call([
+            CategorySeeder::class,
+            KitchenDataSeeder::class,
+            HomepageSectionSeeder::class,
+            DealerSeeder::class,
+            FaqSeeder::class,
+            TestimonialSeeder::class,
+        ]);
     }
 }
