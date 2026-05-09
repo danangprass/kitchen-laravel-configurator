@@ -24,7 +24,8 @@
                             @if ($image)
                                 <img src="{{ asset('storage/' . $image->path) }}"
                                      alt="{{ $product->name }}"
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.onerror=null;this.src='/images/placeholder-product.svg'">
                             @else
                                 <div class="text-steel-400">
                                     <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">

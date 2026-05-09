@@ -33,7 +33,8 @@
             <div class="bg-white rounded-card border border-steel-500/50 overflow-hidden aspect-[4/3] shadow-sm">
                 @if ($section->background_type === 'image' && $section->background_data)
                     <img src="{{ e($section->background_data) }}" alt="{{ $section->title }}"
-                         class="w-full h-full object-cover">
+                         class="w-full h-full object-cover"
+                         onerror="this.onerror=null;this.src='/images/placeholder-product.svg'">
                 @else
                     <div class="w-full h-full flex items-center justify-center bg-ice-500 text-steel-400">
                         <div class="text-center">
