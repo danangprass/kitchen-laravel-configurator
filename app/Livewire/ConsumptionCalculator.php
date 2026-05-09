@@ -82,6 +82,26 @@ class ConsumptionCalculator extends Component
     }
 
     /**
+     * Build a disambiguated display label for a product.
+     *
+     * Appends the SKU when present, falling back to tray count, so that
+     * identically-named models (e.g. CHEFTOP MIND.Maps BIG PLUS in
+     * multiple configurations) are visually distinct in list contexts.
+     */
+    public function productLabel(Product $product): string
+    {
+        if (filled($product->sku)) {
+            return $product->name.' — '.$product->sku;
+        }
+
+        if (filled($product->number_of_trays)) {
+            return $product->name.' ('.$product->number_of_trays.' trays)';
+        }
+
+        return $product->name;
+    }
+
+    /**
      * @return Collection<int, Product>
      */
     public function getProductsProperty(): Collection
