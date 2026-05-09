@@ -23,6 +23,8 @@ Route::get('/configurator', Configurator::class)->name('configurator');
 
 Route::livewire('/compare', ProductComparator::class)->name('compare');
 
+Route::get('/about', fn () => view('pages.about'))->name('about');
+
 Route::get('/privacy-policy', fn () => view('pages.privacy-policy'))->name(
     'privacy-policy',
 );

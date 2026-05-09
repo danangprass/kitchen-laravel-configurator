@@ -24,31 +24,31 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id("admin")
-            ->path("admin")
+            ->id('admin')
+            ->path('admin')
             ->login()
             ->colors([
-                "primary" => "#080C0E",
+                'primary' => '#080C0E',
             ])
             ->renderHook(
-                "panels::head.end",
-                fn() => "<style>" .
+                'panels::head.end',
+                fn () => '<style>'.
                     file_get_contents(
-                        resource_path("css/filament/admin/theme.css"),
-                    ) .
-                    "</style>",
+                        resource_path('css/filament/admin/theme.css'),
+                    ).
+                    '</style>',
             )
             ->discoverResources(
-                in: app_path("Filament/Resources"),
+                in: app_path('Filament/Resources'),
                 for: "App\Filament\Resources",
             )
             ->discoverPages(
-                in: app_path("Filament/Pages"),
+                in: app_path('Filament/Pages'),
                 for: "App\Filament\Pages",
             )
             ->pages([Dashboard::class])
             ->discoverWidgets(
-                in: app_path("Filament/Widgets"),
+                in: app_path('Filament/Widgets'),
                 for: "App\Filament\Widgets",
             )
             ->widgets([AccountWidget::class, FilamentInfoWidget::class])
