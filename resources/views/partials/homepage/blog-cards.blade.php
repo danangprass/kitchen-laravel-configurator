@@ -30,7 +30,8 @@
                         @if (!empty($article['image']))
                             <div class="aspect-[16/10] overflow-hidden">
                                 <img src="{{ $article['image'] }}" alt="{{ $article['title'] ?? '' }}"
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.onerror=null;this.src='/images/placeholder-product.svg'">
                             </div>
                         @endif
                         <div class="p-6">
