@@ -4,13 +4,6 @@
             <h1 class="text-2xl font-bold text-slate-900">Compare Ovens</h1>
             <p class="mt-1 text-slate-600">Compare up to 3 ovens side-by-side</p>
         </div>
-        <a href="{{ route('configurator') }}" wire:navigate
-            class="px-5 py-2.5 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition flex items-center">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-            </svg>
-            Add Products
-        </a>
     </div>
 
     @if ($this->products->isEmpty())
@@ -22,9 +15,9 @@
             </div>
             <h2 class="text-lg font-semibold text-slate-900 mb-2">No ovens selected</h2>
             <p class="text-slate-500 mb-6">Select up to 3 ovens from the configurator to compare them side-by-side.</p>
-            <a href="{{ route('configurator') }}" wire:navigate
-                class="inline-flex items-center px-6 py-3 bg-slate-600 text-white rounded-lg font-semibold hover:bg-slate-700 transition">
-                Go to Configurator
+            <a href="{{ route('compare.select') }}" wire:navigate
+                class="inline-flex items-center px-6 py-3 bg-midnight-500 text-white rounded-lg font-semibold hover:bg-midnight-400 transition">
+                Browse Ovens
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -41,6 +34,16 @@
                 </svg>
                 Show only differences
             </button>
+            @if (count($comparedProductIds) < 3)
+                <a href="{{ route('compare.select') }}" wire:navigate
+                    class="px-4 py-2 rounded-lg font-medium text-sm transition flex items-center
+                           bg-midnight-500 text-white hover:bg-midnight-400">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Add Products
+                </a>
+            @endif
             <button wire:click="clearCompare"
                 class="px-4 py-2 text-sm text-red-600 hover:text-red-700 font-medium flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

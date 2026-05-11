@@ -8,7 +8,7 @@ $dirs = [
     '/tmp/storage/logs',
 ];
 foreach ($dirs as $dir) {
-    if (!is_dir($dir)) {
+    if (! is_dir($dir)) {
         mkdir($dir, 0755, true);
     }
 }
@@ -20,4 +20,4 @@ putenv('VIEW_COMPILED_PATH=/tmp/views');
 $_SERVER['HTTPS'] = 'on';
 $_SERVER['SERVER_PORT'] = 443;
 
-require __DIR__ . '/../public/index.php';
+require __DIR__.'/../public/index.php';

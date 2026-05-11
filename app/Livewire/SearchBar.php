@@ -56,7 +56,7 @@ class SearchBar extends Component
             ->get()
             ->map(fn (Product $product): array => [
                 'label' => $product->name,
-                'url' => route('configurator', ['product' => $product->slug]),
+                'url' => route('products.show', ['slug' => $product->slug]),
             ])
             ->toArray();
 

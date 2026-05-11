@@ -119,10 +119,10 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6" wire:loading.class="opacity-40">
                         @foreach ($products as $product)
                             <div class="group bg-white rounded-2xl border border-steel-300 overflow-hidden
-                                        hover:border-midnight-300 hover:shadow-lg transition-all duration-200">
+                                        hover:border-midnight-300 hover:shadow-lg transition-all duration-200 flex flex-col">
 
                                 {{-- Product Image --}}
-                                <div class="relative aspect-[4/3] bg-ice-200 overflow-hidden">
+                                <a href="/products/{{ $product->slug }}" class="block relative aspect-[4/3] bg-ice-200 overflow-hidden">
                                     @if ($product->list_image)
                                         <img src="{{ $product->list_image }}"
                                              alt="{{ $product->name }}"
@@ -148,12 +148,14 @@
                                             {{ $product->category->name }}
                                         </span>
                                     @endif
-                                </div>
+                                </a>
 
                                 {{-- Product Info --}}
-                                <div class="p-5">
+                                <div class="p-5 flex flex-col flex-1">
                                     <h3 class="font-display font-semibold text-midnight-500 text-base leading-snug mb-1">
-                                        {{ $product->name }}
+                                        <a href="/products/{{ $product->slug }}" class="hover:underline">
+                                            {{ $product->name }}
+                                        </a>
                                     </h3>
 
                                     @if ($product->sku)
@@ -187,23 +189,16 @@
                                         </div>
                                     @endif
 
+                                    {{-- Spacer pushes actions to bottom --}}
+                                    <div class="flex-1"></div>
+
                                     {{-- Actions --}}
                                     <div class="flex items-center gap-2">
-                                        <a href="/configurator?product={{ $product->id }}"
+                                        <a href="/products/{{ $product->slug }}"
                                            class="flex-1 inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium
                                                   bg-midnight-500 text-white hover:bg-midnight-400
-                                                  transition-colors duration-150">
-                                            Configure
-                                        </a>
-                                        <a href="/compare?product={{ $product->id }}"
-                                           class="inline-flex items-center justify-center px-3 py-2 rounded-lg text-sm font-medium
-                                                  border border-steel-300 text-charcoal-500 hover:border-midnight-300 hover:text-midnight-500
-                                                  transition-colors duration-150"
-                                           title="Compare">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                            </svg>
+                                                  transition-all duration-150 active:scale-[0.97]">
+                                            View Details
                                         </a>
                                     </div>
                                 </div>

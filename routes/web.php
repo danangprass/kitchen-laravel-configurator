@@ -9,6 +9,8 @@ use App\Livewire\DealerLocator;
 use App\Livewire\FaqPage;
 use App\Livewire\HomePage;
 use App\Livewire\ProductComparator;
+use App\Livewire\ProductCompareSelector;
+use App\Livewire\ProductDetail;
 use App\Livewire\ProductsPage;
 use App\Livewire\TestimonialsPage;
 use App\Models\Accessory;
@@ -23,6 +25,7 @@ Route::get('/', HomePage::class)->name('home');
 Route::get('/configurator', Configurator::class)->name('configurator');
 
 Route::livewire('/compare', ProductComparator::class)->name('compare');
+Route::livewire('/compare/select', ProductCompareSelector::class)->name('compare.select');
 
 Route::get('/about', fn () => view('pages.about'))->name('about');
 
@@ -46,6 +49,7 @@ Route::post('/newsletter/subscribe', function (Request $request) {
     ->name('newsletter.subscribe');
 
 Route::get('/products', ProductsPage::class)->name('products');
+Route::get('/products/{slug}', ProductDetail::class)->name('products.show');
 Route::get('/testimonials', TestimonialsPage::class)->name('testimonials');
 Route::get('/faq', FaqPage::class)->name('faq');
 
